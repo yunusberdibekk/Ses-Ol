@@ -22,7 +22,7 @@ enum NetworkPath: String {
     case voluntarilyPsychologist = "VoluntarilyPsychologist_CRUD.php?"
     case voluntarilyPitchTent = "VoluntarilyPitchTent_CRUD.php?"
 
-    static let baseURL: String = "http://192.168.1.3/ses_ol_api/api/"
+    static let baseURL: String = "http://localhost/ses_ol_api/api/"
 }
 
 
