@@ -95,12 +95,8 @@ Yazılım mühendisliği dersi kapsamında , meydana gelen doğal afetlerden son
 ![mainPage](https://github.com/yunusberdibekk/SesOl/assets/69711134/528cb8df-a819-4c87-ae7f-e34bf8487375)
 ![waitingApprove](https://github.com/yunusberdibekk/SesOl/assets/69711134/75edb340-c3b1-4aba-8146-e2f57745f0a8)
 
-
-
-
-
-
-
+#### Veri Tabanı Şeması
+![db](https://github.com/yunusberdibekk/SesOl/assets/69711134/b8d7ea97-599e-4e90-b5b7-60602feb7681)
 
 
 
