@@ -91,11 +91,11 @@ Yazılım mühendisliği dersi kapsamında , meydana gelen doğal afetlerden son
 
 - ![Simulator Screenshot - iPhone 14 Pro - 2023-06-12 at 01 17 34](https://github.com/yunusberdibekk/SesOl/assets/92654362/b39453f5-eee5-4a64-9769-313612beaa19)
 
-#### Kurum Onaylama Paneli
+### Kurum Onaylama Paneli
 ![mainPage](https://github.com/yunusberdibekk/SesOl/assets/69711134/528cb8df-a819-4c87-ae7f-e34bf8487375)
 ![waitingApprove](https://github.com/yunusberdibekk/SesOl/assets/69711134/75edb340-c3b1-4aba-8146-e2f57745f0a8)
 
-#### Veri Tabanı Şeması
+### Veri Tabanı Şeması
 ![db](https://github.com/yunusberdibekk/SesOl/assets/69711134/b8d7ea97-599e-4e90-b5b7-60602feb7681)
 
 
