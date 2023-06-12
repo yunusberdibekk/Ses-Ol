@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION["permit"]) && !empty($_SESSION["admin_id"])) {
-    header("Location: http://localhost/sesolAdminPanel/index.php");
+    header("Location: http://localhost/SesOl/sesolAdminPanel/index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ if (isset($_POST["admin_tel"]) && isset($_POST["admin_pass"])) {
         if ($result != null) {
             $_SESSION["permit"] = "1";
             $_SESSION["admin_id"]= $result["giris_id"];
-            header("Location: http://localhost/sesolAdminPanel/index.php");
+            header("Location: http://localhost/SesOl/sesolAdminPanel/index.php");
             die();
         } else {
             echo "kullanici bulunamadı";

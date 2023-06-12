@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION["permit"]) && empty($_SESSION["admin_id"])) {
-    header("Location: http://localhost/sesolAdminPanel/login.php");
+    header("Location: http://localhost/SesOl/sesolAdminPanel/login.php");
 }
 include_once 'config/database.php';
 $database = new Database();
@@ -330,6 +330,6 @@ $admin_id = $_SESSION["admin_id"];
 <?php
 if (isset($_POST["logout"])) {
     session_destroy();
-    header("Location: http://localhost/sesolAdminPanel/login.php");
+    header("Location: http://localhost/SesOl/sesolAdminPanel/login.php");
 }
 ?>

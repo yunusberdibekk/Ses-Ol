@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION["permit"]) && empty($_SESSION["admin_id"])) {
-    header("Location: http://localhost/sesolAdminPanel/login.php");
+    header("Location: http://localhost/SesOl/sesolAdminPanel/login.php");
 }
 include_once 'config/database.php';
 $database = new Database();
@@ -252,7 +252,7 @@ if (isset($_GET["status"]) && isset($_GET["union_id"])) {
     $stmt->bindParam(":status", $status);
     $stmt->bindParam(":union_id", $union_id);
     if ($stmt->execute()) { ?>
-        <script>window.location.href = "http://localhost/sesolAdminPanel/unions-rejected  -approve.php"; </script>
+        <script>window.location.href = "http://localhost/SesOl/sesolAdminPanel/unions-rejected-approve.php"; </script>
     <?php } else {
         echo "failed";
     }
