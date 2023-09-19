@@ -24,8 +24,3 @@ enum NetworkPath: String {
 
     static let baseURL: String = "http://localhost/ses_ol_api/api/"
 }
-
-
-struct NetworkConfig {
-    let baseUrl: String
-}

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SignupView: View {
     @StateObject private var viewModel = SignupViewModel()
-    @StateObject private var errorManager = ErrorManager()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -64,10 +63,9 @@ struct SignupView: View {
                 CustomButton(onTap: {
                     Task {
                         if viewModel.selectedOption == 0 {
-                            errorManager.citizienErrorMessage = await viewModel.signupCitizien()
-
+                            await viewModel.signupCitizien()
                         } else {
-                            errorManager.unionErrorMessage = await viewModel.signupUnion()
+                            await viewModel.signupUnion()
                         }
                     }
 
@@ -93,28 +91,16 @@ struct SignupView: View {
                 }
             }
                 .onChange(of: viewModel.selectedCountry, perform: { newValue in
-                // print(newValue.ulkeAdi)
                 viewModel.selectedCity = City(sehir_id: "-1", sehir_adi: "Seç", ulke_idfk: "-1")
                 viewModel.selectedDistrict = District(ilce_id: "-1", ilce_adi: "Seç", sehir_idfk: "-1")
             })
-                .alert("Kayıt olma işlemi başarılı oldu.", isPresented: $viewModel.successfulRegistration) {
-                Button("Giriş") {
-                    print("Kayıt olma başarılı.")
-                    dismiss()
-                }
-            } message: {
-                Text("Tebrikler kayıt olma işleminiz başarıyla sonuçlanmıştır.Lütfen giriş yapınız.")
-            }
                 .alert("Kayıt olma işlemi başarısız oldu.", isPresented: $viewModel.unSuccessfulRegistration) {
                 Button("Tamam") {
                     print("Kayıt olma başarısız.")
                 }
             } message: {
-                if viewModel.selectedOption == 0 {
-                    Text($errorManager.citizienErrorMessage.wrappedValue)
-
-                } else {
-                    Text($errorManager.unionErrorMessage.wrappedValue)
+                if let error = viewModel.authError {
+                    Text(error.description)
                 }
             }
         }
