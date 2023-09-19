@@ -37,7 +37,7 @@ struct LoginView: View {
                         ContentView()
                             .navigationBarBackButtonHidden(true)
                     }
-                    
+
                     Group {
                         HStack {
                             Text("Hesabın yok mu?")
@@ -45,7 +45,6 @@ struct LoginView: View {
                                 viewModel.toSignup.toggle()
                             }
                                 .foregroundColor(.blue)
-
                             NavigationLink("", isActive: $viewModel.toSignup) {
                                 SignupView().navigationBarBackButtonHidden(true)
 
