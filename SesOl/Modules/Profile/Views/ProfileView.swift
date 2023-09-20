@@ -83,7 +83,6 @@ struct ProfileView: View {
                                     await profileViewModel.readIbans()
                                 }
                             }
-
                             Spacer().frame(height: 75)
                         }
 

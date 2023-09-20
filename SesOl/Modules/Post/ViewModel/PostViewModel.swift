@@ -11,15 +11,15 @@ class PostViewModel: ObservableObject {
     @Published var selectedSupportType: SupportType = .providingAssistance
     @Published var unionSelectedPostOption: UnionPostOptions = .createPost
     @Published var citizienSelectedPostOption: CitizienPostOptions = .helpRequest
-    
+
     @Published var userID: Int = -1
     @Published var isUnionAccount: Int = -1
     @Published var adressId: Int = -1
-    
-    @Published var unionPosts: UnionPostResponse? = nil
-    @Published var unions: UnionResponse? = nil
-    @Published var supportCategories: SupportCategoriesResponse? = nil
-    @Published var disasters: DisasterResponse? = nil
+
+    @Published var unionPosts: UnionPostResponse?
+    @Published var unions: UnionResponse?
+    @Published var supportCategories: SupportCategoriesResponse?
+    @Published var disasters: DisasterResponse?
 
     @Published var unionPostDesc: String = ""
     @Published var citizienSelectedUnionID: Int = -1
@@ -41,15 +41,20 @@ class PostViewModel: ObservableObject {
     @Published var voluntarilyPitchTent: Bool = false
     @Published var voluntarilyTransporter: Bool = false
 
+    @Published var errorMessage: NetworkError?
+
     private let networkManager = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseURL))
     private let cache = UserDefaultCache()
 
     func getUnionPosts() async {
-        let posts = await getAllUnionPosts(method: .read_post)
+        let response = await NetworkManager.shared.post(url: .unionPostCrud, method: .post, model: UnionPostRequest(method: RequestMethods.read_post.rawValue), type: UnionPostResponse.self)
 
-        if let posts = posts {
-            DispatchQueue.main.async {
-                self.unionPosts = self.parseUnionPost(response: posts)
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                self.unionPosts = success
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
     }
@@ -66,164 +71,186 @@ class PostViewModel: ObservableObject {
     }
 
     func readCitizienProfile() async {
-        let response = await readUserProfileID(method: .read_user, user_account_id: userID)
+        let response = await NetworkManager.shared.post(url: .usersCrud, method: .post, model: CitizienProfileRequest(method: RequestMethods.read_user.rawValue, user_account_id: userID), type: CitizienProfileResponse.self)
+
         DispatchQueue.main.async {
-            self.adressId = response
+            switch response {
+            case .success(let success):
+                if let adresID = success.addressID {
+                    self.adressId = adresID
+                }
+
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getUnions() async {
-        let response = await getAllUnions(method: .get_all_unions)
+        let response = await NetworkManager.shared.post(url: .unionsCrud, method: .post, model: UnionRequest(method: RequestMethods.get_all_unions.rawValue), type: UnionResponse.self)
 
         DispatchQueue.main.async {
-            self.unions = response
+            switch response {
+            case .success(let success):
+                self.unions = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getSupportCategories() async {
-        let response = await getAllSupportCategories()
+        let response = await NetworkManager.shared.fetch(url: .getRequirement, method: .get, type: SupportCategoriesResponse.self)
 
         DispatchQueue.main.async {
-            self.supportCategories = response
+            switch response {
+            case .success(let success):
+                self.supportCategories = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getDisasters() async {
-        let response = await getAllDisasters()
+        let response = await NetworkManager.shared.fetch(url: .getDisaster, method: .get, type: DisasterResponse.self)
 
         DispatchQueue.main.async {
-            self.disasters = response
+            switch response {
+            case .success(let success):
+                self.disasters = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func createHelpRequest() async {
-        let response = await createHelpRequest(method: .create_request, request_account_id: userID, num_of_person: citizienNumOfPerson, request_disaster_id: citizienSelectedDisasterID, request_union_id: citizienSelectedUnionID, request_category: selectedCategoryID, request_desc: citizienDesc)
+        let response = await NetworkManager.shared.post(url: .requestCrud, method: .post, model: CreateUserRequest(method: RequestMethods.create_request.rawValue, request_account_id: userID, num_of_person: citizienNumOfPerson, request_disaster_id: citizienSelectedDisasterID, request_union_id: citizienSelectedUnionID, request_category: selectedCategoryID, request_desc: citizienDesc), type: CreateUserHelpRequestResponse.self)
 
-        if response == "ok" {
-            DispatchQueue.main.async {
-                self.createHelpRequest = true
-            }
-            DispatchQueue.main.async {
-                self.citizienNumOfPerson = 0
-            }
-            DispatchQueue.main.async {
-                self.citizienDesc = ""
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.createHelpRequest = false
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                if let status = success.status {
+                    if status == "ok" {
+                        self.createHelpRequest = true
+                        self.citizienNumOfPerson = 0
+                        self.citizienDesc = ""
+                    } else {
+                        self.createHelpRequest = false
+                    }
+                }
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
-
     }
 
     func createProvidingAssistance() async {
-        let response = await createProvidingAssistance(method: .create_assistance, user_assistance_account_id: userID, assistance_title: citizienTittle, assistance_sent_union_id: citizienSelectedUnionID, assistance_num_of_person: citizienNumOfPerson, assistance_category_id: selectedCategoryID, assistance_desc: citizienDesc, assistance_address_id: adressId, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .providingAssistanceCrud, method: .post, model: CreateSupportRequest(method: RequestMethods.create_assistance.rawValue, user_assistance_account_id: userID, assistance_title: citizienTittle, assistance_sent_union_id: citizienSelectedUnionID, assistance_num_of_person: citizienNumOfPerson, assistance_category_id: selectedCategoryID, assistance_desc: citizienDesc, assistance_address_id: adressId, is_a_union: isUnionAccount), type: CreateUserHelpRequestResponse.self)
 
-        if response == "ok" {
-            DispatchQueue.main.async {
-                self.createSupportRequest = true
-            }
-            DispatchQueue.main.async {
-                self.citizienNumOfPerson = 0
-            }
-            DispatchQueue.main.async {
-                self.citizienDesc = ""
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.createSupportRequest = false
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                if let status = success.status {
+                    if status == "ok" {
+                        self.createSupportRequest = true
+                        self.citizienNumOfPerson = 0
+                        self.citizienDesc = ""
+                    } else {
+                        self.createSupportRequest = false
+                    }
+                }
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
     }
 
     func createPost() async {
-        let response = await createPost(method: .create_post, post_publisher_id: userID, post_content: unionPostDesc)
+        let response = await NetworkManager.shared.post(url: .unionPostCrud, method: .post, model: CreatePostRequest(method: RequestMethods.create_post.rawValue, post_publisher_id: userID, post_content: unionPostDesc), type: CreatePostResponse.self)
 
-        if response == "ok" {
-            DispatchQueue.main.async {
-                self.createPost = true
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.createPost = false
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                if let status = success.status {
+                    if status == "ok" {
+                        self.createPost = true
+                    } else {
+                        self.createPost = false
+                    }
+                }
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
     }
 
     func createVoluntarilyPsychologist() async {
-        let response = await createVoluntarilyPsychologist(method: .create_voluntarily, user_account_id: userID, voluntarily_union_id: citizienSelectedUnionID, voluntarily_vehicle_status: citizienVehicleStatus, voluntarily_desc: citizienDesc)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: CreateVoluntarilyPsychologistRequest(method: RequestMethods.create_voluntarily.rawValue, user_account_id: userID, voluntarily_union_id: citizienSelectedUnionID, voluntarily_vehicle_status: citizienVehicleStatus, voluntarily_desc: citizienDesc), type: CreateVoluntarilyPsychologistResponse.self)
 
-        if response == "ok" {
-            DispatchQueue.main.async {
-                self.citizienVehicleStatus = 0
-            }
-
-            DispatchQueue.main.async {
-                self.citizienDesc = ""
-            }
-
-            DispatchQueue.main.async {
-                self.voluntarilyPsychologist = true
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.voluntarilyPsychologist = false
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                if let status = success.status {
+                    if status == "ok" {
+                        self.citizienVehicleStatus = 0
+                        self.citizienDesc = ""
+                        self.voluntarilyPsychologist = true
+                    } else {
+                        self.voluntarilyPsychologist = false
+                    }
+                }
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
     }
 
+
     func createVoluntarilyPitchTent() async {
-        let response = await createVoluntarilyPitchTent(method: .create_voluntarily, user_account_id: userID, voluntarily_union_id: citizienSelectedUnionID, voluntarily_vehicle_status: citizienVehicleStatus, voluntarily_desc: citizienDesc)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: CreateVoluntarilyPitchTentRequest(method: RequestMethods.create_voluntarily.rawValue, user_account_id: userID, voluntarily_union_id: citizienSelectedUnionID, voluntarily_vehicle_status: citizienVehicleStatus, voluntarily_description: citizienDesc), type: CreateVoluntarilyPsychologistResponse.self)
 
-        if response == "ok" {
-            DispatchQueue.main.async {
-                self.citizienVehicleStatus = 0
-            }
-
-            DispatchQueue.main.async {
-                self.citizienDesc = ""
-            }
-
-            DispatchQueue.main.async {
-                self.voluntarilyPitchTent = true
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.voluntarilyPitchTent = false
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let success):
+                if let status = success.status {
+                    if status == "ok" {
+                        self.citizienVehicleStatus = 0
+                        self.citizienDesc = ""
+                        self.voluntarilyPitchTent = true
+                    } else {
+                        self.voluntarilyPitchTent = false
+                    }
+                }
+            case .failure(let failure):
+                self.errorMessage = failure
             }
         }
     }
 
     func createVoluntarilyTransporter() async {
         if let vehicleCount = Int(citizienVehicleCount), let driverCount = Int(citizienDriverCount) {
-            let response = await createVoluntarilyTransporter(method: .create_voluntarily, user_account_id: userID, union_id: citizienSelectedUnionID, voluntarily_from_location: citizienFromLocation, voluntarily_to_location: citizienToLocation, voluntarily_num_of_vehicle: vehicleCount, voluntarily_num_of_driver: driverCount, voluntarily_desc: citizienDesc)
+            let response = await NetworkManager.shared.post(url: .voluntarilyTransporter, method: .post, model: CreateVoluntarilyTransporterRequest(method: RequestMethods.create_voluntarily.rawValue, user_account_id: userID, union_id: citizienSelectedUnionID, voluntarily_from_location: citizienFromLocation, voluntarily_to_location: citizienToLocation, voluntarily_num_of_vehicle: vehicleCount, voluntarily_num_of_driver: driverCount, voluntarily_description: citizienDesc), type: CreateVoluntarilyTransporterResponse.self)
 
-            if response == "ok" {
-                DispatchQueue.main.async {
-                    self.citizienVehicleCount = ""
-                }
-                DispatchQueue.main.async {
-                    self.citizienDriverCount = ""
-                }
-                DispatchQueue.main.async {
-                    self.citizienVehicleStatus = 0
-                }
-                DispatchQueue.main.async {
-                    self.citizienFromLocation = ""
-                }
-                DispatchQueue.main.async {
-                    self.citizienToLocation = ""
-                }
-                DispatchQueue.main.async {
-                    self.citizienDesc = ""
-                }
-                DispatchQueue.main.async {
-                    self.voluntarilyPsychologist = true
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.voluntarilyPsychologist = false
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let success):
+                    if let status = success.status {
+                        if status == "ok" {
+                            self.citizienVehicleCount = ""
+                            self.citizienDriverCount = ""
+                            self.citizienVehicleStatus = 0
+                            self.citizienFromLocation = ""
+                            self.citizienToLocation = ""
+                            self.citizienDesc = ""
+                            self.voluntarilyPsychologist = true
+                        } else {
+                            self.voluntarilyPsychologist = false
+                        }
+                    }
+                case .failure(let failure):
+                    self.errorMessage = failure
                 }
             }
         } else {
@@ -248,88 +275,11 @@ class PostViewModel: ObservableObject {
         dateFormatter.dateFormat = "HH:mm:ss" // Saat, dakika ve saniye
         return dateFormatter.string(from: Date())
     }
-}
 
-extension PostViewModel: IPostViewModel {
-    func readUserProfileID(method: RequestMethods, user_account_id: Int) async -> Int {
-        let response = await networkManager.post(path: .usersCrud, model: CitizienProfileRequest(method: method.rawValue, user_account_id: user_account_id), type: CitizienProfileResponse.self)
-        return response?.addressID ?? -1
-    }
-
-    func getAllUnionPosts(method: RequestMethods) async -> UnionPostResponse? {
-        guard let response = await networkManager.post(path: .unionPostCrud, model: UnionPostRequest(method: method.rawValue), type: UnionPostResponse.self) else { return nil }
-        return response
-    }
-
-    func createVoluntarilyPsychologist(method: RequestMethods, user_account_id: Int, voluntarily_union_id: Int, voluntarily_vehicle_status: Int, voluntarily_desc: String) async -> String {
-        guard let response = await networkManager.post(path: .voluntarilyPsychologist, model: CreateVoluntarilyPsychologistRequest(method: method.rawValue, user_account_id: user_account_id, voluntarily_union_id: voluntarily_union_id, voluntarily_vehicle_status: voluntarily_vehicle_status, voluntarily_desc: voluntarily_desc), type: CreateVoluntarilyPsychologistResponse.self) else { return "error" }
-        return response.status ?? "error"
-    }
-
-    func createVoluntarilyPitchTent(method: RequestMethods, user_account_id: Int, voluntarily_union_id: Int, voluntarily_vehicle_status: Int, voluntarily_desc: String) async -> String {
-        guard let response = await networkManager.post(path: .voluntarilyPitchTent, model: CreateVoluntarilyPitchTentRequest(method: method.rawValue, user_account_id: user_account_id, voluntarily_union_id: voluntarily_union_id, voluntarily_vehicle_status: voluntarily_vehicle_status, voluntarily_description: voluntarily_desc), type: CreateVoluntarilyPsychologistResponse.self) else { return "error" }
-        return response.status ?? "error" }
-
-    func createVoluntarilyTransporter(method: RequestMethods, user_account_id: Int, union_id: Int, voluntarily_from_location: String, voluntarily_to_location: String, voluntarily_num_of_vehicle: Int, voluntarily_num_of_driver: Int, voluntarily_desc: String) async -> String {
-        guard let response = await networkManager.post(path: .voluntarilyTransporter, model: CreateVoluntarilyTransporterRequest(method: method.rawValue, user_account_id: user_account_id, union_id: union_id, voluntarily_from_location: voluntarily_from_location, voluntarily_to_location: voluntarily_to_location, voluntarily_num_of_vehicle: voluntarily_num_of_vehicle, voluntarily_num_of_driver: voluntarily_num_of_driver, voluntarily_description: voluntarily_desc), type: CreateVoluntarilyTransporterResponse.self) else { return "error" }
-        return response.status ?? "error"
-    }
-
-    func createPost(method: RequestMethods, post_publisher_id: Int, post_content: String) async -> String {
-        guard let response = await networkManager.post(path: .unionPostCrud, model: CreatePostRequest(method: method.rawValue, post_publisher_id: post_publisher_id, post_content: post_content), type: CreatePostResponse.self) else { return "error" }
-        return response.status ?? "error"
-    }
-
-    func createProvidingAssistance(method: RequestMethods, user_assistance_account_id: Int, assistance_title: String, assistance_sent_union_id: Int, assistance_num_of_person: Int, assistance_category_id: Int, assistance_desc: String, assistance_address_id: Int, is_a_union: Int) async -> String {
-        guard let response = await networkManager.post(path: .providingAssistanceCrud, model: CreateSupportRequest(method: method.rawValue, user_assistance_account_id: user_assistance_account_id, assistance_title: assistance_title, assistance_sent_union_id: assistance_sent_union_id, assistance_num_of_person: assistance_num_of_person, assistance_category_id: assistance_category_id, assistance_desc: assistance_desc, assistance_address_id: assistance_address_id, is_a_union: is_a_union), type: CreateSupportRequestResponse.self) else { return "error" }
-        return response.status ?? "error"
-    }
-
-    func createHelpRequest(method: RequestMethods, request_account_id: Int, num_of_person: Int, request_disaster_id: Int, request_union_id: Int, request_category: Int, request_desc: String) async -> String {
-        guard let response = await networkManager.post(path: .requestCrud, model: CreateUserRequest(method: method.rawValue, request_account_id: request_account_id, num_of_person: num_of_person, request_disaster_id: request_disaster_id, request_union_id: request_union_id, request_category: request_category, request_desc: request_desc), type: CreateUserHelpRequestResponse.self) else { return "error" }
-        return response.status ?? "error"
-    }
-
-    func getAllUnions(method: RequestMethods) async -> UnionResponse? {
-        guard let response = await networkManager.post(path: .unionsCrud, model: UnionRequest(method: method.rawValue), type: UnionResponse.self) else { return nil }
-        return response
-    }
-
-    func getAllSupportCategories() async -> SupportCategoriesResponse? {
-        guard let response = await networkManager.fetch(path: .getRequirement, method: .get, type: SupportCategoriesResponse.self) else { return nil }
-        return response
-    }
-
-    func getAllDisasters() async -> DisasterResponse? {
-        guard let response = await networkManager.fetch(path: .getDisaster, method: .get, type: DisasterResponse.self) else { return nil }
-        return response
-    }
-
-    func readUserCache(key: UserCacheKeys) -> Int {
+    private func readUserCache(key: UserCacheKeys) -> Int {
         let response = cache.read(key: key)
         guard let responseInt = Int(response) else { return -1 }
         return responseInt
     }
-
-}
-
-protocol IPostViewModel {
-    func createHelpRequest(method: RequestMethods, request_account_id: Int, num_of_person: Int, request_disaster_id: Int, request_union_id: Int, request_category: Int, request_desc: String) async -> String
-
-    func createProvidingAssistance(method: RequestMethods, user_assistance_account_id: Int, assistance_title: String, assistance_sent_union_id: Int, assistance_num_of_person: Int, assistance_category_id: Int, assistance_desc: String, assistance_address_id: Int, is_a_union: Int) async -> String
-
-    func createVoluntarilyPsychologist(method: RequestMethods, user_account_id: Int, voluntarily_union_id: Int, voluntarily_vehicle_status: Int, voluntarily_desc: String) async -> String
-
-    func createVoluntarilyPitchTent(method: RequestMethods, user_account_id: Int, voluntarily_union_id: Int, voluntarily_vehicle_status: Int, voluntarily_desc: String) async -> String
-
-    func createVoluntarilyTransporter(method: RequestMethods, user_account_id: Int, union_id: Int, voluntarily_from_location: String, voluntarily_to_location: String, voluntarily_num_of_vehicle: Int, voluntarily_num_of_driver: Int, voluntarily_desc: String) async -> String
-
-    func createPost(method: RequestMethods, post_publisher_id: Int, post_content: String) async -> String
-    func readUserProfileID(method: RequestMethods, user_account_id: Int) async -> Int
-    func getAllUnionPosts(method: RequestMethods) async -> UnionPostResponse?
-    func getAllUnions(method: RequestMethods) async -> UnionResponse?
-    func getAllSupportCategories() async -> SupportCategoriesResponse?
-    func getAllDisasters() async -> DisasterResponse?
-    func readUserCache(key: UserCacheKeys) -> Int
 
 }

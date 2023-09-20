@@ -23,6 +23,11 @@
 		BE1A71FC2AB91A7200EFA272 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71FB2AB91A7200EFA272 /* NetworkConfig.swift */; };
 		BE1A71FE2AB91A9F00EFA272 /* NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71FD2AB91A9F00EFA272 /* NetworkType.swift */; };
 		BE1A72002AB91AC200EFA272 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71FF2AB91AC200EFA272 /* NetworkManager.swift */; };
+		BE1A723B2AB9C00500EFA272 /* HelpRequestSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A723A2AB9C00500EFA272 /* HelpRequestSubView.swift */; };
+		BE1A723D2AB9C03800EFA272 /* DefaultSupportRequestSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A723C2AB9C03800EFA272 /* DefaultSupportRequestSubView.swift */; };
+		BE1A723F2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A723E2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift */; };
+		BE1A72412AB9C08000EFA272 /* PitchTentSupportRequestSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72402AB9C08000EFA272 /* PitchTentSupportRequestSubView.swift */; };
+		BE1A72432AB9C0A100EFA272 /* TransporterSupportSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72422AB9C0A100EFA272 /* TransporterSupportSubView.swift */; };
 		BE22898D2A2F3403006B8BF7 /* NetworkPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22898C2A2F3403006B8BF7 /* NetworkPath.swift */; };
 		BE29F7F42A23F96F002044F5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F7F32A23F96F002044F5 /* PostViewModel.swift */; };
 		BE29F7F62A24275A002044F5 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F7F52A24275A002044F5 /* PostModel.swift */; };
@@ -113,6 +118,11 @@
 		BE1A71FB2AB91A7200EFA272 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		BE1A71FD2AB91A9F00EFA272 /* NetworkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkType.swift; sourceTree = "<group>"; };
 		BE1A71FF2AB91AC200EFA272 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BE1A723A2AB9C00500EFA272 /* HelpRequestSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpRequestSubView.swift; sourceTree = "<group>"; };
+		BE1A723C2AB9C03800EFA272 /* DefaultSupportRequestSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSupportRequestSubView.swift; sourceTree = "<group>"; };
+		BE1A723E2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychologistSupportRequestSubView.swift; sourceTree = "<group>"; };
+		BE1A72402AB9C08000EFA272 /* PitchTentSupportRequestSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchTentSupportRequestSubView.swift; sourceTree = "<group>"; };
+		BE1A72422AB9C0A100EFA272 /* TransporterSupportSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransporterSupportSubView.swift; sourceTree = "<group>"; };
 		BE22898C2A2F3403006B8BF7 /* NetworkPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPath.swift; sourceTree = "<group>"; };
 		BE29F7F32A23F96F002044F5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		BE29F7F52A24275A002044F5 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
@@ -212,8 +222,8 @@
 		BE06F19F2A0E88F100D2C4CB /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				BE06F1A32A0E896E00D2C4CB /* ViewModel */,
 				BE06F1A22A0E896900D2C4CB /* Model */,
+				BE06F1A32A0E896E00D2C4CB /* ViewModel */,
 				BE06F1A12A0E896300D2C4CB /* View */,
 			);
 			path = Post;
@@ -223,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				BE06F1A42A0E897900D2C4CB /* PostView.swift */,
+				BE1A72442AB9C15200EFA272 /* SubViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +287,18 @@
 				BE1A71FB2AB91A7200EFA272 /* NetworkConfig.swift */,
 			);
 			path = NetworkUtils;
+			sourceTree = "<group>";
+		};
+		BE1A72442AB9C15200EFA272 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				BE1A723A2AB9C00500EFA272 /* HelpRequestSubView.swift */,
+				BE1A723C2AB9C03800EFA272 /* DefaultSupportRequestSubView.swift */,
+				BE1A723E2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift */,
+				BE1A72402AB9C08000EFA272 /* PitchTentSupportRequestSubView.swift */,
+				BE1A72422AB9C0A100EFA272 /* TransporterSupportSubView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		BE3228352A217EA400F9F572 /* Views */ = {
@@ -954,6 +977,7 @@
 				BECDB5322A09323500B8CD68 /* ProfileViewModel.swift in Sources */,
 				BED52EB52A3494F5002A843E /* IbanOptions.swift in Sources */,
 				BE1A71EC2AB910C600EFA272 /* AuthValidator.swift in Sources */,
+				BE1A723F2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift in Sources */,
 				BE428A592A07151D00774EC0 /* TextAreaModifier.swift in Sources */,
 				BE428A8D2A072A2A00774EC0 /* FeedView.swift in Sources */,
 				BEA3993C2A2009B4001B5CC0 /* HelpRequestModel.swift in Sources */,
@@ -965,6 +989,7 @@
 				BE6F91272A31F0A6003B868F /* RequestMethods.swift in Sources */,
 				BE3228412A2207CA00F9F572 /* SupportRequestViewModel.swift in Sources */,
 				BE428A572A0713F200774EC0 /* TextArea.swift in Sources */,
+				BE1A72412AB9C08000EFA272 /* PitchTentSupportRequestSubView.swift in Sources */,
 				BE32282F2A214D6C00F9F572 /* CitizienHelpRequestDetail.swift in Sources */,
 				BE530EAC29F2B668009BDCC9 /* OnboardModel.swift in Sources */,
 				BED4BA1C2A361B8F009AFCCC /* IbanDetailView.swift in Sources */,
@@ -985,6 +1010,7 @@
 				BEF215E129F5B0A70025C19F /* UserCache.swift in Sources */,
 				BE6F91322A329350003B868F /* CitizienPostOptions.swift in Sources */,
 				BE32283B2A218B6700F9F572 /* DetailModel.swift in Sources */,
+				BE1A72432AB9C0A100EFA272 /* TransporterSupportSubView.swift in Sources */,
 				BEBD406029FC81C900FDD9D7 /* SignupViewModel.swift in Sources */,
 				BE530EDA29F3013B009BDCC9 /* TextFieldModifier.swift in Sources */,
 				BEBD406229FC81D300FDD9D7 /* SignupModel.swift in Sources */,
@@ -1013,8 +1039,10 @@
 				BE530ED829F300F4009BDCC9 /* FontSizes.swift in Sources */,
 				BE530EBF29F2FF31009BDCC9 /* Custom+EdgeInsets.swift in Sources */,
 				BE0294332A2730F8009C8788 /* VoluntarilyPitchTentRow.swift in Sources */,
+				BE1A723B2AB9C00500EFA272 /* HelpRequestSubView.swift in Sources */,
 				BE3DEB5B29F6EB3700B35210 /* LoginViewModel.swift in Sources */,
 				BEEBFC212A167825000D8E25 /* TextModifier.swift in Sources */,
+				BE1A723D2AB9C03800EFA272 /* DefaultSupportRequestSubView.swift in Sources */,
 				BE6F912E2A32613E003B868F /* SystemMessageRow.swift in Sources */,
 				BE3228312A214DB300F9F572 /* CitizienProvidingAssistanceDetail.swift in Sources */,
 				BE02940B2A265CA5009C8788 /* UnionPostDetail.swift in Sources */,

@@ -109,7 +109,7 @@ struct PostView: View {
 
                     switch postViewModel.citizienSelectedPostOption {
                     case .helpRequest:
-                        HelpRequestSubview(selectedUnionID: $postViewModel.citizienSelectedUnionID, selectedDisasterID: $postViewModel.citizienSelectedDisasterID, numOfPerson: $postViewModel.citizienNumOfPerson, requestDesc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse(), disasters: postViewModel.disasters ?? DisasterResponse(), selectedHelpCategoryID: $postViewModel.selectedCategoryID, supportCategories: postViewModel.supportCategories ?? SupportCategoriesResponse())
+                        HelpRequestSubView(selectedUnionID: $postViewModel.citizienSelectedUnionID, selectedDisasterID: $postViewModel.citizienSelectedDisasterID, numOfPerson: $postViewModel.citizienNumOfPerson, requestDesc: $postViewModel.citizienDesc, selectedHelpCategoryID: $postViewModel.selectedCategoryID, unions: postViewModel.unions ?? UnionResponse(), disasters: postViewModel.disasters ?? DisasterResponse(), supportCategories: postViewModel.supportCategories ?? SupportCategoriesResponse())
 
                         HStack {
                             Spacer()
@@ -146,7 +146,7 @@ struct PostView: View {
 
                         switch postViewModel.selectedSupportType {
                         case .providingAssistance:
-                            DefaultSupportRequestSubview(unionSelectionID: $postViewModel.citizienSelectedUnionID, selectedSupportCategoryId: $postViewModel.selectedCategoryID, numOfPerson: $postViewModel.citizienNumOfPerson, unionTittle: $postViewModel.citizienTittle, unionDesc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse(), supportCategories: postViewModel.supportCategories ?? SupportCategoriesResponse())
+                            DefaultSupportRequestSubView(unionSelectionID: $postViewModel.citizienSelectedUnionID, selectedSupportCategoryId: $postViewModel.selectedCategoryID, numOfPerson: $postViewModel.citizienNumOfPerson, unionTittle: $postViewModel.citizienTittle, unionDesc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse(), supportCategories: postViewModel.supportCategories ?? SupportCategoriesResponse())
                                 .alert("Destek talebi", isPresented: $postViewModel.createSupportRequest, actions: {
                                 Button("Tamam", role: .destructive) {
 //                                    dismiss()
@@ -155,7 +155,7 @@ struct PostView: View {
                                     Text("Destek talebiniz başarılı bir şekilde oluşturulmuştur.")
                                 })
                         case .psychologist:
-                            PsychologistSupportRequestSubview(unionSelectionID: $postViewModel.citizienSelectedUnionID, vehicleStatus: $postViewModel.citizienVehicleStatus, desc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse())
+                            PsychologistSupportRequestSubView(unionSelectionID: $postViewModel.citizienSelectedUnionID, vehicleStatus: $postViewModel.citizienVehicleStatus, desc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse())
                                 .alert("Gönüllü psikolog destek talebi", isPresented: $postViewModel.voluntarilyPsychologist, actions: {
                                 Button("Tamam", role: .destructive) {
 //                                    dismiss()
@@ -173,7 +173,7 @@ struct PostView: View {
                                     Text("Gönüllü çadır kurma destek talebiniz başarılı bir şekilde oluşturulmuştur.")
                                 })
                         case .transporter:
-                            TransporterSupportSubview(unionSelectionID: $postViewModel.citizienSelectedUnionID, fromLocation: $postViewModel.citizienFromLocation, toLocation: $postViewModel.citizienToLocation, numOfVehicle: $postViewModel.citizienVehicleCount, numOfDriver: $postViewModel.citizienDriverCount, desc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse())
+                            TransporterSupportSubView(unionSelectionID: $postViewModel.citizienSelectedUnionID, fromLocation: $postViewModel.citizienFromLocation, toLocation: $postViewModel.citizienToLocation, numOfVehicle: $postViewModel.citizienVehicleCount, numOfDriver: $postViewModel.citizienDriverCount, desc: $postViewModel.citizienDesc, unions: postViewModel.unions ?? UnionResponse())
                                 .alert("Gönüllü taşımacılık destek talebi", isPresented: $postViewModel.voluntarilyTransporter, actions: {
                                 Button("Tamam", role: .destructive) {
 //                                    dismiss()
@@ -237,235 +237,3 @@ struct PostView_Previews: PreviewProvider {
         PostView()
     }
 }
-
-struct HelpRequestSubview: View {
-    @Binding var selectedUnionID: Int
-    @Binding var selectedDisasterID: Int
-    @Binding var numOfPerson: Int
-    @Binding var requestDesc: String
-    var unions: UnionResponse
-    var disasters: DisasterResponse
-    @Binding var selectedHelpCategoryID: Int
-    var supportCategories: SupportCategoriesResponse
-
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 25) {
-                Picker("Kurum adı", selection: $selectedUnionID) {
-                    Text("Seç").tag(-1)
-                    ForEach(unions, id: \.unionID) { union in
-                        Text(union.unionName ?? "").tag(union.unionID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Picker("Afet kategori", selection: $selectedDisasterID) {
-                    Text("Seç").tag(-1)
-                    ForEach(disasters, id: \.disasterID) { disaster in
-                        Text(disaster.disasterName ?? "").tag(disaster.disasterID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Picker("Destek kategori", selection: $selectedHelpCategoryID) {
-                    Text("Seç").tag(-1)
-                    ForEach(supportCategories, id: \.categoryID) { category in
-                        Text(category.categoryName ?? "").tag(category.categoryID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Stepper(value: $numOfPerson, in: 0...100) {
-                    Text("Talep kişi sayısı: \(numOfPerson)")
-                }
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextArea(text: $requestDesc, hint: "Yardım talebi açıklama")
-                    .foregroundColor(.halloween_orange)
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-            }
-        }
-    }
-}
-
-struct DefaultSupportRequestSubview: View {
-    @Binding var unionSelectionID: Int
-    @Binding var selectedSupportCategoryId: Int
-    @Binding var numOfPerson: Int
-    @Binding var unionTittle: String
-    @Binding var unionDesc: String
-
-    var unions: UnionResponse
-    var supportCategories: SupportCategoriesResponse
-
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 19) {
-                Picker("Kurum adı", selection: $unionSelectionID) {
-                    Text("Seç").tag(-1)
-                    ForEach(unions, id: \.unionID) { union in
-                        Text(union.unionName ?? "").tag(union.unionID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Picker("Destek kategori", selection: $selectedSupportCategoryId) {
-                    Text("Seç").tag(-1)
-                    ForEach(supportCategories, id: \.categoryID) { category in
-                        Text(category.categoryName ?? "").tag(category.categoryID ?? 1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Stepper(value: $numOfPerson, in: 0...100) {
-                    Text("Talep kişi sayısı: \(numOfPerson)")
-                }
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextField("Başlık", text: $unionTittle)
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextArea(text: $unionDesc, hint: "Destek talebi açıklama")
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-            }
-        }
-    }
-}
-
-struct PsychologistSupportRequestSubview: View {
-    @Binding var unionSelectionID: Int
-    @Binding var vehicleStatus: Int
-    @Binding var desc: String
-
-    var unions: UnionResponse
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 15) {
-                Picker("Kurum adı", selection: $unionSelectionID) {
-                    Text("Seç").tag(-1)
-                    ForEach(unions, id: \.unionID) { union in
-                        Text(union.unionName ?? "").tag(union.unionID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                Picker("Vasıta durumu", selection: $vehicleStatus) {
-                    Text("Yok").tag(0)
-                    Text("Var").tag(1)
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextArea(text: $desc, hint: "Gönüllü psikolog açıklama.")
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-            }
-        }
-    }
-}
-
-struct PitchTentSupportRequestSubView: View {
-    @Binding var unionSelectionID: Int
-    @Binding var vehicleStatus: Int
-    @Binding var desc: String
-    var unions: UnionResponse
-
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 15) {
-                Picker("Kurum adı", selection: $unionSelectionID) {
-                    Text("Seç").tag(-1)
-                    ForEach(unions, id: \.unionID) { union in
-                        Text(union.unionName ?? "").tag(union.unionID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-
-                Picker("Vasıta durumu", selection: $vehicleStatus) {
-                    Text("Yok").tag(0)
-                    Text("Var").tag(1)
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextArea(text: $desc, hint: "Gönüllü çadır kurma açıklama.")
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-            }
-        }
-    }
-}
-
-struct TransporterSupportSubview: View {
-    @Binding var unionSelectionID: Int
-    @Binding var fromLocation: String
-    @Binding var toLocation: String
-    @Binding var numOfVehicle: String
-    @Binding var numOfDriver: String
-    @Binding var desc: String
-
-    var unions: UnionResponse
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 15) {
-                Picker("Kurum adı", selection: $unionSelectionID) {
-                    Text("Seç").tag(-1)
-                    ForEach(unions, id: \.unionID) { union in
-                        Text(union.unionName ?? "").tag(union.unionID ?? -1)
-                    }
-                }
-                    .pickerStyle(.navigationLink)
-                    .foregroundColor(.halloween_orange)
-                    .cornerRadius(25)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextField("Alınacak konum", text: $fromLocation)
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextField("Bırakılacak konum", text: $toLocation)
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextField("Vasıta sayısı", text: $numOfVehicle)
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                TextField("Şoför sayısı", text: $numOfDriver)
-                    .foregroundColor(.halloween_orange)
-                    .modifier(TextFieldModifier())
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-                LargeTextField(text: $desc, hint: "Gönüllü taşımacılık açıklama.")
-                    .padding([.leading, .trailing], PagePaddings.Normal.padding_20.rawValue)
-            }
-        }
-    }
-}
-
