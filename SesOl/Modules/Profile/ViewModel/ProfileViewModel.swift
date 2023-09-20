@@ -13,9 +13,9 @@ final class ProfileViewModel: ObservableObject {
 
     @Published var citizienModel: CitizienProfileResponse?
     @Published var unionModel: UnionProfileResponse?
-    @Published var selectedIbanOption: IbanOptions = .create
     @Published var ibans: IbanReadResponse = IbanReadResponse()
 
+    @Published var selectedIbanOption: IbanOptions = .create
     @Published var isUnionAccount: Int = -1
     @Published var showEdit = false
     @Published var userID: Int = -1
@@ -34,8 +34,9 @@ final class ProfileViewModel: ObservableObject {
     @Published var ibanDeleted = false
     
     @Published var errorMessage: NetworkError?
+    @Published var error:Bool = false
+    
     private let cache = UserDefaultCache()
-
 
     func readIbans() async {
         if let userId = Int(cache.read(key: .userId)) {

@@ -8,45 +8,59 @@
 import Foundation
 
 final class HelpRequestViewModel: ObservableObject {
-    
     /// Readed userID value in UserDefaults
     @Published var userID = -1
     /// Readed isUnionAccount value in UserDefaults
     @Published var isUnionAccount = -1
     @Published var selectedOption: RequestOptions = .waiting
+
+    @Published var approvedHelpRequests: HelpRequestResponse?
+    @Published var waitingHelpRequests: HelpRequestResponse?
+    @Published var rejectedHelpRequests: HelpRequestResponse?
     
-    @Published var approvedHelpRequests: HelpRequestResponse? = nil
-    @Published var waitingHelpRequests: HelpRequestResponse? = nil
-    @Published var rejectedHelpRequests: HelpRequestResponse? = nil
-    
+    @Published var error: Bool = false
+    @Published var errorMessage: NetworkError?
+
     @Published var systemRequestMessage = HelpRequestResponseElement(requestID: -1, requestAccountID: -1, userName: "System", userSurname: "", userTel: "system", requestUnionID: -1, requestUnionName: "", requestDisasterID: -1, requestDisasterName: "", requestCategoryID: -1, requestCategoryName: "", requestNumOfPerson: -1, requestDesc: "Şu anda kayıtlı veri bulunmamaktadır.", requestAddressID: -1, requestDistrict: "", requestCity: "", requestCountry: "", requestFullAddress: "", requestApproveStatus: -1)
 
-   
-
-    private let networkManager = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseURL))
     private let cache = UserDefaultCache()
 
     func getApprovedHelpRequests() async {
-        let approvedRequests = await getAllHelpRequests(method: .read_request_approved, request_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .requestCrud, method: .post, model: HelpRequest(method: RequestMethods.read_request_approved.rawValue, request_account_id: userID, is_a_union: isUnionAccount), type: HelpRequestResponse.self)
 
         DispatchQueue.main.async {
-            self.approvedHelpRequests = approvedRequests
+            switch response {
+            case .success(let success):
+                self.approvedHelpRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getWaitingHelpRequests() async {
-        let waitingRequests = await getAllHelpRequests(method: .read_request_waiting, request_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .requestCrud, method: .post, model: HelpRequest(method: RequestMethods.read_request_waiting.rawValue, request_account_id: userID, is_a_union: isUnionAccount), type: HelpRequestResponse.self)
 
         DispatchQueue.main.async {
-            self.waitingHelpRequests = waitingRequests
+            switch response {
+            case .success(let success):
+                self.waitingHelpRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getRejectedHelpRequests() async {
-        let rejectedRequests = await getAllHelpRequests(method: .read_request_rejected, request_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .requestCrud, method: .post, model: HelpRequest(method: RequestMethods.read_request_rejected.rawValue, request_account_id: userID, is_a_union: isUnionAccount), type: HelpRequestResponse.self)
 
         DispatchQueue.main.async {
-            self.rejectedHelpRequests = rejectedRequests
+            switch response {
+            case .success(let success):
+                self.rejectedHelpRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
@@ -59,22 +73,10 @@ final class HelpRequestViewModel: ObservableObject {
             self.isUnionAccount = isUnionAccount
         }
     }
-}
-
-extension HelpRequestViewModel: IHelpRequestViewModel {
-    func getAllHelpRequests(method: RequestMethods, request_account_id: Int, is_a_union: Int) async -> HelpRequestResponse? {
-        guard let response = await networkManager.post(path: .requestCrud, model: HelpRequest(method: method.rawValue, request_account_id: request_account_id, is_a_union: is_a_union), type: HelpRequestResponse.self) else { return nil }
-        return response
-    }
-
-    func readUserCache(key: UserCacheKeys) -> Int {
+    
+    private func readUserCache(key: UserCacheKeys) -> Int {
         let response = cache.read(key: key)
         guard let responseInt = Int(response) else { return -1 }
         return responseInt
     }
-}
-
-protocol IHelpRequestViewModel {
-    func getAllHelpRequests(method: RequestMethods, request_account_id: Int, is_a_union: Int) async -> HelpRequestResponse?
-    func readUserCache(key: UserCacheKeys) -> Int
 }

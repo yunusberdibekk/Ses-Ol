@@ -22,17 +22,11 @@ class DetailViewModel: ObservableObject {
     @Published var request_id = -1
     @Published var voluntarily_account_id = -1
 
+    @Published var isUpdated: Bool = false
+    @Published var isDeleted: Bool = false
+
     @Published var errorMessage: NetworkError?
 
-    @Published var isDeletedVoluntarily = false
-    @Published var isDeletedSupportRequest = false
-    @Published var isDeletedHelpRequest = false
-    @Published var isDeletedPost = false
-
-    @Published var isUpdatedVoluntarily = false
-    @Published var isUpdatedSupportRequest = false
-    @Published var isUpdatedHelpRequest = false
-    @Published var isUpdatedPost = false
 
     func rejectVoluntarilyPitchTent() async {
         await updateVoluntarilyPitchTent(approveStatus: 0)
@@ -93,9 +87,7 @@ class DetailViewModel: ObservableObject {
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //    self.deleteSupportRequestStatus = status
-                }
+                self.changeDeleteStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
@@ -109,9 +101,7 @@ class DetailViewModel: ObservableObject {
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    self.changeVoluntarilyStatus(response: status)
-                }
+                self.changeDeleteStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
@@ -126,9 +116,7 @@ class DetailViewModel: ObservableObject {
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //          self.deleteHelpRequestStatus = status
-                }
+                self.changeDeleteStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
@@ -142,88 +130,106 @@ class DetailViewModel: ObservableObject {
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //        self.deletePostStatus = status
-                }
+                self.changeDeleteStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
         }
     }
 
+    /// Update  support request  status. For union.
     private func updateSupportRequest(approveStatus: Int) async {
         let response = await NetworkManager.shared.post(url: .providingAssistanceCrud, method: .post, model: UpdateSupportRequest(method: RequestMethods.update_my_assistance.rawValue, assistance_id: assistance_id, assistance_status: approveStatus), type: UpdateSupportRequestReponse.self)
 
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //    self.updateSupportRequestStatus = status
-                }
+                self.changeUpdateStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
         }
     }
 
+    /// Update  help request  status. For union.
     private func updateHelpRequest(approveStatus: Int) async {
         let response = await NetworkManager.shared.post(url: .requestCrud, method: .post, model: UpdateRequest(method: RequestMethods.update_request_status.rawValue, request_id: requestId, request_status: approveStatus, is_a_union: 1), type: UpdateRequestReponse.self)
 
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //        self.updateHelpRequestStatus = status
-                }
+                self.changeUpdateStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
         }
     }
 
-
+    /// Update  support  request  status. For union.
     private func updateVoluntarilyPitchTent(approveStatus: Int) async {
         let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: UpdateVoluntarilyPitchTentRequest(method: RequestMethods.update_voluntarily.rawValue, user_account_id: voluntarily_account_id, voluntarily_approve_status: approveStatus), type: UpdateVoluntarilyPitchTentResponse.self)
 
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //       self.updateVoluntarilyStatus = status
-                }
+                self.changeUpdateStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
         }
     }
 
+    /// Update  support  request  status. For union.
     private func updateVoluntarilyPsychologist(approveStatus: Int) async {
         let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: UpdateVoluntarilyPsychologistRequest(method: RequestMethods.update_voluntarily.rawValue, user_account_id: voluntarily_account_id, voluntarily_approve_status: approveStatus), type: UpdateVoluntarilyPsychologistResponse.self)
 
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //       self.updateVoluntarilyStatus = status
-                }
+                self.changeUpdateStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
         }
     }
 
+    /// Update  support  request  status. For union.
     private func updateVoluntarilyTransporter(approveStatus: Int) async {
         let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: UpdateVoluntarilyTransporterRequest(method: RequestMethods.update_voluntarily.rawValue, user_account_id: voluntarily_account_id, voluntarily_approve_status: approveStatus), type: UpdateVoluntarilyTransporterResponse.self)
 
         DispatchQueue.main.async {
             switch response {
             case .success(let success):
-                if let status = success.status {
-                    //       self.updateVoluntarilyStatus = status
-                }
+                self.changeUpdateStatus(status: success.status)
             case .failure(let failure):
                 self.errorMessage = failure
             }
+        }
+    }
+
+    /// Change isDelete status.
+    private func changeDeleteStatus(status: String?) {
+        if let status = status {
+            if status == "ok" {
+                self.isDeleted = true
+            } else {
+                self.isDeleted = false
+            }
+        } else {
+            self.isDeleted = false
+        }
+    }
+
+    /// Change isUpdate status.
+    private func changeUpdateStatus(status: String?) {
+        if let status = status {
+            if status == "ok" {
+                self.isUpdated = true
+            } else {
+                self.isUpdated = false
+            }
+        } else {
+            self.isUpdated = false
         }
     }
 
@@ -234,69 +240,6 @@ class DetailViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.userID = userID
             self.isUnionAccount = isUnionAccount
-        }
-    }
-
-    func changeVoluntarilyStatus(response: String) {
-        if response == "ok" {
-            self.isDeletedVoluntarily = true
-        } else {
-            self.isDeletedVoluntarily = false
-        }
-    }
-
-    func changeHelpRequestStatus(response: String) {
-        if response == "ok" {
-            self.isDeletedHelpRequest = true
-        } else {
-            self.isDeletedHelpRequest = false
-        }
-    }
-
-    func changePostRequestStatus(response: String) {
-        if response == "ok" {
-            self.isDeletedPost = true
-        } else {
-            self.isDeletedPost = false
-        }
-    }
-
-    @MainActor
-    private func changeSupportRequestStatus(status: String?) {
-        if let status = status {
-            if status == "ok" {
-                self.isDeletedSupportRequest = true
-            } else {
-                self.isDeletedSupportRequest = false
-            }
-        } else {
-            self.isDeletedSupportRequest = false
-        }
-    }
-    
-    @MainActor
-    private func changeHelpRequestStatus(status: String?) {
-        if let status = status {
-            if status == "ok" {
-                self.isDeletedHelpRequest = true
-            } else {
-                self.isDeletedHelpRequest = false
-            }
-        } else {
-            self.isDeletedHelpRequest = false
-        }
-    }
-    
-    @MainActor
-    private func changePostStatus(status: String?) {
-        if let status = status {
-            if status == "ok" {
-                self.isDeletedPost = true
-            } else {
-                self.isDeletedPost = false
-            }
-        } else {
-            self.isDeletedPost = false
         }
     }
 

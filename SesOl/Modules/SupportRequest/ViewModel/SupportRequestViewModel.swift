@@ -19,116 +19,181 @@ class SupportRequestViewModel: ObservableObject {
     /// Readed isUnionAccount value in UserDefaults
     @Published var isUnionAccount = 0
 
-    @Published var waitingSupportRequests: ProvidingAssistanceResponse? = nil
-    @Published var rejectedSupportRequests: ProvidingAssistanceResponse? = nil
-    @Published var approvedSupportRequests: ProvidingAssistanceResponse? = nil
+    @Published var waitingSupportRequests: ProvidingAssistanceResponse?
+    @Published var rejectedSupportRequests: ProvidingAssistanceResponse?
+    @Published var approvedSupportRequests: ProvidingAssistanceResponse?
 
-    @Published var waitingVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse? = nil
-    @Published var rejectedVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse? = nil
-    @Published var approvedVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse? = nil
+    @Published var waitingVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse?
+    @Published var rejectedVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse?
+    @Published var approvedVoluntarilyPitchTentRequests: VoluntarilyPitchTentResponse?
 
-    @Published var waitingVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse? = nil
-    @Published var rejectedVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse? = nil
-    @Published var approvedVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse? = nil
+    @Published var waitingVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse?
+    @Published var rejectedVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse?
+    @Published var approvedVoluntarilyPsychologistRequests: VoluntarilyPsychologistResponse?
 
-    @Published var waitingVoluntarilyTransporterRequests: VoluntarilyTransporterResponse? = nil
-    @Published var rejectedVoluntarilyTransporterRequests: VoluntarilyTransporterResponse? = nil
-    @Published var approvedVoluntarilyTransporterRequests: VoluntarilyTransporterResponse? = nil
+    @Published var waitingVoluntarilyTransporterRequests: VoluntarilyTransporterResponse?
+    @Published var rejectedVoluntarilyTransporterRequests: VoluntarilyTransporterResponse?
+    @Published var approvedVoluntarilyTransporterRequests: VoluntarilyTransporterResponse?
+
+    @Published var error = false
+    @Published var errorMessage: NetworkError?
 
     private let networkManager = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseURL))
     private let cache = UserDefaultCache()
 
     func getApprovedSupportRequests() async {
-        let approvedRequests = await getProvidingAssistanceRequests(method: .read_approved_providing, user_assistance_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .providingAssistanceCrud, method: .post, model: ProvidingAssistanceRequest(method: RequestMethods.read_approved_providing.rawValue, user_assistance_account_id: userID, is_a_union: isUnionAccount), type: ProvidingAssistanceResponse.self)
+
         DispatchQueue.main.async {
-            self.approvedSupportRequests = approvedRequests
+            switch response {
+            case .success(let success):
+                self.approvedSupportRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getWaitingSupportRequests() async {
-        let waitingRequests = await getProvidingAssistanceRequests(method: .read_waiting_providing, user_assistance_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .providingAssistanceCrud, method: .post, model: ProvidingAssistanceRequest(method: RequestMethods.read_waiting_providing.rawValue, user_assistance_account_id: userID, is_a_union: isUnionAccount), type: ProvidingAssistanceResponse.self)
+
         DispatchQueue.main.async {
-            self.waitingSupportRequests = waitingRequests
+            switch response {
+            case .success(let success):
+                self.waitingSupportRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getRejectedSupportRequests() async {
-        let rejectedRequests = await getProvidingAssistanceRequests(method: .read_rejected_providing, user_assistance_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .providingAssistanceCrud, method: .post, model: ProvidingAssistanceRequest(method: RequestMethods.read_rejected_providing.rawValue, user_assistance_account_id: userID, is_a_union: isUnionAccount), type: ProvidingAssistanceResponse.self)
+
         DispatchQueue.main.async {
-            self.rejectedSupportRequests = rejectedRequests
+            switch response {
+            case .success(let success):
+                self.rejectedSupportRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getWaitingVoluntarilyPitchTent() async {
-        let response = await getVoluntarilyPitchTent(method: .read_waiting_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: VoluntarilyPitchTentRequest(method: RequestMethods.read_waiting_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPitchTentResponse.self)
+
         DispatchQueue.main.async {
-            self.waitingVoluntarilyPitchTentRequests = response
+            switch response {
+            case .success(let success):
+                self.waitingVoluntarilyPitchTentRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getRejectedVoluntarilyPitchTent() async {
-        let response = await getVoluntarilyPitchTent(method: .read_rejected_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: VoluntarilyPitchTentRequest(method: RequestMethods.read_rejected_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPitchTentResponse.self)
+
         DispatchQueue.main.async {
-            self.rejectedVoluntarilyPitchTentRequests = response
+            switch response {
+            case .success(let success):
+                self.rejectedVoluntarilyPitchTentRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getApprovedVoluntarilyPitchTent() async {
-        let response = await getVoluntarilyPitchTent(method: .read_approved_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: VoluntarilyPitchTentRequest(method: RequestMethods.read_approved_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPitchTentResponse.self)
+
         DispatchQueue.main.async {
-            self.approvedVoluntarilyPitchTentRequests = response
+            switch response {
+            case .success(let success):
+                self.approvedVoluntarilyPitchTentRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getWaitingVoluntarilyPsychologist() async {
-        let response = await getVoluntarilyPsychologist(method: .read_waiting_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: VoluntarilyPsychologistRequest(method: RequestMethods.read_waiting_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPsychologistResponse.self)
+
         DispatchQueue.main.async {
-            self.waitingVoluntarilyPsychologistRequests = response
+            switch response {
+            case .success(let success):
+                self.waitingVoluntarilyPsychologistRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getRejectedVoluntarilyPsychologist() async {
-        let response = await getVoluntarilyPsychologist(method: .read_rejected_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: VoluntarilyPsychologistRequest(method: RequestMethods.read_rejected_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPsychologistResponse.self)
+
         DispatchQueue.main.async {
-            self.rejectedVoluntarilyPsychologistRequests = response
+            switch response {
+            case .success(let success):
+                self.rejectedVoluntarilyPsychologistRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getApprovedVoluntarilyPsychologist() async {
-        let response = await getVoluntarilyPsychologist(method: .read_approved_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyPsychologist, method: .post, model: VoluntarilyPsychologistRequest(method: RequestMethods.read_approved_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyPsychologistResponse.self)
+
         DispatchQueue.main.async {
-            self.approvedVoluntarilyPsychologistRequests = response
+            switch response {
+            case .success(let success):
+                self.approvedVoluntarilyPsychologistRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getWaitingVoluntarilyTransporter() async {
-        let response = await getVoluntarilyTransporter(method: .read_waiting_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyTransporter, method: .post, model: VoluntarilyTransporterRequest(method: RequestMethods.read_waiting_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyTransporterResponse.self)
+
         DispatchQueue.main.async {
-            self.waitingVoluntarilyTransporterRequests = response
+            switch response {
+            case .success(let success):
+                self.waitingVoluntarilyTransporterRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getRejectedVoluntarilyTransporter() async {
-        let response = await getVoluntarilyTransporter(method: .read_rejected_providing, user_account_id: userID, is_a_union: isUnionAccount)
+        let response = await NetworkManager.shared.post(url: .voluntarilyTransporter, method: .post, model: VoluntarilyTransporterRequest(method: RequestMethods.read_rejected_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyTransporterResponse.self)
+
         DispatchQueue.main.async {
-            self.rejectedVoluntarilyTransporterRequests = response
+            switch response {
+            case .success(let success):
+                self.rejectedVoluntarilyTransporterRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
     func getApprovedVoluntarilyTransporter() async {
-        let response = await getVoluntarilyTransporter(method: .read_approved_providing, user_account_id: userID, is_a_union: isUnionAccount)
-        DispatchQueue.main.async {
-            self.approvedVoluntarilyTransporterRequests = response
-        }
-    }
-
-    func readCache(userIdKey: UserCacheKeys, isUnionKey: UserCacheKeys) {
-        let userID = readUserCache(key: userIdKey)
-        let isUnionAccount = readUserCache(key: isUnionKey)
+        let response = await NetworkManager.shared.post(url: .voluntarilyTransporter, method: .post, model: VoluntarilyTransporterRequest(method: RequestMethods.read_approved_providing.rawValue, user_account_id: userID, is_a_union: isUnionAccount), type: VoluntarilyTransporterResponse.self)
 
         DispatchQueue.main.async {
-            self.userID = userID
-            self.isUnionAccount = isUnionAccount
+            switch response {
+            case .success(let success):
+                self.approvedVoluntarilyTransporterRequests = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
@@ -152,40 +217,20 @@ class SupportRequestViewModel: ObservableObject {
             await getApprovedVoluntarilyTransporter()
         }
     }
-}
 
-extension SupportRequestViewModel: ISupportRequestViewModel {
-    func getVoluntarilyPitchTent(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyPitchTentResponse? {
-        guard let response = await networkManager.post(path: .voluntarilyPitchTent, model: VoluntarilyPitchTentRequest(method: method.rawValue, user_account_id: user_account_id, is_a_union: is_a_union), type: VoluntarilyPitchTentResponse.self) else { return nil }
-        return response
+    func readCache(userIdKey: UserCacheKeys, isUnionKey: UserCacheKeys) {
+        let userID = readUserCache(key: userIdKey)
+        let isUnionAccount = readUserCache(key: isUnionKey)
+
+        DispatchQueue.main.async {
+            self.userID = userID
+            self.isUnionAccount = isUnionAccount
+        }
     }
 
-    func getVoluntarilyPsychologist(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyPsychologistResponse? {
-        guard let response = await networkManager.post(path: .voluntarilyPsychologist, model: VoluntarilyPsychologistRequest(method: method.rawValue, user_account_id: user_account_id, is_a_union: is_a_union), type: VoluntarilyPsychologistResponse.self) else { return nil }
-        return response
-    }
-
-    func getVoluntarilyTransporter(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyTransporterResponse? {
-        guard let response = await networkManager.post(path: .voluntarilyTransporter, model: VoluntarilyTransporterRequest(method: method.rawValue, user_account_id: user_account_id, is_a_union: is_a_union), type: VoluntarilyTransporterResponse.self) else { return nil }
-        return response
-    }
-
-    func getProvidingAssistanceRequests(method: RequestMethods, user_assistance_account_id: Int, is_a_union: Int) async -> ProvidingAssistanceResponse? {
-        guard let response = await networkManager.post(path: .providingAssistanceCrud, model: ProvidingAssistanceRequest(method: method.rawValue, user_assistance_account_id: user_assistance_account_id, is_a_union: is_a_union), type: ProvidingAssistanceResponse.self) else { return nil }
-        return response
-    }
-
-    func readUserCache(key: UserCacheKeys) -> Int {
+    private func readUserCache(key: UserCacheKeys) -> Int {
         let response = cache.read(key: key)
         guard let responseInt = Int(response) else { return -1 }
         return responseInt
     }
-}
-
-protocol ISupportRequestViewModel {
-    func getVoluntarilyPitchTent(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyPitchTentResponse?
-    func getVoluntarilyPsychologist(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyPsychologistResponse?
-    func getVoluntarilyTransporter(method: RequestMethods, user_account_id: Int, is_a_union: Int) async -> VoluntarilyTransporterResponse?
-    func getProvidingAssistanceRequests(method: RequestMethods, user_assistance_account_id: Int, is_a_union: Int) async -> ProvidingAssistanceResponse?
-    func readUserCache(key: UserCacheKeys) -> Int
 }

@@ -9,14 +9,20 @@ import Foundation
 
 final class FeedViewModel: ObservableObject {
 
-    @Published var unionPosts: UnionPostResponse? = nil
-    private let networkManager = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseURL))
+    @Published var unionPosts: UnionPostResponse?
+    @Published var error:Bool = false
+    @Published var errorMessage: NetworkError?
 
     func getUnionPosts() async {
-        let posts = await getAllUnionPosts(method: "read_post")
+        let response = await NetworkManager.shared.post(url: .unionPostCrud, method: .post, model: UnionPostRequest(method: RequestMethods.read_post.rawValue), type: UnionPostResponse.self)
 
         DispatchQueue.main.async {
-            self.unionPosts = posts
+            switch response {
+            case .success(let success):
+                self.unionPosts = success
+            case .failure(let failure):
+                self.errorMessage = failure
+            }
         }
     }
 
@@ -26,16 +32,4 @@ final class FeedViewModel: ObservableObject {
         return dateFormatter.string(from: Date())
     }
 
-}
-
-extension FeedViewModel {
-    func getAllUnionPosts(method: String) async -> UnionPostResponse? {
-        guard let response = await networkManager.post(path: .unionPostCrud, model: UnionPostRequest(method: method), type: UnionPostResponse.self) else { return nil }
-
-        return response
-    }
-}
-
-protocol IFeedViewModel {
-    func getAllUnionPosts(method: String) async -> UnionPostResponse?
 }

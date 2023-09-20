@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct HelpRequestView: View {
-
     @StateObject private var helpRequestViewModel = HelpRequestViewModel()
-    
+
     var body: some View {
         NavigationStack {
             VStack {
