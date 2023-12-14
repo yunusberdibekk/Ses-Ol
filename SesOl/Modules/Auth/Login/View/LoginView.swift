@@ -25,46 +25,47 @@ struct LoginView: View {
                     HTextIconField(hint: "Telefon numarası", iconName: Icons.Auth.icon_tel.rawValue, text: $viewModel.userPhone)
                     HTextSecureIconField(hint: "Şifre", iconName: Icons.Auth.icon_lock.rawValue, text: $viewModel.userPassword)
                         .padding(.top, PagePaddings.Auth.normal.rawValue)
-
-                    CustomButton(onTap: {
-                        Task {
-                            await viewModel.loginUser()
+                    NavigationLink {
+                        if viewModel.isLogged {
+                            RootView()
+                                .navigationBarBackButtonHidden(true)
                         }
-                    }, title: "Giriş yap")
-                        .padding(.top, PagePaddings.Auth.normal.rawValue)
-
-                    NavigationLink("", isActive: $viewModel.isLogged) {
-                        ContentView()
-                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        CustomButton(onTap: {
+                            Task {
+                                await viewModel.loginUser()
+                            }
+                        }, title: "Giriş yap")
+                            .padding(.top, PagePaddings.Auth.normal.rawValue)
                     }
-
                     Group {
                         HStack {
                             Text("Hesabın yok mu?")
-                            Button("Kaydol") {
-                                viewModel.toSignup.toggle()
-                            }
+                            NavigationLink {
+                                if viewModel.toSignup {
+                                    SignupView()
+                                        .navigationBarBackButtonHidden(true)
+                                }
+                            } label: {
+                                Button("Kaydol") {
+                                    viewModel.toSignup.toggle()
+                                }
                                 .foregroundColor(.blue)
-                            NavigationLink("", isActive: $viewModel.toSignup) {
-                                SignupView().navigationBarBackButtonHidden(true)
-
                             }
                         }
-                            .padding(.top, PagePaddings.All.normal.rawValue)
-                            .font(.system(size: FontSizes.caption1, weight: .regular))
-                            .foregroundColor(.spanish_gray)
-                            .tint(.brilliant_azure)
+                        .padding(.top, PagePaddings.All.normal.rawValue)
+                        .font(.system(size: FontSizes.caption1, weight: .regular))
+                        .foregroundColor(.spanish_gray)
+                        .tint(.brilliant_azure)
                     }
                     Divider().frame(width: 200)
                     Spacer()
-
                 }
-                    .padding(.all, PagePaddings.All.normal.rawValue)
+                .padding(.all, PagePaddings.All.normal.rawValue)
             }
         }.modifier(ViewStatusHiddenModifier())
     }
 }
-
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
@@ -73,7 +74,6 @@ struct LogInView_Previews: PreviewProvider {
 }
 
 private struct HTextIconField: View {
-
     let hint: String
     let iconName: String
     var text: Binding<String>
@@ -89,7 +89,6 @@ private struct HTextIconField: View {
 }
 
 private struct HTextSecureIconField: View {
-
     let hint: String
     let iconName: String
     var text: Binding<String>

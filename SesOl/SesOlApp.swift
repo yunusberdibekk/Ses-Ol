@@ -14,7 +14,7 @@ struct SesOlApp: App {
         WindowGroup {
             NavigationStack {
                 if viewModel.alreadyLogged() {
-                    ContentView()
+                    RootView()
                 } else {
                     OnboardView()
                 }

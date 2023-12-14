@@ -529,14 +529,12 @@
 		BE530E8029F2B1A8009BDCC9 /* SesOl */ = {
 			isa = PBXGroup;
 			children = (
+				BED12EFB2B2BA30E0088091B /* App */,
 				BEF215E229F5C6B10025C19F /* Core */,
-				BE530E9229F2B220009BDCC9 /* Product */,
-				BE530E9129F2B217009BDCC9 /* Modules */,
-				BE530E9029F2B206009BDCC9 /* Resources */,
 				BE530E8F29F2B1FD009BDCC9 /* Utils */,
-				BE428A262A06D26000774EC0 /* ContentView.swift */,
-				BE530E8129F2B1A8009BDCC9 /* SesOlApp.swift */,
-				BE342D7629FB1DB20059ED75 /* Info.plist */,
+				BE530E9129F2B217009BDCC9 /* Modules */,
+				BE530E9229F2B220009BDCC9 /* Product */,
+				BE530E9029F2B206009BDCC9 /* Resources */,
 				BE530E8729F2B1A9009BDCC9 /* Preview Content */,
 			);
 			path = SesOl;
@@ -574,7 +572,7 @@
 		BE530E9129F2B217009BDCC9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				BE83CA912A27BFF1007DE109 /* View */,
+				BED12EFC2B2BA32A0088091B /* Root */,
 				BE530E9D29F2B2B1009BDCC9 /* Auth */,
 				BE428A012A06CD6300774EC0 /* Feed */,
 				BE428A202A06CFCF00774EC0 /* HelpRequest */,
@@ -589,6 +587,7 @@
 		BE530E9229F2B220009BDCC9 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				BE83CA912A27BFF1007DE109 /* View */,
 				BE530EA129F2B3C4009BDCC9 /* Widget */,
 			);
 			path = Product;
@@ -829,6 +828,23 @@
 				BE83CA992A27FA2D007DE109 /* Help */,
 			);
 			path = Citizien;
+			sourceTree = "<group>";
+		};
+		BED12EFB2B2BA30E0088091B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BE530E8129F2B1A8009BDCC9 /* SesOlApp.swift */,
+				BE342D7629FB1DB20059ED75 /* Info.plist */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		BED12EFC2B2BA32A0088091B /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				BE428A262A06D26000774EC0 /* ContentView.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 		BEEBFC162A14001D000D8E25 /* SupportRequest */ = {
