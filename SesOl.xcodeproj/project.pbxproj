@@ -68,7 +68,6 @@
 		BE530ED829F300F4009BDCC9 /* FontSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530ED729F300F4009BDCC9 /* FontSizes.swift */; };
 		BE530EDA29F3013B009BDCC9 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530ED929F3013B009BDCC9 /* TextFieldModifier.swift */; };
 		BE530EDC29F30692009BDCC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EDB29F30692009BDCC9 /* CustomButton.swift */; };
-		BE58337D2A1C3F7A0003E356 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE58337C2A1C3F7A0003E356 /* ProfileModel.swift */; };
 		BE6F91272A31F0A6003B868F /* RequestMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F91262A31F0A6003B868F /* RequestMethods.swift */; };
 		BE6F91292A323589003B868F /* RequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F91282A323589003B868F /* RequestOptions.swift */; };
 		BE6F912B2A323598003B868F /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F912A2A323598003B868F /* SupportType.swift */; };
@@ -86,11 +85,16 @@
 		BEBD406229FC81D300FDD9D7 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBD406129FC81D300FDD9D7 /* SignupModel.swift */; };
 		BECDB5322A09323500B8CD68 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5312A09323500B8CD68 /* ProfileViewModel.swift */; };
 		BECDB5342A0932C800B8CD68 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5332A0932C800B8CD68 /* PostDetailView.swift */; };
+		BED12F2E2B2BD7870088091B /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2D2B2BD7870088091B /* UserType.swift */; };
+		BED12F302B2BD8820088091B /* IbanOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2F2B2BD8820088091B /* IbanOptions.swift */; };
+		BED12F322B2BDEDA0088091B /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F312B2BDEDA0088091B /* ProfileResponse.swift */; };
+		BED12F342B2BDEE10088091B /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F332B2BDEE10088091B /* ProfileRequest.swift */; };
+		BED12F362B2BDEEB0088091B /* IbanResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F352B2BDEEB0088091B /* IbanResponse.swift */; };
+		BED12F382B2BDEF00088091B /* IbanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F372B2BDEF00088091B /* IbanRequest.swift */; };
 		BED470942A273F7B005AE8C6 /* UnionVoluntarilyPsychologist.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED470932A273F7B005AE8C6 /* UnionVoluntarilyPsychologist.swift */; };
 		BED470962A273F8F005AE8C6 /* UnionVoluntarilyPitchTent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED470952A273F8F005AE8C6 /* UnionVoluntarilyPitchTent.swift */; };
 		BED470982A273FA0005AE8C6 /* UnionVoluntarilyTransporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED470972A273FA0005AE8C6 /* UnionVoluntarilyTransporter.swift */; };
 		BED4BA1C2A361B8F009AFCCC /* IbanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4BA1B2A361B8F009AFCCC /* IbanDetailView.swift */; };
-		BED52EB52A3494F5002A843E /* IbanOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED52EB42A3494F5002A843E /* IbanOptions.swift */; };
 		BEEBFC0E2A134EA0000D8E25 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC0D2A134EA0000D8E25 /* Requests.swift */; };
 		BEEBFC102A135111000D8E25 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC0F2A135111000D8E25 /* ProfileView.swift */; };
 		BEEBFC1B2A1400CC000D8E25 /* SupportRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC1A2A1400CC000D8E25 /* SupportRequestView.swift */; };
@@ -165,7 +169,6 @@
 		BE530ED729F300F4009BDCC9 /* FontSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizes.swift; sourceTree = "<group>"; };
 		BE530ED929F3013B009BDCC9 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		BE530EDB29F30692009BDCC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		BE58337C2A1C3F7A0003E356 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		BE6F91262A31F0A6003B868F /* RequestMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethods.swift; sourceTree = "<group>"; };
 		BE6F91282A323589003B868F /* RequestOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOptions.swift; sourceTree = "<group>"; };
 		BE6F912A2A323598003B868F /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
@@ -183,11 +186,16 @@
 		BEBD406129FC81D300FDD9D7 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
 		BECDB5312A09323500B8CD68 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		BECDB5332A0932C800B8CD68 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		BED12F2D2B2BD7870088091B /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		BED12F2F2B2BD8820088091B /* IbanOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanOptions.swift; sourceTree = "<group>"; };
+		BED12F312B2BDEDA0088091B /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		BED12F332B2BDEE10088091B /* ProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequest.swift; sourceTree = "<group>"; };
+		BED12F352B2BDEEB0088091B /* IbanResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanResponse.swift; sourceTree = "<group>"; };
+		BED12F372B2BDEF00088091B /* IbanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanRequest.swift; sourceTree = "<group>"; };
 		BED470932A273F7B005AE8C6 /* UnionVoluntarilyPsychologist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionVoluntarilyPsychologist.swift; sourceTree = "<group>"; };
 		BED470952A273F8F005AE8C6 /* UnionVoluntarilyPitchTent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionVoluntarilyPitchTent.swift; sourceTree = "<group>"; };
 		BED470972A273FA0005AE8C6 /* UnionVoluntarilyTransporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionVoluntarilyTransporter.swift; sourceTree = "<group>"; };
 		BED4BA1B2A361B8F009AFCCC /* IbanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanDetailView.swift; sourceTree = "<group>"; };
-		BED52EB42A3494F5002A843E /* IbanOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanOptions.swift; sourceTree = "<group>"; };
 		BEEBFC0D2A134EA0000D8E25 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		BEEBFC0F2A135111000D8E25 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BEEBFC1A2A1400CC000D8E25 /* SupportRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRequestView.swift; sourceTree = "<group>"; };
@@ -436,9 +444,9 @@
 		BE428A1F2A06CFBF00774EC0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				BE428A662A071C8000774EC0 /* ViewModel */,
 				BE428A652A071C7C00774EC0 /* Model */,
 				BE428A642A071C7800774EC0 /* Views */,
+				BE428A662A071C8000774EC0 /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -473,7 +481,12 @@
 		BE428A652A071C7C00774EC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BE58337C2A1C3F7A0003E356 /* ProfileModel.swift */,
+				BED12F312B2BDEDA0088091B /* ProfileResponse.swift */,
+				BED12F332B2BDEE10088091B /* ProfileRequest.swift */,
+				BED12F352B2BDEEB0088091B /* IbanResponse.swift */,
+				BED12F372B2BDEF00088091B /* IbanRequest.swift */,
+				BED12F2D2B2BD7870088091B /* UserType.swift */,
+				BED12F2F2B2BD8820088091B /* IbanOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,7 +566,6 @@
 			children = (
 				BE530E9429F2B23A009BDCC9 /* Extensions */,
 				BE530E9329F2B232009BDCC9 /* Enums */,
-				BE530E9729F2B255009BDCC9 /* ViewModifiers */,
 				BEF215DF29F5B0910025C19F /* Storage */,
 				BE530E9629F2B24B009BDCC9 /* Fonts */,
 				BE1A71EA2AB910BF00EFA272 /* Helpers */,
@@ -587,6 +599,7 @@
 		BE530E9229F2B220009BDCC9 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				BE530E9729F2B255009BDCC9 /* ViewModifiers */,
 				BE83CA912A27BFF1007DE109 /* View */,
 				BE530EA129F2B3C4009BDCC9 /* Widget */,
 			);
@@ -597,18 +610,8 @@
 			isa = PBXGroup;
 			children = (
 				BE530EB529F2FE48009BDCC9 /* Size */,
-				BE530EAD29F2FE21009BDCC9 /* Radius.swift */,
-				BE530EAF29F2FE2C009BDCC9 /* PagePaddings.swift */,
-				BE530EB129F2FE37009BDCC9 /* Icons.swift */,
-				BE530EB329F2FE41009BDCC9 /* Images.swift */,
-				BEEBFC0D2A134EA0000D8E25 /* Requests.swift */,
-				BEEBFC1C2A15B0FB000D8E25 /* RequestType.swift */,
-				BE6F91262A31F0A6003B868F /* RequestMethods.swift */,
-				BE6F91282A323589003B868F /* RequestOptions.swift */,
-				BE6F912A2A323598003B868F /* SupportType.swift */,
-				BE6F912F2A329345003B868F /* UnionPostOptions.swift */,
-				BE6F91312A329350003B868F /* CitizienPostOptions.swift */,
-				BED52EB42A3494F5002A843E /* IbanOptions.swift */,
+				BED12F392B2BDFAF0088091B /* Constants */,
+				BED12F3A2B2BDFBF0088091B /* Requests */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -847,6 +850,31 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
+		BED12F392B2BDFAF0088091B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BE530EAD29F2FE21009BDCC9 /* Radius.swift */,
+				BE530EAF29F2FE2C009BDCC9 /* PagePaddings.swift */,
+				BE530EB129F2FE37009BDCC9 /* Icons.swift */,
+				BE530EB329F2FE41009BDCC9 /* Images.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		BED12F3A2B2BDFBF0088091B /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				BEEBFC0D2A134EA0000D8E25 /* Requests.swift */,
+				BEEBFC1C2A15B0FB000D8E25 /* RequestType.swift */,
+				BE6F91262A31F0A6003B868F /* RequestMethods.swift */,
+				BE6F91282A323589003B868F /* RequestOptions.swift */,
+				BE6F912A2A323598003B868F /* SupportType.swift */,
+				BE6F912F2A329345003B868F /* UnionPostOptions.swift */,
+				BE6F91312A329350003B868F /* CitizienPostOptions.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		BEEBFC162A14001D000D8E25 /* SupportRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,7 +967,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					BE530E7D29F2B1A8009BDCC9 = {
 						CreatedOnToolsVersion = 14.3;
@@ -990,8 +1018,8 @@
 				BE428A7B2A07270E00774EC0 /* HelpRequestView.swift in Sources */,
 				BE530EA629F2B643009BDCC9 /* SignupView.swift in Sources */,
 				BE1A72002AB91AC200EFA272 /* NetworkManager.swift in Sources */,
+				BED12F362B2BDEEB0088091B /* IbanResponse.swift in Sources */,
 				BECDB5322A09323500B8CD68 /* ProfileViewModel.swift in Sources */,
-				BED52EB52A3494F5002A843E /* IbanOptions.swift in Sources */,
 				BE1A71EC2AB910C600EFA272 /* AuthValidator.swift in Sources */,
 				BE1A723F2AB9C05A00EFA272 /* PsychologistSupportRequestSubView.swift in Sources */,
 				BE428A592A07151D00774EC0 /* TextAreaModifier.swift in Sources */,
@@ -1010,10 +1038,10 @@
 				BE530EAC29F2B668009BDCC9 /* OnboardModel.swift in Sources */,
 				BED4BA1C2A361B8F009AFCCC /* IbanDetailView.swift in Sources */,
 				BE0294312A2730E0009C8788 /* VoluntarilyTransporterRow.swift in Sources */,
+				BED12F342B2BDEE10088091B /* ProfileRequest.swift in Sources */,
 				BE3228452A2254C700F9F572 /* SupportRequestRow.swift in Sources */,
 				BE22898D2A2F3403006B8BF7 /* NetworkPath.swift in Sources */,
 				BECDB5342A0932C800B8CD68 /* PostDetailView.swift in Sources */,
-				BE58337D2A1C3F7A0003E356 /* ProfileModel.swift in Sources */,
 				BE530EB029F2FE2C009BDCC9 /* PagePaddings.swift in Sources */,
 				BED470982A273FA0005AE8C6 /* UnionVoluntarilyTransporter.swift in Sources */,
 				BE530EB229F2FE37009BDCC9 /* Icons.swift in Sources */,
@@ -1032,9 +1060,11 @@
 				BEBD406229FC81D300FDD9D7 /* SignupModel.swift in Sources */,
 				BED470962A273F8F005AE8C6 /* UnionVoluntarilyPitchTent.swift in Sources */,
 				BE428A272A06D26000774EC0 /* ContentView.swift in Sources */,
+				BED12F382B2BDEF00088091B /* IbanRequest.swift in Sources */,
 				BE530EAE29F2FE21009BDCC9 /* Radius.swift in Sources */,
 				BE6F91292A323589003B868F /* RequestOptions.swift in Sources */,
 				BE1A71EF2AB9110000EFA272 /* AuthService.swift in Sources */,
+				BED12F2E2B2BD7870088091B /* UserType.swift in Sources */,
 				BE1A71F62AB9175500EFA272 /* NetworkError.swift in Sources */,
 				BE530EB929F2FE68009BDCC9 /* ViewHeight.swift in Sources */,
 				BE1A71FA2AB91A4900EFA272 /* INetworkManager.swift in Sources */,
@@ -1043,9 +1073,11 @@
 				BE530EBB29F2FF0B009BDCC9 /* Colors.swift in Sources */,
 				BE06F1A52A0E897900D2C4CB /* PostView.swift in Sources */,
 				BE32283F2A22071A00F9F572 /* SupportRequestModel.swift in Sources */,
+				BED12F302B2BD8820088091B /* IbanOptions.swift in Sources */,
 				BE530EB429F2FE41009BDCC9 /* Images.swift in Sources */,
 				BE1A71FC2AB91A7200EFA272 /* NetworkConfig.swift in Sources */,
 				BE02942F2A2730CA009C8788 /* VoluntarilyPsychologistRow.swift in Sources */,
+				BED12F322B2BDEDA0088091B /* ProfileResponse.swift in Sources */,
 				BE99B7F12A1EF93A00D93F6E /* FeedViewModel.swift in Sources */,
 				BE530EDC29F30692009BDCC9 /* CustomButton.swift in Sources */,
 				BE0294352A2738C0009C8788 /* CitizienVoluntarilyPsychologist.swift in Sources */,
@@ -1116,6 +1148,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1177,6 +1210,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -8,140 +8,145 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject private var profileViewModel = ProfileViewModel()
+    @StateObject var viewModel = ProfileViewModel()
+    @AppStorage("userType") var userType: UserType = .citizien
+    @AppStorage("userID") var userID = 0
 
     var body: some View {
         NavigationStack {
-            VStack (spacing: 15) {
+            VStack(spacing: 15) {
+                switch userType {
+                case .citizien:
+                    headerView
+                case .union:
+                    unionIbansView()
+                    headerView
+                }
+                signOutView
                 Spacer()
-                if profileViewModel.isUnionAccount == 1 {
-                    HStack {
-                        Spacer()
-                        NavigationLink(isActive: $profileViewModel.showEdit) {
-                            IbanDetailView().navigationBarBackButtonHidden(true)
-                        } label: {
-                            Button {
-                                profileViewModel.showEdit.toggle()
-                            } label: {
-                                Image(systemName: "creditcard.fill")
-                                    .foregroundColor(.halloween_orange)
-                            }
-                        }
-                    }
-                        .padding(.trailing, PagePaddings.Normal.padding_20.rawValue)
-                }
-
-                Image(systemName: profileViewModel.isUnionAccount == 0 ? "person.fill" : "person.badge.shield.checkmark.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 50)
-
-                Text("Kullanıcı Bilgileri")
-                    .font(.title)
-                    .foregroundColor(.dark_liver)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
-                    .padding(.top, 5)
-
-                VStack(spacing: 10) {
-                    if profileViewModel.isUnionAccount == 0 {
-                        if let citizienProfile = profileViewModel.citizienModel {
-                            UserInformationItem(iconName: "person.fill", text: citizienProfile.userName ?? "")
-                            UserInformationItem(iconName: "person.fill", text: citizienProfile.userSurname ?? "")
-                            UserInformationItem(iconName: "phone.fill", text: citizienProfile.userTel ?? "")
-                            UserInformationItem(iconName: "map.circle.fill", text: citizienProfile.addressCountry ?? "")
-                            UserInformationItem(iconName: "map.circle", text: citizienProfile.addressCity ?? "")
-                            UserInformationItem(iconName: "mappin.circle.fill", text: citizienProfile.addressDistrict ?? "")
-                            UserInformationItem(iconName: "mappin.circle", text: citizienProfile.fullAddress ?? "")
-                        }
-                    } else if profileViewModel.isUnionAccount == 1 {
-                        if let unionProfile = profileViewModel.unionModel {
-                            UserInformationItem(iconName: "person.fill", text: unionProfile.unionName ?? "")
-                            UserInformationItem(iconName: "envelope.fill", text: unionProfile.unionEmail ?? "")
-                            UserInformationItem(iconName: "globe", text: unionProfile.unionWebSite ?? "")
-                            UserInformationItem(iconName: "phone.fill", text: unionProfile.unionTel ?? "")
-                            HStack {
-                                Image(systemName: "creditcard.fill")
-                                    .foregroundColor(.halloween_orange)
-
-                                Picker("Kurum İbanlar", selection: .constant(0)) {
-                                    Text("İbanlarım").tag(0)
-                                    ForEach(profileViewModel.ibans, id: \.ibanID) { iban in
-                                        HStack {
-                                            Text(iban.ibanTitle ?? "")
-                                            Text(iban.iban ?? "")
-                                        }
-                                            .foregroundColor(.spanish_gray)
-                                    }
-                                }
-                                    .pickerStyle(.navigationLink)
-                                    .foregroundColor(.gray.opacity(0.6))
-                                Spacer()
-                            }.modifier(TextFieldModifier())
-                                .onAppear {
-                                Task {
-                                    await profileViewModel.readIbans()
-                                }
-                            }
-                            Spacer().frame(height: 75)
-                        }
-
-                    } else {
-                        Text("Error")
+                    .frame(height: 60)
+            }
+            .onAppear {
+                Task {
+                    switch userType {
+                    case .citizien:
+                        await viewModel.readCitizien(with: userID)
+                    case .union:
+                        await viewModel.readUnion(with: userID)
+                        await viewModel.readUnionIbans(with: userID)
                     }
                 }
-                    .padding(.top, 10)
-                    .padding(.trailing, 20)
-                    .padding(.leading, 20)
-
-                NavigationLink(isActive: $profileViewModel.quit) {
-                    LoginView().navigationBarBackButtonHidden(true)
-                } label: {
-                    Button {
-                        profileViewModel.quitUserAcccount()
-                    } label: {
-                        Text("Çıkış")
-                            .font(.system(size: FontSizes.headline))
-                            .fontWeight(.regular)
-                            .padding(.trailing, 0)
-                        Image(systemName: "arrow.right")
-                    }.foregroundColor(.halloween_orange)
-                }
-                Spacer().frame(height: 60)
             }
         }
-            .onAppear {
-            profileViewModel.readCache(userIdKey: .userId, isUnionKey: .isUnionAccount)
-            Task {
-                if profileViewModel.isUnionAccount == 0 {
-                    await profileViewModel.readCitizien()
-                } else {
-                    await profileViewModel.readUnion()
-                }
-                await profileViewModel.readIbans()
+        .navigationBarBackButtonHidden(true)
+    }
+
+    private var editIbanView: some View {
+        HStack(spacing: 0) {
+            Spacer()
+            NavigationLink {
+                IbanDetailView()
+                    .environmentObject(viewModel)
+            } label: {
+                Image(systemName: "creditcard.fill")
+                    .foregroundStyle(.orange)
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+        .padding(.trailing, 20)
     }
-}
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
+    private var signOutView: some View {
+        NavigationLink {
+            LoginView()
+                .navigationBarBackButtonHidden(true)
+        } label: {
+            Button {
+                viewModel.signOut()
+            } label: {
+                Text("Çıkış")
+                    .font(.system(size: FontSizes.headline))
+                    .fontWeight(.regular)
+                    .padding(.trailing, 0)
+                Image(systemName: "arrow.right")
+            }
+            .foregroundColor(.halloween_orange)
+        }
     }
-}
 
-private struct UserInformationItem: View {
-    var iconName: String
-    var text: String
+    private var headerView: some View {
+        VStack(spacing: 0) {
+            Image(systemName: userType == .citizien ?
+                "person.fill" : "person.badge.shield.checkmark.fill")
+                .font(.largeTitle)
+            Text("Kullanıcı Bilgileri")
+                .font(.title)
+                .foregroundColor(.gray)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.leading)
+                .padding(.top, 5)
+        }
+    }
 
-    var body: some View {
+    @ViewBuilder private func citizienInformationsView() -> some View {
+        if let citizien = viewModel.citizien {
+            VStack(spacing: 10) {
+                userInformationCell(icon: "person.fill", title: citizien.userName ?? "")
+                userInformationCell(icon: "person.fill", title: citizien.userSurname ?? "")
+                userInformationCell(icon: "phone.fill", title: citizien.userTel ?? "")
+                userInformationCell(icon: "map.circle.fill", title: citizien.addressCountry ?? "")
+                userInformationCell(icon: "map.circle", title: citizien.addressCity ?? "")
+                userInformationCell(icon: "mappin.circle.fill", title: citizien.addressDistrict ?? "")
+                userInformationCell(icon: "mappin.circle", title: citizien.fullAddress ?? "")
+            }
+            .padding(.top, 10)
+            .padding([.leading, .trailing], 20)
+        }
+    }
+
+    @ViewBuilder private func unionInformationsView() -> some View {
+        if let union = viewModel.union {
+            VStack(spacing: 10) {
+                userInformationCell(icon: "person.fill", title: union.unionName ?? "")
+                userInformationCell(icon: "envelope.fill", title: union.unionEmail ?? "")
+                userInformationCell(icon: "globe", title: union.unionWebSite ?? "")
+                userInformationCell(icon: "phone.fill", title: union.unionTel ?? "")
+                unionIbansView()
+                Spacer()
+                    .frame(height: 75)
+            }
+            .padding(.top, 10)
+            .padding([.leading, .trailing], 20)
+        }
+    }
+
+    @ViewBuilder private func unionIbansView() -> some View {
         HStack {
-            Image(systemName: iconName)
+            Image(systemName: "creditcard.fill")
+                .foregroundStyle(.orange)
+            Picker("Ibanlar", selection: .constant("")) {
+                ForEach(viewModel.unionIbans, id: \.ibanID) { iban in
+                    HStack {
+                        Text(iban.ibanTitle ?? "")
+                        Text(iban.iban ?? "")
+                    }
+                    .foregroundColor(.spanish_gray)
+                }
+                .pickerStyle(.navigationLink)
+                .foregroundColor(.gray.opacity(0.6))
+            }
+            Spacer()
+        }
+        .modifier(TextFieldModifier())
+    }
+
+    @ViewBuilder private func userInformationCell(icon: String, title: String) -> some View {
+        HStack {
+            Image(systemName: icon)
                 .foregroundColor(.halloween_orange)
-            Text(text)
+            Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.dark_liver)
         }
-            .modifier(TextFieldModifier())
+        .modifier(TextFieldModifier())
     }
 }
