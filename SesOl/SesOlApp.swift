@@ -9,15 +9,14 @@ import SwiftUI
 
 @main
 struct SesOlApp: App {
-    @StateObject private var viewModel = LoginViewModel()
+    @AppStorage("isOnBoarding") var isOnBoarding = false
+
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                if viewModel.alreadyLogged() {
-                    RootView()
-                } else {
-                    OnboardView()
-                }
+            if isOnBoarding {
+                LoginView()
+            } else {
+                OnboardView()
             }
         }
     }

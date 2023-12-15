@@ -38,28 +38,24 @@ struct LoginView: View {
                         }, title: "Giriş yap")
                             .padding(.top, PagePaddings.Auth.normal.rawValue)
                     }
-                    Group {
-                        HStack {
-                            Text("Hesabın yok mu?")
-                            NavigationLink {
-                                if viewModel.toSignup {
-                                    SignupView()
-                                        .navigationBarBackButtonHidden(true)
-                                }
-                            } label: {
-                                Button("Kaydol") {
-                                    viewModel.toSignup.toggle()
-                                }
-                                .foregroundColor(.blue)
-                            }
+
+                    HStack {
+                        Text("Hesabın yok mu?")
+                        Button("Kaydol") {
+                            viewModel.toSignup = true
                         }
-                        .padding(.top, PagePaddings.All.normal.rawValue)
-                        .font(.system(size: FontSizes.caption1, weight: .regular))
-                        .foregroundColor(.spanish_gray)
-                        .tint(.brilliant_azure)
+                        .foregroundColor(.blue)
                     }
+                    .padding(.top, PagePaddings.All.normal.rawValue)
+                    .font(.system(size: FontSizes.caption1, weight: .regular))
+                    .foregroundColor(.spanish_gray)
+                    .tint(.brilliant_azure)
                     Divider().frame(width: 200)
                     Spacer()
+                }
+                .navigationDestination(isPresented: $viewModel.toSignup) {
+                    SignupView()
+                        .navigationBarBackButtonHidden(true)
                 }
                 .padding(.all, PagePaddings.All.normal.rawValue)
             }
