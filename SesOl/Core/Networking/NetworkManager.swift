@@ -5,8 +5,8 @@
 //  Created by Yunus Emre Berdibek on 19.09.2023.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 final class NetworkManager: INetworkManager {
     var config: NetworkConfig
@@ -16,7 +16,7 @@ final class NetworkManager: INetworkManager {
     }
 
     static let shared = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseURL))
-    
+
     /// Generic fetch function.
     /// - Parameters:
     ///   - url: Request url
@@ -35,7 +35,7 @@ final class NetworkManager: INetworkManager {
         }
         return .success(data)
     }
-    
+
     /// Generic post function
     /// - Parameters:
     ///   - url: Request url
@@ -43,7 +43,7 @@ final class NetworkManager: INetworkManager {
     ///   - model: Model to be translated as a dictionary
     ///   - type: Generic response type
     /// - Returns: It will save data to the database. It will forward the response returned as a result of this process.
-    func post<T:Codable, R:Encodable>(url: NetworkPath, method: NetworkType, model: R, type: T.Type)async -> Result<T, NetworkError> {
+    func post<T: Codable, R: Encodable>(url: NetworkPath, method: NetworkType, model: R, type: T.Type) async -> Result<T, NetworkError> {
         let jsonEncoder = JSONEncoder()
 
         guard let data = try? jsonEncoder.encode(model) else {
@@ -64,9 +64,9 @@ final class NetworkManager: INetworkManager {
             return .failure(.networkError(description: "The data is empty."))
         }
 
-        return.success(data)
+        return .success(data)
     }
-    
+
     /// Custom  modifier auth  function
     /// - Parameters:
     ///   - url: Request url
@@ -95,10 +95,10 @@ final class NetworkManager: INetworkManager {
             return .failure(.networkError(description: "The data is empty."))
         }
 
-        return.success(data)
+        return .success(data)
     }
 
-    ///It will convert the model to dictionary data type
+    /// It will convert the model to dictionary data type
     private func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {

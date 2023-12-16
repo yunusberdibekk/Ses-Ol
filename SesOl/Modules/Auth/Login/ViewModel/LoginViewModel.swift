@@ -5,8 +5,8 @@
 //  Created by Yunus Emre Berdibek on 24.04.2023.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 final class LoginViewModel: ObservableObject {
     @Published var userPhone: String = ""
@@ -35,7 +35,7 @@ final class LoginViewModel: ObservableObject {
         }
     }
 
-    func onSaveUserToken(userID: String, isUnion: String) async -> Void {
+    func onSaveUserToken(userID: String, isUnion: String) async {
         cache.save(key: .userId, value: userID)
         cache.save(key: .isUnionAccount, value: isUnion)
 
@@ -48,4 +48,3 @@ final class LoginViewModel: ObservableObject {
         return !cache.read(key: .userId).isEmpty
     }
 }
-

@@ -59,6 +59,7 @@ struct LoginView: View {
                 }
                 .padding(.all, PagePaddings.All.normal.rawValue)
             }
+
         }.modifier(ViewStatusHiddenModifier())
     }
 }

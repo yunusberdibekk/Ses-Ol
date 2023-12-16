@@ -7,70 +7,23 @@
 
 import SwiftUI
 
-enum Users: String, CaseIterable {
-    case citizien = "Citizien"
-    case union = "Union"
-}
-
 struct SignupView: View {
     @StateObject private var viewModel = SignupViewModel()
-    @State var selectedUser: Users = .citizien
-
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ScrollView {
             VStack {
-                HStack {
-                    Spacer()
-                    Text("Kayıt Ol")
-                        .font(.title)
-                        .foregroundColor(.halloween_orange)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.leading)
-                }
-                .padding([.top, .trailing], PagePaddings.Normal.padding_20.rawValue)
-
-                Picker("Select", selection: $selectedUser) {
-                    ForEach(Users.allCases, id: \.self) { item in
-                        Text(item.rawValue)
-                    }
-                }
-                .tint(.halloween_orange)
-                .pickerStyle(.segmented)
-
-                switch selectedUser {
+                headerView
+                switch viewModel.userType {
                 case .citizien:
-                    VStack(spacing: 15) {
-                        HTextIconField(text: $viewModel.citizienName, iconName: "person.fill", hint: "Ad")
-                        HTextIconField(text: $viewModel.citizienSurname, iconName: "person.fill", hint: "Soyad")
-                        HTextIconField(text: $viewModel.citizienPhone, iconName: "phone.fill", hint: "Telefon numarası")
-                        HLocationCountryField(iconName: "map.circle.fill", hint: "Ülke", selectedItem: $viewModel.selectedCountry, countries: viewModel.countries)
-                        HLocationCityField(iconName: "map.circle", hint: "Şehir", selectedItem: $viewModel.selectedCity, cities: viewModel.cities)
-                        HLocationDistrictField(iconName: "mappin.circle.fill", hint: "İlçe", selectedItem: $viewModel.selectedDistrict, districts: viewModel.districts)
-                        HTextIconField(text: $viewModel.citizienFullAddress, iconName: "mappin.circle", hint: "Tam adres")
-                        HTextSecureIconField(text: $viewModel.citizienPassword, iconName: "lock.fill", hint: "Şifre")
-                    }
-                    .padding(.top, PagePaddings.Auth.normal.rawValue)
+                    citizienInputList()
                 case .union:
-                    VStack(spacing: 15) {
-                        HTextIconField(text: $viewModel.unionName, iconName: "person.fill", hint: "Kurum adı")
-                        HTextIconField(text: $viewModel.unionPhone, iconName: "phone.fill", hint: "Telefon numarası")
-                        HTextIconField(text: $viewModel.unionEmail, iconName: "envelope.fill", hint: "Email adresi")
-                        HTextIconField(text: $viewModel.unionWebsite, iconName: "network", hint: "Web sitesi")
-                        HTextSecureIconField(text: $viewModel.unionPassword, iconName: "lock.fill", hint: "Şifre")
-                    }
-                    .padding(.top, PagePaddings.Auth.normal.rawValue)
+                    unionInputList()
                 }
-
                 CustomButton(onTap: {
                     Task {
-                        switch selectedUser {
-                        case .citizien:
-                            await viewModel.signupCitizien()
-                        case .union:
-                            await viewModel.signupUnion()
-                        }
+                        await viewModel.signUp()
                     }
                 }, title: "Kayıt ol")
                     .padding(.top, PagePaddings.All.normal.rawValue)
@@ -84,8 +37,10 @@ struct SignupView: View {
             }
         }
         .onChange(of: viewModel.selectedCountry, perform: { _ in
-            viewModel.selectedCity = City(sehir_id: "-1", sehir_adi: "Seç", ulke_idfk: "-1")
-            viewModel.selectedDistrict = District(ilce_id: "-1", ilce_adi: "Seç", sehir_idfk: "-1")
+            viewModel.updateLocations(
+                countries: viewModel.countries,
+                cities: viewModel.cities,
+                districts: viewModel.districts)
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -103,119 +58,156 @@ struct SignupView: View {
             }
         }
     }
+
+    private var headerView: some View {
+        VStack {
+            Text("Kayıt Ol")
+                .font(.system(.title, weight: .bold))
+                .foregroundColor(.halloween_orange)
+                .frame(maxWidth: .infinity, alignment: .center)
+
+            Picker("Seç", selection: $viewModel.userType) {
+                ForEach(UserType.allCases, id: \.self) { item in
+                    Text(item.description)
+                }
+            }
+            .tint(.halloween_orange)
+            .pickerStyle(.segmented)
+        }
+    }
+
+    @ViewBuilder private func customInputField(title: String, icon: String, text: Binding<String>, isTextField: Bool) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.halloween_orange.opacity(0.5))
+            if isTextField {
+                TextField(title, text: text)
+            } else {
+                SecureField(title, text: text)
+            }
+        }
+        .foregroundColor(.gray.opacity(0.6))
+        .modifier(TextFieldModifier())
+    }
+
+    @ViewBuilder private func customCountryInputField(title: String, icon: String, countries: [Country], selection: Binding<Country>) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.halloween_orange.opacity(0.5))
+            Picker(title, selection: selection) {
+                ForEach(countries, id: \.id) { country in
+                    Text(country.ulkeAdi)
+                        .tag(country)
+                }
+            }
+            .pickerStyle(.navigationLink)
+            .foregroundColor(.gray.opacity(0.6))
+            Spacer()
+        }
+        .modifier(TextFieldModifier())
+    }
+
+    @ViewBuilder private func customCityInputField(title: String, icon: String, cities: [City], selection: Binding<City>) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.halloween_orange.opacity(0.5))
+            Picker(title, selection: selection) {
+                ForEach(cities, id: \.id) { city in
+                    Text(city.sehirAdi)
+                        .tag(city)
+                }
+            }
+            .pickerStyle(.navigationLink)
+            .foregroundColor(.gray.opacity(0.6))
+            Spacer()
+        }
+        .modifier(TextFieldModifier())
+    }
+
+    @ViewBuilder private func customDistrictInputField(title: String, icon: String, districts: [District], selection: Binding<District>) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.halloween_orange.opacity(0.5))
+            Picker(title, selection: selection) {
+                ForEach(districts, id: \.id) { district in
+                    Text(district.ilceAdi)
+                        .tag(district)
+                }
+            }
+            .pickerStyle(.navigationLink)
+            .foregroundColor(.gray.opacity(0.6))
+            Spacer()
+        }
+        .modifier(TextFieldModifier())
+    }
+
+    @ViewBuilder private func citizienInputList() -> some View {
+        VStack(spacing: 15) {
+            customInputField(title: "Ad",
+                             icon: "person.fill",
+                             text: $viewModel.citizienName,
+                             isTextField: true)
+            customInputField(title: "Soyad",
+                             icon: "person",
+                             text: $viewModel.citizienSurname,
+                             isTextField: true)
+            customInputField(title: "Telefon numarası",
+                             icon: "phone.fill",
+                             text: $viewModel.citizienPhone,
+                             isTextField: true)
+            customCountryInputField(title: "Ülke",
+                                    icon: "map.fill",
+                                    countries: viewModel.countries,
+                                    selection: $viewModel.selectedCountry)
+            customCityInputField(title: "Şehir",
+                                 icon: "map",
+                                 cities: viewModel.cities,
+                                 selection: $viewModel.selectedCity)
+            customDistrictInputField(title: "İlçe",
+                                     icon: "mappin",
+                                     districts: viewModel.districts,
+                                     selection: $viewModel.selectedDistrict)
+            customInputField(title: "Tam adres",
+                             icon: "mappin.and.ellipse",
+                             text: $viewModel.citizienFullAddress,
+                             isTextField: true)
+            customInputField(title: "Şifre",
+                             icon: "lock.fill",
+                             text: $viewModel.citizienFullAddress,
+                             isTextField: false)
+        }
+        .padding(.top, PagePaddings.Auth.normal.rawValue)
+    }
+
+    @ViewBuilder private func unionInputList() -> some View {
+        VStack(spacing: 15) {
+            customInputField(title: "Kurum adı",
+                             icon: "person.fill",
+                             text: $viewModel.unionName,
+                             isTextField: true)
+            customInputField(title: "Telefon numarası",
+                             icon: "phone.fill",
+                             text: $viewModel.unionPhone,
+                             isTextField: true)
+            customInputField(title: "Email adresi",
+                             icon: "envelope.fill",
+                             text: $viewModel.unionEmail,
+                             isTextField: true)
+            customInputField(title: "Web sitesi",
+                             icon: "network",
+                             text: $viewModel.unionWebsite,
+                             isTextField: true)
+            customInputField(title: "Şifre",
+                             icon: "lock.fill",
+                             text: $viewModel.unionPassword,
+                             isTextField: false)
+        }
+        .padding(.top, PagePaddings.Auth.normal.rawValue)
+    }
 }
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
         SignupView()
-    }
-}
-
-private struct HTextIconField: View {
-    var text: Binding<String>
-    var iconName: String
-    let hint: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(.halloween_orange.opacity(0.5))
-            TextField(hint, text: text)
-        }.foregroundColor(.gray.opacity(0.60))
-
-            .modifier(TextFieldModifier())
-    }
-}
-
-private struct HTextSecureIconField: View {
-    var text: Binding<String>
-    var iconName: String
-    let hint: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(.halloween_orange.opacity(0.5))
-            SecureField(hint, text: text)
-        }.foregroundColor(.gray.opacity(0.60))
-
-            .modifier(TextFieldModifier())
-    }
-}
-
-private struct HLocationCountryField: View {
-    var iconName: String
-    var hint: String
-    @Binding var selectedItem: Country
-    var countries: [LocationResponseElement]
-
-    var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(.halloween_orange.opacity(0.5))
-            Picker(hint, selection: $selectedItem) {
-                Text("Seç").tag(Country(ulke_id: "-1", ulke_adi: "Seç"))
-                ForEach(countries, id: \.ulkeID) { element in
-                    let country = Country(ulke_id: element.ulkeID ?? "", ulke_adi: element.ulkeAdi ?? "")
-                    Text(element.ulkeAdi ?? "").tag(country)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .foregroundColor(.gray.opacity(0.6))
-            Spacer()
-        }
-        .modifier(TextFieldModifier())
-    }
-}
-
-private struct HLocationCityField: View {
-    var iconName: String
-    var hint: String
-    @Binding var selectedItem: City
-    var cities: [LocationResponseElement]
-
-    var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(.halloween_orange.opacity(0.5))
-
-            Picker(hint, selection: $selectedItem) {
-                Text("Seç").tag(City(sehir_id: "-1", sehir_adi: "Seç", ulke_idfk: "-1"))
-                ForEach(cities, id: \.self) { element in
-                    let city = City(sehir_id: element.sehirID ?? "", sehir_adi: element.sehirAdi ?? "", ulke_idfk: element.ulkeIDFk ?? "")
-                    Text(element.sehirAdi ?? "").tag(city)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .foregroundColor(.gray.opacity(0.6))
-            Spacer()
-        }
-        .modifier(TextFieldModifier())
-    }
-}
-
-private struct HLocationDistrictField: View {
-    var iconName: String
-    var hint: String
-    @Binding var selectedItem: District
-    var districts: [LocationResponseElement]
-
-    var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(.halloween_orange.opacity(0.5))
-
-            Picker(hint, selection: $selectedItem) {
-                Text("Seç").tag(District(ilce_id: "-1", ilce_adi: "Seç", sehir_idfk: "-1"))
-                ForEach(districts, id: \.ilceID) { element in
-                    let district = District(ilce_id: element.ilceID ?? "", ilce_adi: element.ilceAdi ?? "", sehir_idfk: element.sehirIDFk ?? "")
-                    Text(element.ilceAdi ?? "").tag(district)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .foregroundColor(.gray.opacity(0.6))
-            Spacer()
-        }
-        .modifier(TextFieldModifier())
     }
 }

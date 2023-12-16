@@ -7,7 +7,16 @@
 
 import Foundation
 
-enum UserType: Int, Hashable {
+enum UserType: Int, CaseIterable, Hashable {
     case citizien = 0
     case union = 1
+
+    var description: String {
+        switch self {
+        case .citizien:
+            "Citizien"
+        case .union:
+            "Union"
+        }
+    }
 }
