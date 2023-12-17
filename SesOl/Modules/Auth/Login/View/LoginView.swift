@@ -33,7 +33,7 @@ struct LoginView: View {
                         .navigationBarBackButtonHidden(true)
                 })
                 .navigationDestination(isPresented: $viewModel.isLogged, destination: {
-                    RootView()
+                    RootTabView()
                         .navigationBarBackButtonHidden(true)
                 })
                 .padding(.all, PagePaddings.All.normal.rawValue)

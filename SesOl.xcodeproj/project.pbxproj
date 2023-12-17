@@ -15,6 +15,7 @@
 		BE0294372A2738CB009C8788 /* CitizienVoluntarilyPitchTent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0294362A2738CB009C8788 /* CitizienVoluntarilyPitchTent.swift */; };
 		BE0294392A2738D6009C8788 /* CitizienVoluntarilyTransporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0294382A2738D6009C8788 /* CitizienVoluntarilyTransporter.swift */; };
 		BE06F1A52A0E897900D2C4CB /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE06F1A42A0E897900D2C4CB /* PostView.swift */; };
+		BE14083E2B2F67E3007F85C2 /* RootTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE14083D2B2F67E3007F85C2 /* RootTabModel.swift */; };
 		BE1A71EC2AB910C600EFA272 /* AuthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71EB2AB910C600EFA272 /* AuthValidator.swift */; };
 		BE1A71F62AB9175500EFA272 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71F52AB9175500EFA272 /* NetworkError.swift */; };
 		BE1A71FA2AB91A4900EFA272 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A71F92AB91A4900EFA272 /* NetworkManagerProtocol.swift */; };
@@ -43,7 +44,7 @@
 		BE3228452A2254C700F9F572 /* SupportRequestRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3228442A2254C700F9F572 /* SupportRequestRow.swift */; };
 		BE3228472A22770600F9F572 /* UnionProvidingAssistanceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3228462A22770600F9F572 /* UnionProvidingAssistanceDetail.swift */; };
 		BE3DEB5B29F6EB3700B35210 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3DEB5A29F6EB3700B35210 /* LoginViewModel.swift */; };
-		BE428A272A06D26000774EC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A262A06D26000774EC0 /* ContentView.swift */; };
+		BE428A272A06D26000774EC0 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A262A06D26000774EC0 /* RootTabView.swift */; };
 		BE428A572A0713F200774EC0 /* TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A562A0713F200774EC0 /* TextArea.swift */; };
 		BE428A592A07151D00774EC0 /* TextAreaModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A582A07151D00774EC0 /* TextAreaModifier.swift */; };
 		BE428A7B2A07270E00774EC0 /* HelpRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A7A2A07270E00774EC0 /* HelpRequestView.swift */; };
@@ -113,6 +114,7 @@
 		BE0294362A2738CB009C8788 /* CitizienVoluntarilyPitchTent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizienVoluntarilyPitchTent.swift; sourceTree = "<group>"; };
 		BE0294382A2738D6009C8788 /* CitizienVoluntarilyTransporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizienVoluntarilyTransporter.swift; sourceTree = "<group>"; };
 		BE06F1A42A0E897900D2C4CB /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		BE14083D2B2F67E3007F85C2 /* RootTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabModel.swift; sourceTree = "<group>"; };
 		BE1A71EB2AB910C600EFA272 /* AuthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidator.swift; sourceTree = "<group>"; };
 		BE1A71F52AB9175500EFA272 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		BE1A71F92AB91A4900EFA272 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
@@ -142,7 +144,7 @@
 		BE3228462A22770600F9F572 /* UnionProvidingAssistanceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionProvidingAssistanceDetail.swift; sourceTree = "<group>"; };
 		BE342D7629FB1DB20059ED75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BE3DEB5A29F6EB3700B35210 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		BE428A262A06D26000774EC0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BE428A262A06D26000774EC0 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		BE428A562A0713F200774EC0 /* TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArea.swift; sourceTree = "<group>"; };
 		BE428A582A07151D00774EC0 /* TextAreaModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaModifier.swift; sourceTree = "<group>"; };
 		BE428A7A2A07270E00774EC0 /* HelpRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpRequestView.swift; sourceTree = "<group>"; };
@@ -258,6 +260,22 @@
 				BE29F7F32A23F96F002044F5 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BE14083B2B2F67D4007F85C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BE428A262A06D26000774EC0 /* RootTabView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BE14083C2B2F67D6007F85C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BE14083D2B2F67E3007F85C2 /* RootTabModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BE1A71EA2AB910BF00EFA272 /* Helpers */ = {
@@ -553,7 +571,7 @@
 		BE530E9129F2B217009BDCC9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				BED12EFC2B2BA32A0088091B /* Root */,
+				BED12EFC2B2BA32A0088091B /* RootTabView */,
 				BE530E9D29F2B2B1009BDCC9 /* Auth */,
 				BE428A012A06CD6300774EC0 /* Feed */,
 				BE428A202A06CFCF00774EC0 /* HelpRequest */,
@@ -809,12 +827,13 @@
 			name = App;
 			sourceTree = "<group>";
 		};
-		BED12EFC2B2BA32A0088091B /* Root */ = {
+		BED12EFC2B2BA32A0088091B /* RootTabView */ = {
 			isa = PBXGroup;
 			children = (
-				BE428A262A06D26000774EC0 /* ContentView.swift */,
+				BE14083C2B2F67D6007F85C2 /* Model */,
+				BE14083B2B2F67D4007F85C2 /* View */,
 			);
-			path = Root;
+			path = RootTabView;
 			sourceTree = "<group>";
 		};
 		BED12F392B2BDFAF0088091B /* Constants */ = {
@@ -999,6 +1018,7 @@
 				BE3228452A2254C700F9F572 /* SupportRequestRow.swift in Sources */,
 				BE2AB36B2B2E62A1008419F7 /* LoginResponse.swift in Sources */,
 				BE22898D2A2F3403006B8BF7 /* NetworkPath.swift in Sources */,
+				BE14083E2B2F67E3007F85C2 /* RootTabModel.swift in Sources */,
 				BECDB5342A0932C800B8CD68 /* PostDetailView.swift in Sources */,
 				BE530EB029F2FE2C009BDCC9 /* PagePaddings.swift in Sources */,
 				BED470982A273FA0005AE8C6 /* UnionVoluntarilyTransporter.swift in Sources */,
@@ -1015,7 +1035,7 @@
 				BEBD406029FC81C900FDD9D7 /* SignUpViewModel.swift in Sources */,
 				BE530EDA29F3013B009BDCC9 /* TextFieldModifier.swift in Sources */,
 				BED470962A273F8F005AE8C6 /* UnionVoluntarilyPitchTent.swift in Sources */,
-				BE428A272A06D26000774EC0 /* ContentView.swift in Sources */,
+				BE428A272A06D26000774EC0 /* RootTabView.swift in Sources */,
 				BED12F382B2BDEF00088091B /* IbanRequest.swift in Sources */,
 				BE530EAE29F2FE21009BDCC9 /* Radius.swift in Sources */,
 				BE6F91292A323589003B868F /* RequestOptions.swift in Sources */,

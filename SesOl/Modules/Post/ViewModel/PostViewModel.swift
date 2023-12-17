@@ -63,7 +63,7 @@ class PostViewModel: ObservableObject {
         var postlar = UnionPostResponse()
 
         for post in response {
-            if post.publisherUnionID == self.userID {
+            if post.publisherUnionID == userID {
                 postlar.append(post)
             }
         }
@@ -207,7 +207,6 @@ class PostViewModel: ObservableObject {
         }
     }
 
-
     func createVoluntarilyPitchTent() async {
         let response = await NetworkManager.shared.post(url: .voluntarilyPitchTent, method: .post, model: CreateVoluntarilyPitchTentRequest(method: RequestMethods.create_voluntarily.rawValue, user_account_id: userID, voluntarily_union_id: citizienSelectedUnionID, voluntarily_vehicle_status: citizienVehicleStatus, voluntarily_description: citizienDesc), type: CreateVoluntarilyPsychologistResponse.self)
 
@@ -281,5 +280,4 @@ class PostViewModel: ObservableObject {
         guard let responseInt = Int(response) else { return -1 }
         return responseInt
     }
-
 }
