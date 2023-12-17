@@ -15,24 +15,50 @@ final class LoginViewModel: ObservableObject {
     @Published var userPhone: String = ""
     @Published var isLogged: Bool = false
     @Published var toSignup: Bool = false
-    @Published var authErrorMessage: AuthError?
+    @Published var logMessage: String = ""
+    @Published var logStatus: Bool = false
 
-    let authService = AuthService()
-
+    @MainActor
     func loginUser() async {
-        let response = await authService.login(phoneNumber: userPhone,
-                                               password: userPassword)
+        let response = await NetworkManager.shared.post(
+            url: .login,
+            method: .post,
+            model: LoginRequest(
+                user_tel: userPhone,
+                user_password: userPassword),
+            type: LoginResponse.self)
+
         switch response {
         case .success(let success):
             if let userAccountID = success.userAccountID, let isUnionAccount = success.isUnionAccount {
-                userType = UserType(rawValue: isUnionAccount) ?? .citizien
-                userID = userAccountID
+                DispatchQueue.main.async {
+                    self.userType = UserType(rawValue: isUnionAccount) ?? .citizien
+                    self.userID = userAccountID
+                    self.isLogged = true
+                }
             }
-        case .failure(let failure):
-            DispatchQueue.main.async {
-                self.authErrorMessage = failure
-                self.isLogged = false
-            }
+        case .failure(let error):
+            showAlert(message: error.localizedDescription)
         }
+    }
+
+    private func showAlert(message: String) {
+        DispatchQueue.main.async {
+            self.logMessage = message
+            self.logStatus.toggle()
+        }
+    }
+
+    private func isValidateValues() -> Bool {
+        guard userPhone.isValidPhone else {
+            showAlert(message: "Telefon uzunluğu min. 8 olmalıdır.Özel karakterler içermemelidir.Ülke alan kodunu içermelidir.")
+            return false
+        }
+
+        guard userPassword.count > 6 else {
+            showAlert(message: "Kullanıcı şifresi min. 6 olmalıdır.")
+            return false
+        }
+        return true
     }
 }

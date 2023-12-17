@@ -1,5 +1,5 @@
 //
-//  SignupView.swift
+//  SignUpView.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 21.04.2023.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SignupView: View {
-    @StateObject private var viewModel = SignupViewModel()
+struct SignUpView: View {
+    @StateObject private var viewModel = SignUpViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -52,10 +52,8 @@ struct SignupView: View {
                 }
             }
         }
-        .alert("Kayıt olma işlemi başarısız oldu.", isPresented: $viewModel.unSuccessfulRegistration) {} message: {
-            if let error = viewModel.authError {
-                Text(error.description)
-            }
+        .alert("Dikkat!", isPresented: $viewModel.logStatus) {
+            Text(viewModel.logMessage)
         }
     }
 
@@ -208,6 +206,6 @@ struct SignupView: View {
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        SignUpView()
     }
 }

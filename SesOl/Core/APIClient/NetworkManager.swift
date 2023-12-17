@@ -8,7 +8,7 @@
 import Alamofire
 import Foundation
 
-final class NetworkManager: INetworkManager {
+final class NetworkManager: NetworkManagerProtocol {
     var config: NetworkConfig
 
     init(config: NetworkConfig) {
@@ -44,37 +44,6 @@ final class NetworkManager: INetworkManager {
     ///   - type: Generic response type
     /// - Returns: It will save data to the database. It will forward the response returned as a result of this process.
     func post<T: Codable, R: Encodable>(url: NetworkPath, method: NetworkType, model: R, type: T.Type) async -> Result<T, NetworkError> {
-        let jsonEncoder = JSONEncoder()
-
-        guard let data = try? jsonEncoder.encode(model) else {
-            return .failure(.networkError(description: "An error occurred during the encode process"))
-        }
-
-        guard let dataString = String(data: data, encoding: .utf8) else {
-            return .failure(.networkError(description: "An error occurred while converting data to string"))
-        }
-
-        let dataRequest = AF.request("\(config.baseUrl)\(url.rawValue)", method: method.toAF(), parameters: convertToDictionary(text: dataString))
-            .validate()
-            .serializingDecodable(T.self)
-
-        let result = await dataRequest.response
-
-        guard let data = result.value else {
-            return .failure(.networkError(description: "The data is empty."))
-        }
-
-        return .success(data)
-    }
-
-    /// Custom  modifier auth  function
-    /// - Parameters:
-    ///   - url: Request url
-    ///   - method: [.post, or .get]]
-    ///   - model: Model to be translated as a dictionary
-    ///   - type: Generic response type
-    /// - Returns: It will save data to the database. It will forward the response returned as a result of this process.
-    func auth<T: Codable, R: Encodable>(url: NetworkPath, method: NetworkType, model: R, type: T.Type) async -> Result<T, AuthError> {
         let jsonEncoder = JSONEncoder()
 
         guard let data = try? jsonEncoder.encode(model) else {

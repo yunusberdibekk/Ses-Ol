@@ -5,8 +5,8 @@
 //  Created by Yunus Emre Berdibek on 19.09.2023.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 enum NetworkType {
     case get
@@ -21,4 +21,3 @@ enum NetworkType {
         }
     }
 }
-

@@ -29,7 +29,7 @@ struct LoginView: View {
                     Spacer()
                 }
                 .navigationDestination(isPresented: $viewModel.toSignup, destination: {
-                    SignupView()
+                    SignUpView()
                         .navigationBarBackButtonHidden(true)
                 })
                 .navigationDestination(isPresented: $viewModel.isLogged, destination: {
@@ -38,7 +38,11 @@ struct LoginView: View {
                 })
                 .padding(.all, PagePaddings.All.normal.rawValue)
             }
-        }.modifier(ViewStatusHiddenModifier())
+        }
+        .modifier(ViewStatusHiddenModifier())
+        .alert("Dikkat!", isPresented: $viewModel.logStatus) {
+            Text(viewModel.logMessage)
+        }
     }
 
     private func headerView(width: CGFloat) -> some View {
