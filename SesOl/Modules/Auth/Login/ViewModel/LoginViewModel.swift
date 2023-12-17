@@ -5,27 +5,28 @@
 //  Created by Yunus Emre Berdibek on 24.04.2023.
 //
 
-import Alamofire
-import Foundation
+import SwiftUI
 
 final class LoginViewModel: ObservableObject {
-    @Published var userPhone: String = ""
-    @Published var userPassword: String = ""
+    @AppStorage("userType") var userType: UserType = .citizien
+    @AppStorage("userID") var userID: Int = 0
 
-    @Published var isLogged = false
-    @Published var toSignup = false
+    @Published var userPassword: String = ""
+    @Published var userPhone: String = ""
+    @Published var isLogged: Bool = false
+    @Published var toSignup: Bool = false
     @Published var authErrorMessage: AuthError?
 
     let authService = AuthService()
-    private let cache = UserDefaultCache()
 
     func loginUser() async {
-        let response = await authService.login(phoneNumber: userPhone, password: userPassword)
-
+        let response = await authService.login(phoneNumber: userPhone,
+                                               password: userPassword)
         switch response {
         case .success(let success):
             if let userAccountID = success.userAccountID, let isUnionAccount = success.isUnionAccount {
-                await onSaveUserToken(userID: String(userAccountID), isUnion: String(isUnionAccount))
+                userType = UserType(rawValue: isUnionAccount) ?? .citizien
+                userID = userAccountID
             }
         case .failure(let failure):
             DispatchQueue.main.async {
@@ -33,18 +34,5 @@ final class LoginViewModel: ObservableObject {
                 self.isLogged = false
             }
         }
-    }
-
-    func onSaveUserToken(userID: String, isUnion: String) async {
-        cache.save(key: .userId, value: userID)
-        cache.save(key: .isUnionAccount, value: isUnion)
-
-        DispatchQueue.main.async {
-            self.isLogged = true
-        }
-    }
-
-    func alreadyLogged() -> Bool {
-        return !cache.read(key: .userId).isEmpty
     }
 }

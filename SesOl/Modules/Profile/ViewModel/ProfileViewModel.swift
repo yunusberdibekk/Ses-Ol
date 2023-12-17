@@ -154,6 +154,7 @@ final class ProfileViewModel: ObservableObject {
     }
 
     func signOut() {
+        // TODO: - @APPSTORAGE İLE OLANLARI SIFIRLA
         DispatchQueue.main.async {
             self.citizien = nil
             self.union = nil

@@ -64,7 +64,7 @@ struct SignupView: View {
             Text("Kayıt Ol")
                 .font(.system(.title, weight: .bold))
                 .foregroundColor(.halloween_orange)
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
             Picker("Seç", selection: $viewModel.userType) {
                 ForEach(UserType.allCases, id: \.self) { item in

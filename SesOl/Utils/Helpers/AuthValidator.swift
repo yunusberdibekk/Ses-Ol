@@ -31,7 +31,8 @@ final class AuthValidator {
     }
 
     func citizienSignupValidator(citizienName: String, citizienSurname: String, citizienPassword: String, citizienPhone: String,
-        citizienCountry: String, citizienCity: String, citizienDistrict: String, citizienFullAddress: String) -> AuthError? {
+                                 citizienCountry: String, citizienCity: String, citizienDistrict: String, citizienFullAddress: String) -> AuthError?
+    {
         if citizienName.isEmpty {
             return AuthError.authError(description: AuthValidatorErrorKeys.invalidName.rawValue)
         }
@@ -91,11 +92,11 @@ final class AuthValidator {
         if unionPassword.isEmpty {
             return AuthError.authError(description: AuthValidatorErrorKeys.invalidPassword.rawValue)
         }
-        
+
         if unionPhone.isEmpty {
             return AuthError.authError(description: AuthValidatorErrorKeys.invalidPhone.rawValue)
         }
-        
+
         if !(unionEmail.contains("@") && unionEmail.contains(".co")) {
             return AuthError.authError(description: AuthValidatorErrorKeys.invalidEmailFormat.rawValue)
         }
@@ -110,7 +111,6 @@ final class AuthValidator {
 
         return nil
     }
-
 }
 
 enum AuthValidatorErrorKeys: String {

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RootView: View {
-
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.orange
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -24,7 +23,6 @@ struct RootView: View {
     @State var selectedIndex = 0
 
     var body: some View {
-
         NavigationStack {
             VStack {
                 TabView(selection: $selectedIndex) {
@@ -39,7 +37,6 @@ struct RootView: View {
                         //  Text("Yardım Taleplerim")
                     }.tag(1)
 
-
                     PostView().tabItem {
                         Image(systemName: "plus.square.on.square")
                         //  Text("Talep Oluştur")
@@ -52,7 +49,7 @@ struct RootView: View {
 
                     ProfileView().tabItem {
                         Image(systemName: "person")
-                        //Text("Profil")
+                        // Text("Profil")
                     }.tag(4)
                 }.tabViewStyle(.automatic)
                     .tint(.halloween_orange)
@@ -60,6 +57,7 @@ struct RootView: View {
         }
     }
 }
+
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()

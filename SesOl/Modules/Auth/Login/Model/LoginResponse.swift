@@ -1,16 +1,11 @@
 //
-//  LoginModel.swift
+//  LoginResponse.swift
 //  SesOl
 //
-//  Created by Yunus Emre Berdibek on 24.04.2023.
+//  Created by Yunus Emre Berdibek on 17.12.2023.
 //
 
 import Foundation
-
-struct LoginRequest: Encodable {
-    let user_tel: String?
-    let user_password: String?
-}
 
 struct LoginResponse: Codable {
     let userAccountID, isUnionAccount: Int?
