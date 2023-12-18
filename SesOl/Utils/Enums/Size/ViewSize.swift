@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct DividerViewSize {
+enum DividerViewSize {
     static let normal: Double = 2
 }

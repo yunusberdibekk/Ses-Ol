@@ -8,22 +8,18 @@
 import SwiftUI
 
 /// Uygulama içinde yer alan resimlerin yolları bulunuyor.
-struct Images {
+enum Images {
     enum Auth: String {
         case onBoard1 = "img_disaster"
         case onBoard2 = "img_support"
         case onBoard3 = "img_control"
     }
-    
-    
-    
 }
-
 
 extension String {
     /// Parametre olarak gelen string resim'e dönüşüyor.
     /// - Returns: Gelen string adres'in resmi.
-    func toImage() -> Image  {
+    func toImage() -> Image {
         return Image(self)
     }
 }

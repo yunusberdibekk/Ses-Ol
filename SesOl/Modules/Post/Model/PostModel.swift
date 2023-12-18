@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - UnionResponseElement
+
 struct UnionResponseElement: Codable {
     let unionID: Int?
     let unionName: String?
@@ -25,6 +26,7 @@ struct UnionRequest: Encodable {
 }
 
 // MARK: - SupportCategoriesResponseElement
+
 struct SupportCategoriesResponseElement: Codable {
     let categoryID: Int?
     let categoryName: String?
@@ -38,6 +40,7 @@ struct SupportCategoriesResponseElement: Codable {
 typealias SupportCategoriesResponse = [SupportCategoriesResponseElement]
 
 // MARK: - DisasterResponseElement
+
 struct DisasterResponseElement: Codable {
     let disasterID: Int?
     let disasterName: String?
@@ -63,7 +66,6 @@ struct CreateUserRequest: Encodable {
     let request_category: Int?
     let request_desc: String?
 }
-
 
 struct CreateUnionHelpRequestResponse: Codable {
     let status, msg: String?
@@ -108,7 +110,7 @@ struct CreateVoluntarilyPsychologistResponse: Codable {
     let status, msg: String?
 }
 
-struct CreateVoluntarilyPsychologistRequest: Encodable { 
+struct CreateVoluntarilyPsychologistRequest: Encodable {
     let method: String?
     let user_account_id: Int?
     let voluntarily_union_id: Int?
@@ -127,7 +129,6 @@ struct CreateVoluntarilyPitchTentRequest: Encodable {
     let voluntarily_vehicle_status: Int?
     let voluntarily_description: String?
 }
-
 
 struct CreateVoluntarilyTransporterResponse: Codable {
     let status, msg: String?

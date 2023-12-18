@@ -3,4 +3,54 @@
    uuid = "55911E8F-3814-4575-82EB-AEBC2CCD51A0"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1B92DB2-C2E4-4A22-B19E-33113823A0C3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SesOl/Modules/Feed/View/UnionPostListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D1B92DB2-C2E4-4A22-B19E-33113823A0C3 - 2837bafaf08aff80"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SesOl.UnionPostListView.body.getter : some"
+                  moduleName = "SesOl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yunusberdibekk/Developer/GitHub/SesOl/SesOl/Modules/Feed/View/UnionPostListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "232">
+               </Location>
+               <Location
+                  uuid = "D1B92DB2-C2E4-4A22-B19E-33113823A0C3 - 6c507b77dc5beea7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in SesOl.UnionPostListView.body.getter : some"
+                  moduleName = "SesOl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yunusberdibekk/Developer/GitHub/SesOl/SesOl/Modules/Feed/View/UnionPostListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "240">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

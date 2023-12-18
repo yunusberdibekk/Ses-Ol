@@ -8,11 +8,12 @@
 import Foundation
 
 /// Uygulama içinde yer alan iconların yolları bulunuyor.
-struct Icons {
+enum Icons {
     enum App: String {
         case icon_white = "app_icon_white"
         case icon_dark = "app_icon_dark"
     }
+
     enum Auth: String {
         case icon_tel = "phone.fill"
         case icon_lock = "lock.fill"
@@ -25,5 +26,4 @@ struct Icons {
         case support_request = "person.3"
         case profile = "person"
     }
-
 }

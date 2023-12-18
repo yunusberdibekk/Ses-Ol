@@ -10,7 +10,7 @@ import Foundation
 enum CitizienPostOptions: Int, CaseIterable {
     case helpRequest = 0
     case supportRequest = 1
-    
+
     var description: String {
         switch self {
         case .helpRequest:

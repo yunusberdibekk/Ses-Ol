@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ViewHeight {
+enum ViewHeight {
     static let indicator: Double = 6
 }

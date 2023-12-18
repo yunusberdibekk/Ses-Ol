@@ -12,7 +12,7 @@ enum SupportType: Int, CaseIterable {
     case psychologist = 1
     case pitchTent = 2
     case transporter = 3
-    
+
     var description: String {
         switch self {
         case .providingAssistance:

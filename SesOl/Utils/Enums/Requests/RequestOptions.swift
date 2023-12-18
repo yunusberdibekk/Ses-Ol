@@ -11,7 +11,7 @@ enum RequestOptions: Int, CaseIterable {
     case waiting = 0
     case rejected = 1
     case approved = 2
-    
+
     var description: String {
         switch self {
         case .waiting:

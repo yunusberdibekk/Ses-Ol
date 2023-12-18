@@ -16,9 +16,9 @@ class PostViewModel: ObservableObject {
     @Published var isUnionAccount: Int = -1
     @Published var adressId: Int = -1
 
-    @Published var unionPosts: UnionPostResponse?
-    @Published var unions: UnionResponse?
-    @Published var supportCategories: SupportCategoriesResponse?
+    @Published var unionPosts: [UnionPostResponseElement] = []
+    @Published var unions: [UnionPostResponseElement] = []
+    @Published var supportCategories: SupportCategoriesResponse = []
     @Published var disasters: DisasterResponse?
 
     @Published var unionPostDesc: String = ""
@@ -47,7 +47,7 @@ class PostViewModel: ObservableObject {
     private let cache = UserDefaultCache()
 
     func getUnionPosts() async {
-        let response = await NetworkManager.shared.post(url: .unionPostCrud, method: .post, model: UnionPostRequest(method: RequestMethods.read_post.rawValue), type: UnionPostResponse.self)
+        let response = await NetworkManager.shared.post(url: .unionPostCrud, method: .post, model: UnionPostRequest(method: RequestMethods.read_post.rawValue), type: [UnionPostResponseElement].self)
 
         DispatchQueue.main.async {
             switch response {
@@ -59,8 +59,8 @@ class PostViewModel: ObservableObject {
         }
     }
 
-    func parseUnionPost(response: UnionPostResponse) -> UnionPostResponse {
-        var postlar = UnionPostResponse()
+    func parseUnionPost(response: [UnionPostResponseElement]) -> [UnionPostResponseElement] {
+        var postlar = [UnionPostResponseElement]()
 
         for post in response {
             if post.publisherUnionID == userID {
@@ -87,7 +87,7 @@ class PostViewModel: ObservableObject {
     }
 
     func getUnions() async {
-        let response = await NetworkManager.shared.post(url: .unionsCrud, method: .post, model: UnionRequest(method: RequestMethods.get_all_unions.rawValue), type: UnionResponse.self)
+        let response = await NetworkManager.shared.post(url: .unionsCrud, method: .post, model: UnionRequest(method: RequestMethods.get_all_unions.rawValue), type: [UnionPostResponseElement].self)
 
         DispatchQueue.main.async {
             switch response {

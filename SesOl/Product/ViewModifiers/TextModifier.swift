@@ -14,7 +14,7 @@ struct TextModifier: ViewModifier {
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
-            }.foregroundColor(Color.bright_gray)
-        
+            }
+            .foregroundColor(Color.bright_gray)
     }
 }

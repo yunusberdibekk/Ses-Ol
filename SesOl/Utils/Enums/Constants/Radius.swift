@@ -8,6 +8,6 @@
 import Foundation
 
 /// View'ların radius(kıvrım) değerleri.
-struct RadiusItems {
+enum RadiusItems {
     static let radius: Double = 10
 }
