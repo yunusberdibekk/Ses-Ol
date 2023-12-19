@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UnionPostOptions: Int, CaseIterable {
+enum UnionCreateViewOptions: Int, CaseIterable {
     case createPost = 0
     case posts = 1
 

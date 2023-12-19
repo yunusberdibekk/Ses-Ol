@@ -97,7 +97,7 @@ class DetailViewModel: ObservableObject {
     /// Delete voluntarily request.
     /// - Parameter path: NetworkPath
     private func deleteVoluntarily(path: NetworkPath) async {
-        let response = await NetworkManager.shared.post(url: path, method: .post, model: DeleteVoluntarilyRequest(method: RequestMethods.delete_volantarily.rawValue, user_account_id: userID), type: DeleteVoluntarilyResponse.self)
+        let response = await NetworkManager.shared.post(url: path, method: .post, model: DeleteVoluntarilyRequest(method: RequestMethods.delete_voluntarily.rawValue, user_account_id: userID), type: DeleteVoluntarilyResponse.self)
         DispatchQueue.main.async {
             switch response {
             case .success(let success):

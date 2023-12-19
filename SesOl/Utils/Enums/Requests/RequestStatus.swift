@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RequestOptions: Int, CaseIterable {
+enum RequestStatus: Int, CaseIterable {
     case waiting = 0
     case rejected = 1
     case approved = 2

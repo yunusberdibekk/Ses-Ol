@@ -12,7 +12,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
     @AppStorage("userType") var userType: UserType = .citizien
     @AppStorage("userID") var userID: Int = 0
 
-    @Published var selectedOption: RequestOptions = .waiting
+    @Published var selectedRequestStatus: RequestStatus = .waiting
     @Published var approvedHelpRequests: HelpRequestResponse = []
     @Published var waitingHelpRequests: HelpRequestResponse = []
     @Published var rejectedHelpRequests: HelpRequestResponse = []
@@ -77,7 +77,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
     }
 
     func changeRequestStatus(
-        status: RequestStatus, request: HelpRequestResponseElement, index: Int) async
+        status: UpdateRequestStatus, request: HelpRequestResponseElement, index: Int) async
     {
         guard userType == .union else { return }
         let result = await NetworkManager.shared.post(
@@ -134,9 +134,9 @@ final class SOHelpRequestListViewModel: ObservableObject {
 
     @MainActor
     private func updateRequestList(
-        _ status: RequestStatus, at index: Int, with request: HelpRequestResponseElement)
+        _ status: UpdateRequestStatus, at index: Int, with request: HelpRequestResponseElement)
     {
-        switch selectedOption {
+        switch selectedRequestStatus {
         case .waiting:
             if status == .reject {
                 waitingHelpRequests.remove(at: index)
@@ -160,7 +160,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
 
     @MainActor
     private func deleteRequestAtList(_ index: Int) {
-        switch selectedOption {
+        switch selectedRequestStatus {
         case .waiting:
             waitingHelpRequests.remove(at: index)
         case .rejected:

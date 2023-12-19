@@ -13,8 +13,8 @@ struct SOHelpRequestListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                Picker("Seç", selection: $viewModel.selectedOption) {
-                    ForEach(RequestOptions.allCases, id: \.self) { option in
+                Picker("Seç", selection: $viewModel.selectedRequestStatus) {
+                    ForEach(RequestStatus.allCases, id: \.self) { option in
                         Text(option.description)
                             .tag(option)
                     }
@@ -22,7 +22,7 @@ struct SOHelpRequestListView: View {
                 .pickerStyle(.segmented)
                 .foregroundStyle(.red)
 
-                switch viewModel.selectedOption {
+                switch viewModel.selectedRequestStatus {
                 case .waiting:
                     helpRequestList(requestList: viewModel.waitingHelpRequests)
                 case .rejected:
@@ -36,7 +36,7 @@ struct SOHelpRequestListView: View {
             .navigationTitle("Yardım Talepleri")
             .navigationBarTitleDisplayMode(.automatic)
             .refreshable(action: {
-                switch viewModel.selectedOption {
+                switch viewModel.selectedRequestStatus {
                 case .waiting:
                     await viewModel.getWaitingHelpRequests()
                 case .rejected:

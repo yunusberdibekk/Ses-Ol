@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RequestStatus: Int {
+enum UpdateRequestStatus: Int {
     case reject = 0
     case approve = 1
 

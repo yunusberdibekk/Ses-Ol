@@ -13,11 +13,12 @@ struct SesOlApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if isOnBoarding {
-                LoginView()
-            } else {
-                OnboardView()
-            }
+//            if isOnBoarding {
+//                LoginView()
+//            } else {
+//                OnboardView()
+//            }
+            SOCreateView()
         }
     }
 }
