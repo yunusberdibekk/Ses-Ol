@@ -53,6 +53,10 @@ struct SOHelpRequestListView: View {
                 }
             }
         }
+        .alert("Dikkat!", isPresented: $viewModel.logStatus) {
+            Text(viewModel.logMessage)
+            Button("Tamam", role: .cancel) {}
+        }
     }
 
     @ViewBuilder private func helpRequestList(requestList: HelpRequestResponse) -> some View {

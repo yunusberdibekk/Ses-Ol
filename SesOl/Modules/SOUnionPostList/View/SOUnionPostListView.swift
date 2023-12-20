@@ -16,12 +16,15 @@ struct SOUnionPostListView: View {
                 headerView()
                 ScrollView {
                     LazyVStack {
-                        ForEach(viewModel.unionPosts, id: \.postID) { post in
+                        ForEach(0 ..< viewModel.unionPosts.count, id: \.self) { index in
                             NavigationLink {
-                                SOUnionPostDetailView(unionPost: post)
+                                SOPostDetailView(
+                                    post: viewModel.unionPosts[index],
+                                    canDelete: false,
+                                    index: index)
                                     .navigationBarBackButtonHidden(true)
                             } label: {
-                                SOUnionPostListCell(post: post)
+                                SOUnionPostListCell(post: viewModel.unionPosts[index])
                                     .padding(.top, 3)
                             }
                             .foregroundColor(.dark_liver)

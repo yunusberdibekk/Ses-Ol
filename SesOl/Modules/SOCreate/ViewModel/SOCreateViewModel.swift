@@ -45,6 +45,10 @@ final class SOCreateViewModel: ObservableObject {
 
     // MARK: - Union
 
+    func canDelete(unionID: Int) -> Bool {
+        return userID == unionID && userType == .union
+    }
+
     func fetchAdditionalUnionPosts() async {
         guard userType == .union else { return }
 
@@ -67,7 +71,7 @@ final class SOCreateViewModel: ObservableObject {
 
     func createUnionPost() async {
         guard !postDesc.isEmpty else {
-            await showMessage(message: "Gönderi açıklaması boş olamaz.")
+            await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
             return
         }
         let result = await NetworkManager.shared.post(
@@ -84,7 +88,30 @@ final class SOCreateViewModel: ObservableObject {
             if model.status == "ok" {
                 await showMessage(message: "Gönderi başarıyla oluşturuldu.")
             } else {
-                await showMessage(message: "Gönderi oluşturma işleminde hata meydana geldi")
+                await showMessage(message: "Gönderi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
+            }
+        case .failure(let error):
+            await showMessage(message: error.localizedDescription)
+        }
+    }
+
+    func deleteUnionPost(postID: Int, index: Int) async {
+        guard userType == .union else { return }
+        let result = await NetworkManager.shared.post(
+            url: .unionPostCrud,
+            method: .post,
+            model: DeletePostRequest(
+                method: RequestMethods.delete_post.rawValue,
+                post_id: postID),
+            type: DeletePostResponse.self)
+
+        switch result {
+        case .success(let model):
+            if model.status == "ok" {
+                await showMessage(message: "Silme işlemi başarıyla gerçekleşti.")
+                await deleteRequestAtList(index)
+            } else {
+                await showMessage(message: "Gönderi silinirken bir hata meydana geldi. Lütfen tekrar deneyin.")
             }
         case .failure(let error):
             await showMessage(message: error.localizedDescription)
@@ -105,7 +132,7 @@ final class SOCreateViewModel: ObservableObject {
                 case .standart:
                     await createStandartSupportRequest()
                 case .psyhlogist:
-                   await createPsychologistRequest()
+                    await createPsychologistRequest()
                 case .pitchtent:
                     await createPitchTentRequest()
                 case .transporter:
@@ -202,6 +229,7 @@ final class SOCreateViewModel: ObservableObject {
         switch result {
         case .success(let model):
             if model.status == "ok" {
+                await showMessage(message: "Yardım talebi başarıyla oluşturuldu.")
                 resetProperties()
             } else {
                 await showMessage(message: "Destek talebi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
@@ -234,6 +262,7 @@ final class SOCreateViewModel: ObservableObject {
         switch result {
         case .success(let model):
             if model.status == "ok" {
+                await showMessage(message: "Destek talebi başarıyla oluşturuldu.")
                 resetProperties()
             } else {
                 await showMessage(message: "Yardım talebi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
@@ -245,7 +274,7 @@ final class SOCreateViewModel: ObservableObject {
 
     func createPsychologistRequest() async {
         await fetchCitizienAdress()
-        guard let selectedUnion = selectedUnion, let citizienAdresID = citizienAdresID else {
+        guard let selectedUnion = selectedUnion else {
             await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
             return
         }
@@ -262,6 +291,7 @@ final class SOCreateViewModel: ObservableObject {
         switch result {
         case .success(let model):
             if model.status == "ok" {
+                await showMessage(message: "Yardım talebi başarıyla oluşturuldu.")
                 resetProperties()
             } else {
                 await showMessage(message: "Yardım talebi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
@@ -272,7 +302,7 @@ final class SOCreateViewModel: ObservableObject {
     }
 
     func createPitchTentRequest() async {
-        guard let selectedUnion = selectedUnion, let citizienAdresID = citizienAdresID else {
+        guard let selectedUnion = selectedUnion else {
             await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
             return
         }
@@ -289,6 +319,7 @@ final class SOCreateViewModel: ObservableObject {
         switch result {
         case .success(let model):
             if model.status == "ok" {
+                await showMessage(message: "Yardım talebi başarıyla oluşturuldu.")
                 resetProperties()
             } else {
                 await showMessage(message: "Yardım talebi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
@@ -319,6 +350,7 @@ final class SOCreateViewModel: ObservableObject {
         switch result {
         case .success(let model):
             if model.status == "ok" {
+                await showMessage(message: "Yardım talebi başarıyla oluşturuldu.")
                 resetProperties()
             } else {
                 await showMessage(message: "Yardım talebi oluşturulurken bir hata meydana geldi. Lütfen tekrar deneyin.")
@@ -332,5 +364,10 @@ final class SOCreateViewModel: ObservableObject {
     private func showMessage(message: String) {
         logMessage = message
         logStatus.toggle()
+    }
+
+    @MainActor
+    private func deleteRequestAtList(_ index: Int) {
+        posts.remove(at: index)
     }
 }

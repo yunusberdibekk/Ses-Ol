@@ -34,7 +34,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
                 self.approvedHelpRequests = success
             }
         case .failure(let error):
-            await showMessage(message: error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
 
@@ -53,7 +53,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
                 self.waitingHelpRequests = success
             }
         case .failure(let error):
-            await showMessage(message: error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
 
@@ -72,7 +72,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
                 self.rejectedHelpRequests = success
             }
         case .failure(let error):
-            await showMessage(message: error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
 
@@ -89,14 +89,13 @@ final class SOHelpRequestListViewModel: ObservableObject {
                 request_status: status.rawValue,
                 is_a_union: userType.rawValue),
             type: UpdateRequestReponse.self)
-
         switch result {
         case .success(let model):
             if model.status == "ok" {
                 await updateRequestList(status, at: index, with: request)
                 await showMessage(message: "Güncelleme işlemi başarıyla gerçekleşti.")
             } else {
-                await showMessage(message: model.msg ?? "Güncelleme işleminde bir hata meydana geldi.")
+                await showMessage(message: model.msg)
             }
         case .failure(let error):
             await showMessage(message: error.localizedDescription)
@@ -119,7 +118,7 @@ final class SOHelpRequestListViewModel: ObservableObject {
                 await deleteRequestAtList(index)
                 await showMessage(message: "Silme işlemi başarıyla gerçekleşti.")
             } else {
-                await showMessage(message: model.msg ?? "Silme işleminde bir hata meydana geldi.")
+                await showMessage(message: model.msg)
             }
         case .failure(let error):
             await showMessage(message: error.localizedDescription)

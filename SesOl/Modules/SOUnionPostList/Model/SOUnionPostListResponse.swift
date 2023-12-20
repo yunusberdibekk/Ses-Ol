@@ -18,4 +18,11 @@ struct UnionPostResponseElement: Codable {
         case postContent = "post_content"
         case postTime = "post_time"
     }
+
+    static let mockPostElement: UnionPostResponseElement = .init(
+        postID: 1,
+        publisherUnionID: 1,
+        postPublisherName: "AFAD",
+        postContent: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque.",
+        postTime: "20 Aralık 2023, Çarşamba (GMT+3)")
 }

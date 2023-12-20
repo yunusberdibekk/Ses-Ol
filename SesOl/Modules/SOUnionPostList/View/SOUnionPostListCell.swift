@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SOUnionPostListCell: View {
-    var post: UnionPostResponseElement
+    let post: UnionPostResponseElement
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {

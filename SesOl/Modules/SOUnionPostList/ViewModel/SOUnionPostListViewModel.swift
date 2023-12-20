@@ -5,9 +5,11 @@
 //  Created by Yunus Emre Berdibek on 25.05.2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class SOUnionPostListViewModel: ObservableObject {
+    @AppStorage("userType") var userType: UserType = .citizien
+    @AppStorage("userID") var userID = 0
     @Published var unionPosts: [UnionPostResponseElement] = []
     @Published var logStatus: Bool = false
     @Published var logMessage: String = ""

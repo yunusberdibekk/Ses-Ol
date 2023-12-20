@@ -53,11 +53,14 @@ struct SOUnionCreateView: View {
 
     private var postsView: some View {
         Section {
-            ForEach(viewModel.posts, id: \.postID) { post in
+            ForEach(0..<viewModel.posts.count, id: \.self) { index in
                 NavigationLink {
-                    SOUnionPostDetailView(unionPost: post)
+                    SOPostDetailView(
+                        post: viewModel.posts[index],
+                        canDelete: true,
+                    index: index)
                 } label: {
-                    SOUnionPostListCell(post: post)
+                    SOUnionPostListCell(post: viewModel.posts[index])
                         .padding(.bottom, 4)
                 }
             }

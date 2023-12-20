@@ -8,20 +8,21 @@
 import Foundation
 
 // MARK: - SupportRequestResponseElement
+
 struct ProvidingAssistanceResponseElement: Codable {
-    let assistanceID: Int?
-    let assistanceTitle: String?
-    let assistanceSentUnionID: Int?
-    let assistanceSentUnionName: String?
-    let assistanceUserAccountID: Int?
-    let userTel: String?
-    let assistanceNumOfPerson, assistanceCategoryID: Int?
-    let assistanceCategoryName: String?
-    let asistanceStatus: Int?
-    let assistanceDescription, fullname: String?
-    let addressID: Int?
-    let addressDistrict, addressCity, addressCountry, fullAddress: String?
-    let assistanceStatus: Int?
+    let assistanceID: Int
+    let assistanceTitle: String
+    let assistanceSentUnionID: Int
+    let assistanceSentUnionName: String
+    let assistanceUserAccountID: Int
+    let userTel: String
+    let assistanceNumOfPerson, assistanceCategoryID: Int
+    let assistanceCategoryName: String
+    let asistanceStatus: Int
+    let assistanceDescription, fullname: String
+    let addressID: Int
+    let addressDistrict, addressCity, addressCountry, fullAddress: String
+    let assistanceStatus: Int
 
     enum CodingKeys: String, CodingKey {
         case assistanceID = "assistance_id"
@@ -43,26 +44,48 @@ struct ProvidingAssistanceResponseElement: Codable {
         case fullAddress = "full_address"
         case assistanceStatus = "assistance_status"
     }
+
+    static let dummyModel: ProvidingAssistanceResponseElement = .init(
+        assistanceID: 0,
+        assistanceTitle: "Mock",
+        assistanceSentUnionID: 1,
+        assistanceSentUnionName: "Afad",
+        assistanceUserAccountID: 1,
+        userTel: "+905454326778",
+        assistanceNumOfPerson: 15,
+        assistanceCategoryID: 1,
+        assistanceCategoryName: "Category Name",
+        asistanceStatus: 1,
+        assistanceDescription: "Desc",
+        fullname: "Fullname",
+        addressID: 1,
+        addressDistrict: "District",
+        addressCity: "City",
+        addressCountry: "Country",
+        fullAddress: "Full adress",
+        assistanceStatus: 0)
 }
 
 typealias ProvidingAssistanceResponse = [ProvidingAssistanceResponseElement]
 
 struct ProvidingAssistanceRequest: Encodable {
-    let method: String?
-    let user_assistance_account_id: Int?
-    let is_a_union: Int?
+    let method: String
+    let user_assistance_account_id: Int
+    let is_a_union: Int
 }
+
 // MARK: - VoluntarilyTransporterResponseElement
+
 struct VoluntarilyTransporterResponseElement: Codable {
-    let voluntarilyAccountID: Int?
-    let userName, userSurname, userTel: String?
-    let unionID: Int?
-    let unionName, voluntarilyFromLocation, voluntarilyToLocation: String?
-    let voluntarilyNumDriver, voluntarilyNumVehicle: Int?
-    let voluntarilyDEC: String?
-    let addressID: Int?
-    let addressDistrict, addressCity, addressCountry, fullAddress: String?
-    let voluntarilyApproveStatus: Int?
+    let voluntarilyAccountID: Int
+    let userName, userSurname, userTel: String
+    let unionID: Int
+    let unionName, voluntarilyFromLocation, voluntarilyToLocation: String
+    let voluntarilyNumDriver, voluntarilyNumVehicle: Int
+    let voluntarilyDEC: String
+    let addressID: Int
+    let addressDistrict, addressCity, addressCountry, fullAddress: String
+    let voluntarilyApproveStatus: Int
 
     enum CodingKeys: String, CodingKey {
         case voluntarilyAccountID = "voluntarily_account_id"
@@ -83,21 +106,41 @@ struct VoluntarilyTransporterResponseElement: Codable {
         case fullAddress = "full_address"
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
+
+    static let dummyModel: VoluntarilyTransporterResponseElement = .init(
+        voluntarilyAccountID: 1,
+        userName: "Name",
+        userSurname: "Surname",
+        userTel: "User tel",
+        unionID: 1,
+        unionName: "Union name",
+        voluntarilyFromLocation: "From location",
+        voluntarilyToLocation: "To location",
+        voluntarilyNumDriver: 10,
+        voluntarilyNumVehicle: 12,
+        voluntarilyDEC: "Desc",
+        addressID: 1,
+        addressDistrict: "District",
+        addressCity: "City",
+        addressCountry: "Country",
+        fullAddress: "Full adress",
+        voluntarilyApproveStatus: 1)
 }
 
 typealias VoluntarilyTransporterResponse = [VoluntarilyTransporterResponseElement]
 
 // MARK: - VoluntarilyPitchTentResponseElement
+
 struct VoluntarilyPitchTentResponseElement: Codable {
-    let voluntarilyAccountID: Int?
-    let userName, userSurname: String?
-    let unionID: Int?
-    let unionName, userTel: String?
-    let voluntarilyVehicleStatus: Int?
-    let voluntarilyDesc: String?
-    let addressID: Int?
-    let addressDistrict, addressCity, addressCountry, fullAddress: String?
-    let voluntarilyApproveStatus: Int?
+    let voluntarilyAccountID: Int
+    let userName, userSurname: String
+    let unionID: Int
+    let unionName, userTel: String
+    let voluntarilyVehicleStatus: Int
+    let voluntarilyDesc: String
+    let addressID: Int
+    let addressDistrict, addressCity, addressCountry, fullAddress: String
+    let voluntarilyApproveStatus: Int
 
     enum CodingKeys: String, CodingKey {
         case voluntarilyAccountID = "voluntarily_account_id"
@@ -115,22 +158,38 @@ struct VoluntarilyPitchTentResponseElement: Codable {
         case fullAddress = "full_address"
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
+
+    static let dummyModel: VoluntarilyPitchTentResponseElement = .init(
+        voluntarilyAccountID: 1,
+        userName: "Name",
+        userSurname: "Surname",
+        unionID: 1,
+        unionName: "Union name",
+        userTel: "Tel",
+        voluntarilyVehicleStatus: 0,
+        voluntarilyDesc: "Desc",
+        addressID: 1,
+        addressDistrict: "District",
+        addressCity: "City",
+        addressCountry: "Country",
+        fullAddress: "Full adress",
+        voluntarilyApproveStatus: 1)
 }
 
 typealias VoluntarilyPitchTentResponse = [VoluntarilyPitchTentResponseElement]
 
-
 // MARK: - VoluntarilyPsychologistResponseElement
+
 struct VoluntarilyPsychologistResponseElement: Codable {
-    let voluntarilyAccountID: Int?
-    let userName, userSurname: String?
-    let unionID: Int?
-    let unionName, userTel: String?
-    let voluntarilyVehicleStatus: Int?
-    let voluntarilyDesc: String?
-    let addressID: Int?
-    let addressDistrict, addressCity, addressCountry, fullAddress: String?
-    let voluntarilyApproveStatus: Int?
+    let voluntarilyAccountID: Int
+    let userName, userSurname: String
+    let unionID: Int
+    let unionName, userTel: String
+    let voluntarilyVehicleStatus: Int
+    let voluntarilyDesc: String
+    let addressID: Int
+    let addressDistrict, addressCity, addressCountry, fullAddress: String
+    let voluntarilyApproveStatus: Int
 
     enum CodingKeys: String, CodingKey {
         case voluntarilyAccountID = "voluntarily_account_id"
@@ -148,24 +207,40 @@ struct VoluntarilyPsychologistResponseElement: Codable {
         case fullAddress = "full_address"
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
+
+    static let dummyModel: VoluntarilyPsychologistResponseElement = .init(
+        voluntarilyAccountID: 1,
+        userName: "Name",
+        userSurname: "Surname",
+        unionID: 1,
+        unionName: "Union name",
+        userTel: "User tel",
+        voluntarilyVehicleStatus: 1,
+        voluntarilyDesc: "Desc",
+        addressID: 1,
+        addressDistrict: "District",
+        addressCity: "City",
+        addressCountry: "Country",
+        fullAddress: "Full adress",
+        voluntarilyApproveStatus: 1)
 }
 
 typealias VoluntarilyPsychologistResponse = [VoluntarilyPsychologistResponseElement]
 
 struct VoluntarilyPitchTentRequest: Encodable {
-    let method: String?
-    let user_account_id:Int?
-    let is_a_union: Int?
+    let method: String
+    let user_account_id: Int
+    let is_a_union: Int
 }
 
 struct VoluntarilyPsychologistRequest: Encodable {
-    let method: String?
-    let user_account_id:Int?
-    let is_a_union: Int?
+    let method: String
+    let user_account_id: Int
+    let is_a_union: Int
 }
 
 struct VoluntarilyTransporterRequest: Encodable {
-    let method: String?
-    let user_account_id:Int?
-    let is_a_union: Int?
+    let method: String
+    let user_account_id: Int
+    let is_a_union: Int
 }
