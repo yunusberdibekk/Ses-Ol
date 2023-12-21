@@ -71,12 +71,10 @@
 		BECDB5322A09323500B8CD68 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5312A09323500B8CD68 /* ProfileViewModel.swift */; };
 		BECDB5342A0932C800B8CD68 /* SOPostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5332A0932C800B8CD68 /* SOPostDetailView.swift */; };
 		BED12F2E2B2BD7870088091B /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2D2B2BD7870088091B /* UserType.swift */; };
-		BED12F302B2BD8820088091B /* IbanOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2F2B2BD8820088091B /* IbanOptions.swift */; };
 		BED12F322B2BDEDA0088091B /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F312B2BDEDA0088091B /* ProfileResponse.swift */; };
 		BED12F342B2BDEE10088091B /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F332B2BDEE10088091B /* ProfileRequest.swift */; };
 		BED12F362B2BDEEB0088091B /* IbanResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F352B2BDEEB0088091B /* IbanResponse.swift */; };
 		BED12F382B2BDEF00088091B /* IbanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F372B2BDEF00088091B /* IbanRequest.swift */; };
-		BED4BA1C2A361B8F009AFCCC /* IbanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4BA1B2A361B8F009AFCCC /* IbanDetailView.swift */; };
 		BEDBF98E2B32152C009C55B5 /* SupportRequestTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF98D2B32152C009C55B5 /* SupportRequestTypes.swift */; };
 		BEDBF9902B321A9F009C55B5 /* RequestTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF98F2B321A9F009C55B5 /* RequestTypes.swift */; };
 		BEDBF9922B3246CD009C55B5 /* DefaultListButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9912B3246CD009C55B5 /* DefaultListButtonModifier.swift */; };
@@ -86,7 +84,8 @@
 		BEDBF9A62B32671D009C55B5 /* SOSupportRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9A52B32671D009C55B5 /* SOSupportRequestListViewModel.swift */; };
 		BEDBF9AE2B327E0C009C55B5 /* SOSupportRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9AD2B327E0C009C55B5 /* SOSupportRequestDetailView.swift */; };
 		BEDBF9B02B32BB78009C55B5 /* SOSupportRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9AF2B32BB78009C55B5 /* SOSupportRequestResponse.swift */; };
-		BEEBFC102A135111000D8E25 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC0F2A135111000D8E25 /* ProfileView.swift */; };
+		BEDBF9D22B33B9C0009C55B5 /* SOProfileIbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9D12B33B9C0009C55B5 /* SOProfileIbanView.swift */; };
+		BEEBFC102A135111000D8E25 /* SOProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC0F2A135111000D8E25 /* SOProfileView.swift */; };
 		BEF215E129F5B0A70025C19F /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF215E029F5B0A70025C19F /* UserCache.swift */; };
 		BEF215EC29F5D2930025C19F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BEF215EB29F5D2930025C19F /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -158,12 +157,10 @@
 		BECDB5312A09323500B8CD68 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		BECDB5332A0932C800B8CD68 /* SOPostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOPostDetailView.swift; sourceTree = "<group>"; };
 		BED12F2D2B2BD7870088091B /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
-		BED12F2F2B2BD8820088091B /* IbanOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanOptions.swift; sourceTree = "<group>"; };
 		BED12F312B2BDEDA0088091B /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		BED12F332B2BDEE10088091B /* ProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequest.swift; sourceTree = "<group>"; };
 		BED12F352B2BDEEB0088091B /* IbanResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanResponse.swift; sourceTree = "<group>"; };
 		BED12F372B2BDEF00088091B /* IbanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanRequest.swift; sourceTree = "<group>"; };
-		BED4BA1B2A361B8F009AFCCC /* IbanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbanDetailView.swift; sourceTree = "<group>"; };
 		BEDBF98D2B32152C009C55B5 /* SupportRequestTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRequestTypes.swift; sourceTree = "<group>"; };
 		BEDBF98F2B321A9F009C55B5 /* RequestTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTypes.swift; sourceTree = "<group>"; };
 		BEDBF9912B3246CD009C55B5 /* DefaultListButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultListButtonModifier.swift; sourceTree = "<group>"; };
@@ -173,7 +170,8 @@
 		BEDBF9A52B32671D009C55B5 /* SOSupportRequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestListViewModel.swift; sourceTree = "<group>"; };
 		BEDBF9AD2B327E0C009C55B5 /* SOSupportRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestDetailView.swift; sourceTree = "<group>"; };
 		BEDBF9AF2B32BB78009C55B5 /* SOSupportRequestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestResponse.swift; sourceTree = "<group>"; };
-		BEEBFC0F2A135111000D8E25 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		BEDBF9D12B33B9C0009C55B5 /* SOProfileIbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileIbanView.swift; sourceTree = "<group>"; };
+		BEEBFC0F2A135111000D8E25 /* SOProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileView.swift; sourceTree = "<group>"; };
 		BEF215E029F5B0A70025C19F /* UserCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -358,14 +356,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		BE428A1F2A06CFBF00774EC0 /* Profile */ = {
+		BE428A1F2A06CFBF00774EC0 /* SOProfile */ = {
 			isa = PBXGroup;
 			children = (
 				BE428A652A071C7C00774EC0 /* Model */,
 				BE428A642A071C7800774EC0 /* Views */,
 				BE428A662A071C8000774EC0 /* ViewModel */,
 			);
-			path = Profile;
+			path = SOProfile;
 			sourceTree = "<group>";
 		};
 		BE428A202A06CFCF00774EC0 /* SOHelpRequestList */ = {
@@ -381,8 +379,8 @@
 		BE428A642A071C7800774EC0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BEEBFC0F2A135111000D8E25 /* ProfileView.swift */,
-				BED4BA1B2A361B8F009AFCCC /* IbanDetailView.swift */,
+				BEEBFC0F2A135111000D8E25 /* SOProfileView.swift */,
+				BEDBF9D12B33B9C0009C55B5 /* SOProfileIbanView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -395,7 +393,6 @@
 				BED12F352B2BDEEB0088091B /* IbanResponse.swift */,
 				BED12F372B2BDEF00088091B /* IbanRequest.swift */,
 				BED12F2D2B2BD7870088091B /* UserType.swift */,
-				BED12F2F2B2BD8820088091B /* IbanOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,7 +501,7 @@
 				BE428A202A06CFCF00774EC0 /* SOHelpRequestList */,
 				BE06F19F2A0E88F100D2C4CB /* SOCreate */,
 				BEEBFC162A14001D000D8E25 /* SOSupportRequestList */,
-				BE428A1F2A06CFBF00774EC0 /* Profile */,
+				BE428A1F2A06CFBF00774EC0 /* SOProfile */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -840,7 +837,6 @@
 				BE5B95352B2FDCB3006AC6BA /* SORequestModel.swift in Sources */,
 				BE32282F2A214D6C00F9F572 /* SOCitizienHelpRequestDetailView.swift in Sources */,
 				BE530EAC29F2B668009BDCC9 /* OnboardModel.swift in Sources */,
-				BED4BA1C2A361B8F009AFCCC /* IbanDetailView.swift in Sources */,
 				BED12F342B2BDEE10088091B /* ProfileRequest.swift in Sources */,
 				BEDBF9902B321A9F009C55B5 /* RequestTypes.swift in Sources */,
 				BEDBF98E2B32152C009C55B5 /* SupportRequestTypes.swift in Sources */,
@@ -852,7 +848,8 @@
 				BE530EB029F2FE2C009BDCC9 /* PagePaddings.swift in Sources */,
 				BE530EB229F2FE37009BDCC9 /* Icons.swift in Sources */,
 				BE808EFA29FC8C8300D4AB2A /* ViewStatusHiddenModifier.swift in Sources */,
-				BEEBFC102A135111000D8E25 /* ProfileView.swift in Sources */,
+				BEDBF9D22B33B9C0009C55B5 /* SOProfileIbanView.swift in Sources */,
+				BEEBFC102A135111000D8E25 /* SOProfileView.swift in Sources */,
 				BEF215E129F5B0A70025C19F /* UserCache.swift in Sources */,
 				BEDBF9B02B32BB78009C55B5 /* SOSupportRequestResponse.swift in Sources */,
 				BEBD406029FC81C900FDD9D7 /* SignUpViewModel.swift in Sources */,
@@ -873,7 +870,6 @@
 				BE06F1A52A0E897900D2C4CB /* SOCreateView.swift in Sources */,
 				BE32283F2A22071A00F9F572 /* SOSupportRequestModel.swift in Sources */,
 				BEDBF9A02B3252E5009C55B5 /* SOCitizienCreateView.swift in Sources */,
-				BED12F302B2BD8820088091B /* IbanOptions.swift in Sources */,
 				BE530EB429F2FE41009BDCC9 /* Images.swift in Sources */,
 				BE1A71FC2AB91A7200EFA272 /* NetworkConfig.swift in Sources */,
 				BED12F322B2BDEDA0088091B /* ProfileResponse.swift in Sources */,

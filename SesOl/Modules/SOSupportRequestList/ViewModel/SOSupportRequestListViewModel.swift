@@ -304,6 +304,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
         request: ProvidingAssistanceResponseElement,
         index: Int) async
     {
+        guard userType == .union else { return }
         let result = await NetworkManager.shared.post(
             url: .providingAssistanceCrud,
             method: .post,
@@ -331,6 +332,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
         request: VoluntarilyPitchTentResponseElement,
         index: Int) async
     {
+        guard userType == .union else { return }
         let result = await NetworkManager.shared.post(
             url: .voluntarilyPitchTent,
             method: .post,
@@ -358,6 +360,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
         request: VoluntarilyPsychologistResponseElement,
         index: Int) async
     {
+        guard userType == .union else { return }
         let result = await NetworkManager.shared.post(
             url: .voluntarilyPsychologist,
             method: .post,
@@ -385,6 +388,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
         request: VoluntarilyTransporterResponseElement,
         index: Int) async
     {
+        guard userType == .union else { return }
         let result = await NetworkManager.shared.post(
             url: .voluntarilyPsychologist,
             method: .post,
@@ -409,6 +413,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
     // MARK: - Delete
 
     func deleteStandartSupportRequest(requestID: Int, index: Int) async {
+        guard userType == .citizien else { return }
         let result = await NetworkManager.shared.post(
             url: .providingAssistanceCrud,
             method: .post,
@@ -431,6 +436,7 @@ final class SOSupportRequestListViewModel: ObservableObject {
     }
 
     func deleteSupportRequest(path: NetworkPath, index: Int) async {
+        guard userType == .citizien else { return }
         let result = await NetworkManager.shared.post(
             url: path, method: .post,
             model: DeleteVoluntarilyRequest(

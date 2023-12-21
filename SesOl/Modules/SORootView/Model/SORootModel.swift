@@ -30,7 +30,7 @@ struct SORootModel: Identifiable {
               tabItem: .init(title: "Support Requests",
                              icon: "list.bullet.rectangle.portrait.fill")),
         .init(id: UUID().uuidString,
-              view: AnyView(ProfileView()),
+              view: AnyView(SOProfileView()),
               tabItem: .init(title: "Profile",
                              icon: "person.fill")),
     ]
