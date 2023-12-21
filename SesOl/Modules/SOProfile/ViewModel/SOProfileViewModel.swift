@@ -1,5 +1,5 @@
 //
-//  ProfileViewModel.swift
+//  SOProfileViewModel.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 8.05.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class ProfileViewModel: ObservableObject {
+final class SOProfileViewModel: ObservableObject {
     @AppStorage("userType") var userType: UserType = .citizien
     @AppStorage("userID") var userID = 0
     @Published var citizien: CitizienProfileResponse? = nil

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SOProfileView: View {
-    @StateObject var viewModel = ProfileViewModel()
+    @StateObject var viewModel = SOProfileViewModel()
     @State var showIbans: Bool = false
 
     var body: some View {

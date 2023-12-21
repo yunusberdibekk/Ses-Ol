@@ -14,7 +14,7 @@ enum IbanViewOptions: CaseIterable {
 }
 
 struct SOProfileIbanView: View {
-    @EnvironmentObject var viewModel: ProfileViewModel
+    @EnvironmentObject var viewModel: SOProfileViewModel
 
     var body: some View {
         NavigationStack {
@@ -111,6 +111,6 @@ struct SOProfileIbanView: View {
 #Preview {
     NavigationStack {
         SOProfileIbanView()
-            .environmentObject(ProfileViewModel())
+            .environmentObject(SOProfileViewModel())
     }
 }
