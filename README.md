@@ -6,15 +6,11 @@ Yazılım mühendisliği dersi kapsamında , meydana gelen doğal afetlerden son
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 
 <p>
-  <img src="preview/SesOl-Common.png"/>
+  <img src="preview/SesOl-Vatandaş.png"/>
 </p>
 
 <p>
-  <img src="preview/SesO-Citizien.png"/>
-</p>
-
-<p>
-  <img src="preview/SesOl-Union.png"/>
+  <img src="preview/SesOl-Kurum.png"/>
 </p>
 
 <p>
