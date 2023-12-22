@@ -121,6 +121,6 @@ struct SOTransporterRequestDetailView: View {
 }
 
 #Preview {
-    SOTransporterRequestDetailView(transporterRequest: VoluntarilyTransporterResponseElement.dummyModel, index: 0)
+    SOTransporterRequestDetailView(transporterRequest: VoluntarilyTransporterResponseElement.mockTransporterSupportRequestResponseElement, index: 0)
         .environmentObject(SOSupportRequestListViewModel())
 }

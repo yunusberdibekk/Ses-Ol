@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 final class SOCreateViewModel: ObservableObject {
-    @AppStorage("userType") var userType: UserType = .citizien
+    @AppStorage("userType") var userType: UserType = .union
     @AppStorage("userID") var userID: Int = 0
 
     /// Union

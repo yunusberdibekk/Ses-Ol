@@ -117,6 +117,6 @@ struct SOPsychologistRequestDetailView: View {
 }
 
 #Preview {
-    SOPsychologistRequestDetailView(psychologistRequest: VoluntarilyPsychologistResponseElement.dummyModel, index: 0)
+    SOPsychologistRequestDetailView(psychologistRequest: VoluntarilyPsychologistResponseElement.mockPsychologistSupportRequestResponseElement, index: 0)
         .environmentObject(SOSupportRequestListViewModel())
 }

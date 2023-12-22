@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - SupportRequestResponseElement
-
 struct ProvidingAssistanceResponseElement: Codable {
     let assistanceID: Int
     let assistanceTitle: String
@@ -45,25 +43,48 @@ struct ProvidingAssistanceResponseElement: Codable {
         case assistanceStatus = "assistance_status"
     }
 
-    static let dummyModel: ProvidingAssistanceResponseElement = .init(
-        assistanceID: 0,
-        assistanceTitle: "Mock",
-        assistanceSentUnionID: 1,
-        assistanceSentUnionName: "Afad",
-        assistanceUserAccountID: 1,
-        userTel: "+905454326778",
-        assistanceNumOfPerson: 15,
-        assistanceCategoryID: 1,
-        assistanceCategoryName: "Category Name",
-        asistanceStatus: 1,
-        assistanceDescription: "Desc",
-        fullname: "Fullname",
+    static let mockStandartSupportRequestResponseElement1: ProvidingAssistanceResponseElement = .init(
+        assistanceID: 2,
+        assistanceTitle: "Standart Request 2",
+        assistanceSentUnionID: UnionResponseElement.mockUnionResponseElement1.id,
+        assistanceSentUnionName: UnionResponseElement.mockUnionResponseElement1.unionName,
+        assistanceUserAccountID: LoginResponse.mockCitizienLoginResponse.userAccountID,
+        userTel: "+904143658490",
+        assistanceNumOfPerson: 10,
+        assistanceCategoryID: HelpRequestCategoryResponseElement.mockHelpRequestCategoryResponseElement1.categoryID,
+        assistanceCategoryName: HelpRequestCategoryResponseElement
+            .mockHelpRequestCategoryResponseElement1.categoryName,
+        asistanceStatus: -1,
+        assistanceDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu.",
+        fullname: "Reyes Stephie",
         addressID: 1,
-        addressDistrict: "District",
-        addressCity: "City",
-        addressCountry: "Country",
-        fullAddress: "Full adress",
-        assistanceStatus: 0)
+        addressDistrict: District.mockDistrict1.ilceAdi,
+        addressCity: City.mockCity1.sehirAdi,
+        addressCountry: Country.mockCountry1.ulkeAdi,
+        fullAddress: "",
+        assistanceStatus: 1)
+
+    static let mockStandartSupportRequestResponseElement2: ProvidingAssistanceResponseElement = .init(
+        assistanceID: 2,
+        assistanceTitle: "Standart Request 2",
+        assistanceSentUnionID: UnionResponseElement.mockUnionResponseElement2.id,
+        assistanceSentUnionName: UnionResponseElement.mockUnionResponseElement2.unionName,
+        assistanceUserAccountID: LoginResponse.mockCitizienLoginResponse.userAccountID,
+        userTel: "+902665841155",
+        assistanceNumOfPerson: 9,
+        assistanceCategoryID: HelpRequestCategoryResponseElement.mockHelpRequestCategoryResponseElement1.categoryID,
+        assistanceCategoryName: HelpRequestCategoryResponseElement
+            .mockHelpRequestCategoryResponseElement1.categoryName,
+        asistanceStatus: -1,
+        assistanceDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas integer. Urna et pharetra pharetra massa massa ultricies.",
+        fullname: "Reyes Stephie",
+        addressID: 1,
+        addressDistrict: District.mockDistrict2.ilceAdi,
+        addressCity: City.mockCity1.sehirAdi,
+        addressCountry: Country.mockCountry1.ulkeAdi,
+        fullAddress: "",
+        assistanceStatus: 1)
+    static let mockStandartSupportRequestResponseElements: ProvidingAssistanceResponse = [.mockStandartSupportRequestResponseElement1, .mockStandartSupportRequestResponseElement2]
 }
 
 typealias ProvidingAssistanceResponse = [ProvidingAssistanceResponseElement]
@@ -73,8 +94,6 @@ struct ProvidingAssistanceRequest: Encodable {
     let user_assistance_account_id: Int
     let is_a_union: Int
 }
-
-// MARK: - VoluntarilyTransporterResponseElement
 
 struct VoluntarilyTransporterResponseElement: Codable {
     let voluntarilyAccountID: Int
@@ -107,29 +126,27 @@ struct VoluntarilyTransporterResponseElement: Codable {
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
 
-    static let dummyModel: VoluntarilyTransporterResponseElement = .init(
+    static let mockTransporterSupportRequestResponseElement: VoluntarilyTransporterResponseElement = .init(
         voluntarilyAccountID: 1,
-        userName: "Name",
-        userSurname: "Surname",
-        userTel: "User tel",
-        unionID: 1,
-        unionName: "Union name",
-        voluntarilyFromLocation: "From location",
-        voluntarilyToLocation: "To location",
+        userName: "Nguyen",
+        userSurname: "Sharlene",
+        userTel: "+902627989609",
+        unionID: UnionResponseElement.mockUnionResponseElement3.id,
+        unionName: UnionResponseElement.mockUnionResponseElement3.unionName,
+        voluntarilyFromLocation: "Ankara",
+        voluntarilyToLocation: "İstanbul",
         voluntarilyNumDriver: 10,
         voluntarilyNumVehicle: 12,
-        voluntarilyDEC: "Desc",
+        voluntarilyDEC: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quam pellentesque nec nam aliquam sem.",
         addressID: 1,
-        addressDistrict: "District",
-        addressCity: "City",
-        addressCountry: "Country",
-        fullAddress: "Full adress",
-        voluntarilyApproveStatus: 1)
+        addressDistrict: District.mockDistrict1.ilceAdi,
+        addressCity: City.mockCity1.sehirAdi,
+        addressCountry: Country.mockCountry1.ulkeAdi,
+        fullAddress: "",
+        voluntarilyApproveStatus: -1)
 }
 
 typealias VoluntarilyTransporterResponse = [VoluntarilyTransporterResponseElement]
-
-// MARK: - VoluntarilyPitchTentResponseElement
 
 struct VoluntarilyPitchTentResponseElement: Codable {
     let voluntarilyAccountID: Int
@@ -159,26 +176,24 @@ struct VoluntarilyPitchTentResponseElement: Codable {
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
 
-    static let dummyModel: VoluntarilyPitchTentResponseElement = .init(
-        voluntarilyAccountID: 1,
-        userName: "Name",
-        userSurname: "Surname",
-        unionID: 1,
-        unionName: "Union name",
-        userTel: "Tel",
+    static let mockPitchTentSupportRequestResponseElement: VoluntarilyPitchTentResponseElement = .init(
+        voluntarilyAccountID: LoginResponse.mockCitizienLoginResponse.userAccountID,
+        userName: "Smith",
+        userSurname: "Andrea",
+        unionID: UnionResponseElement.mockUnionResponseElement3.id,
+        unionName: UnionResponseElement.mockUnionResponseElement3.unionName,
+        userTel: "+905103267014",
         voluntarilyVehicleStatus: 0,
-        voluntarilyDesc: "Desc",
+        voluntarilyDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Libero enim sed faucibus turpis in eu.",
         addressID: 1,
-        addressDistrict: "District",
-        addressCity: "City",
-        addressCountry: "Country",
-        fullAddress: "Full adress",
+        addressDistrict: District.mockDistrict1.ilceAdi,
+        addressCity: City.mockCity1.sehirAdi,
+        addressCountry: Country.mockCountry1.ulkeAdi,
+        fullAddress: "",
         voluntarilyApproveStatus: 1)
 }
 
 typealias VoluntarilyPitchTentResponse = [VoluntarilyPitchTentResponseElement]
-
-// MARK: - VoluntarilyPsychologistResponseElement
 
 struct VoluntarilyPsychologistResponseElement: Codable {
     let voluntarilyAccountID: Int
@@ -208,19 +223,19 @@ struct VoluntarilyPsychologistResponseElement: Codable {
         case voluntarilyApproveStatus = "voluntarily_approve_status"
     }
 
-    static let dummyModel: VoluntarilyPsychologistResponseElement = .init(
+    static let mockPsychologistSupportRequestResponseElement: VoluntarilyPsychologistResponseElement = .init(
         voluntarilyAccountID: 1,
-        userName: "Name",
-        userSurname: "Surname",
-        unionID: 1,
-        unionName: "Union name",
-        userTel: "User tel",
+        userName: "Jackson",
+        userSurname: "Matthew",
+        unionID: UnionResponseElement.mockUnionResponseElement2.id,
+        unionName: UnionResponseElement.mockUnionResponseElement2.unionName,
+        userTel: "+903582330550",
         voluntarilyVehicleStatus: 1,
-        voluntarilyDesc: "Desc",
+        voluntarilyDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu.",
         addressID: 1,
-        addressDistrict: "District",
-        addressCity: "City",
-        addressCountry: "Country",
+        addressDistrict: District.mockDistrict3.ilceAdi,
+        addressCity: City.mockCity2.sehirAdi,
+        addressCountry: Country.mockCountry1.ulkeAdi,
         fullAddress: "Full adress",
         voluntarilyApproveStatus: 1)
 }

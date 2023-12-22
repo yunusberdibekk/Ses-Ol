@@ -16,15 +16,12 @@ struct SOUnionPostListView: View {
                 headerView()
                 ScrollView {
                     LazyVStack {
-                        ForEach(0 ..< viewModel.unionPosts.count, id: \.self) { index in
+                        ForEach(viewModel.mockUnionPosts, id: \.postID) { post in
                             NavigationLink {
-                                SOPostDetailView(
-                                    post: viewModel.unionPosts[index],
-                                    canDelete: false,
-                                    index: index)
+                                SOPostDetailView(post: post)
                                     .navigationBarBackButtonHidden(true)
                             } label: {
-                                SOUnionPostListCell(post: viewModel.unionPosts[index])
+                                SOUnionPostListCell(post: post)
                                     .padding(.top, 3)
                             }
                             .foregroundColor(.dark_liver)
@@ -42,8 +39,10 @@ struct SOUnionPostListView: View {
             }
         }
         .overlay(alignment: .center) {
-            Text("Şu anda geçerli kurum gönderisi bulunmuyor. Lütfen sayfayı yenileyin veya bir süre bekleyin.")
-                .padding()
+            if viewModel.mockUnionPosts.count == 0 {
+                Text("Şu anda geçerli kurum gönderisi bulunmuyor. Lütfen sayfayı yenileyin veya bir süre bekleyin.")
+                    .padding()
+            }
         }
     }
 
@@ -58,4 +57,5 @@ struct SOUnionPostListView: View {
 
 #Preview {
     SOUnionPostListView()
+        .environmentObject(SOUnionPostListViewModel())
 }

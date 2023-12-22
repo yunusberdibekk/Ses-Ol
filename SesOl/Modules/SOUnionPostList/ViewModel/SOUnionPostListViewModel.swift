@@ -14,6 +14,8 @@ final class SOUnionPostListViewModel: ObservableObject {
     @Published var logStatus: Bool = false
     @Published var logMessage: String = ""
 
+    @Published var mockUnionPosts: [UnionPostResponseElement] = UnionPostResponseElement.mockUnionPostElements
+
     func getUnionPosts() async {
         let response = await NetworkManager.shared.post(
             url: .unionPostCrud,

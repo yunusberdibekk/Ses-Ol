@@ -120,6 +120,6 @@ struct SOSupportRequestDetailView: View {
 }
 
 #Preview {
-    SOSupportRequestDetailView(supportRequest: ProvidingAssistanceResponseElement.dummyModel, index: 0)
+    SOSupportRequestDetailView(supportRequest: ProvidingAssistanceResponseElement.mockStandartSupportRequestResponseElement1, index: 0)
         .environmentObject(SOSupportRequestListViewModel())
 }

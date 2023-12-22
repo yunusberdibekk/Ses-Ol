@@ -69,7 +69,7 @@
 		BEA3993E2A202C39001B5CC0 /* SOHelpRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3993D2A202C39001B5CC0 /* SOHelpRequestCell.swift */; };
 		BEBD406029FC81C900FDD9D7 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBD405F29FC81C900FDD9D7 /* SignUpViewModel.swift */; };
 		BECDB5322A09323500B8CD68 /* SOProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5312A09323500B8CD68 /* SOProfileViewModel.swift */; };
-		BECDB5342A0932C800B8CD68 /* SOPostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5332A0932C800B8CD68 /* SOPostDetailView.swift */; };
+		BECDB5342A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5332A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift */; };
 		BED12F2E2B2BD7870088091B /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2D2B2BD7870088091B /* UserType.swift */; };
 		BED12F322B2BDEDA0088091B /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F312B2BDEDA0088091B /* ProfileResponse.swift */; };
 		BED12F342B2BDEE10088091B /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F332B2BDEE10088091B /* ProfileRequest.swift */; };
@@ -85,6 +85,7 @@
 		BEDBF9AE2B327E0C009C55B5 /* SOSupportRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9AD2B327E0C009C55B5 /* SOSupportRequestDetailView.swift */; };
 		BEDBF9B02B32BB78009C55B5 /* SOSupportRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9AF2B32BB78009C55B5 /* SOSupportRequestResponse.swift */; };
 		BEDBF9D22B33B9C0009C55B5 /* SOProfileIbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9D12B33B9C0009C55B5 /* SOProfileIbanView.swift */; };
+		BEDBF9D42B34B905009C55B5 /* SOPostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBF9D32B34B905009C55B5 /* SOPostDetailView.swift */; };
 		BEEBFC102A135111000D8E25 /* SOProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBFC0F2A135111000D8E25 /* SOProfileView.swift */; };
 		BEF215E129F5B0A70025C19F /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF215E029F5B0A70025C19F /* UserCache.swift */; };
 		BEF215EC29F5D2930025C19F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BEF215EB29F5D2930025C19F /* Alamofire */; };
@@ -155,7 +156,7 @@
 		BEA3993D2A202C39001B5CC0 /* SOHelpRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHelpRequestCell.swift; sourceTree = "<group>"; };
 		BEBD405F29FC81C900FDD9D7 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BECDB5312A09323500B8CD68 /* SOProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileViewModel.swift; sourceTree = "<group>"; };
-		BECDB5332A0932C800B8CD68 /* SOPostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOPostDetailView.swift; sourceTree = "<group>"; };
+		BECDB5332A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOCreateUnionPostDetailView.swift; sourceTree = "<group>"; };
 		BED12F2D2B2BD7870088091B /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		BED12F312B2BDEDA0088091B /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		BED12F332B2BDEE10088091B /* ProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequest.swift; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 		BEDBF9AD2B327E0C009C55B5 /* SOSupportRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestDetailView.swift; sourceTree = "<group>"; };
 		BEDBF9AF2B32BB78009C55B5 /* SOSupportRequestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestResponse.swift; sourceTree = "<group>"; };
 		BEDBF9D12B33B9C0009C55B5 /* SOProfileIbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileIbanView.swift; sourceTree = "<group>"; };
+		BEDBF9D32B34B905009C55B5 /* SOPostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOPostDetailView.swift; sourceTree = "<group>"; };
 		BEEBFC0F2A135111000D8E25 /* SOProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileView.swift; sourceTree = "<group>"; };
 		BEF215E029F5B0A70025C19F /* UserCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 				BE06F1A42A0E897900D2C4CB /* SOCreateView.swift */,
 				BEDBF99D2B324F54009C55B5 /* SOUnionCreateView.swift */,
 				BEDBF99F2B3252E5009C55B5 /* SOCitizienCreateView.swift */,
+				BECDB5332A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -333,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				BE428A8C2A072A2A00774EC0 /* SOUnionPostListView.swift */,
-				BECDB5332A0932C800B8CD68 /* SOPostDetailView.swift */,
+				BEDBF9D32B34B905009C55B5 /* SOPostDetailView.swift */,
 				BE99B7F42A1F024700D93F6E /* SOUnionPostListCell.swift */,
 			);
 			path = View;
@@ -825,6 +828,7 @@
 				BE1A71EC2AB910C600EFA272 /* AuthValidator.swift in Sources */,
 				BE5B95372B2FDE46006AC6BA /* SOCreateViewModel.swift in Sources */,
 				BE428A8D2A072A2A00774EC0 /* SOUnionPostListView.swift in Sources */,
+				BEDBF9D42B34B905009C55B5 /* SOPostDetailView.swift in Sources */,
 				BEA3993C2A2009B4001B5CC0 /* SOHelpRequestModel.swift in Sources */,
 				BE530EAA29F2B654009BDCC9 /* OnboardView.swift in Sources */,
 				BE530EC129F2FF4A009BDCC9 /* GeometryProxy+Extensions.swift in Sources */,
@@ -844,7 +848,7 @@
 				BE5B95332B2FDCAC006AC6BA /* SOResponseModel.swift in Sources */,
 				BE22898D2A2F3403006B8BF7 /* NetworkPath.swift in Sources */,
 				BE14083E2B2F67E3007F85C2 /* SORootModel.swift in Sources */,
-				BECDB5342A0932C800B8CD68 /* SOPostDetailView.swift in Sources */,
+				BECDB5342A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift in Sources */,
 				BE530EB029F2FE2C009BDCC9 /* PagePaddings.swift in Sources */,
 				BE530EB229F2FE37009BDCC9 /* Icons.swift in Sources */,
 				BE808EFA29FC8C8300D4AB2A /* ViewStatusHiddenModifier.swift in Sources */,

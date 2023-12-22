@@ -21,6 +21,8 @@ struct SOCreateView: View {
                         .environmentObject(viewModel)
                 }
             }
+            .navigationTitle("Gönderi Yönetim")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 Task {
                     await viewModel.fetchAdditionalUnionPosts()
@@ -36,4 +38,5 @@ struct SOCreateView: View {
 
 #Preview {
     SOCreateView()
+        .environmentObject(SOCreateViewModel())
 }

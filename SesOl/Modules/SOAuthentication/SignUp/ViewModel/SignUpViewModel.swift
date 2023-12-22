@@ -9,6 +9,10 @@ import SwiftUI
 
 final class SignUpViewModel: ObservableObject {
     @Published var userType: UserType = .citizien
+    @Published var locationCountriesResponse: [LocationResponseElement] = []
+    @Published var locationCitiesResponse: [LocationResponseElement] = []
+    @Published var locationDistrictsResponse: [LocationResponseElement] = []
+    
     @Published var countries = [Country]()
     @Published var cities = [City]()
     @Published var districts = [District]()
@@ -25,20 +29,9 @@ final class SignUpViewModel: ObservableObject {
     @Published var unionEmail = ""
     @Published var unionWebsite = ""
     
-    @Published var selectedCountry: Country = .init(
-        id: UUID().uuidString,
-        ulkeID: "1",
-        ulkeAdi: "Türkiye")
-    @Published var selectedCity: City = .init(
-        id: UUID().uuidString,
-        sehirID: "1",
-        sehirAdi: "Adana",
-        ulkeIDFK: "1")
-    @Published var selectedDistrict: District = .init(
-        id: UUID().uuidString,
-        ilceID: "1",
-        ilceAdi: "Seyhan",
-        sehirIDFK: "1")
+    @Published var selectedCountry: Country = .mockCountry1
+    @Published var selectedCity: City = .mockCity1
+    @Published var selectedDistrict: District = .mockDistrict1
     
     @Published var logMessage: String = ""
     @Published var logStatus: Bool = false
@@ -51,12 +44,10 @@ final class SignUpViewModel: ObservableObject {
         
         switch response {
         case .success(let success):
-            let (countries, cities, districts) = parseLocationResponse(
-                response: success)
-            updateLocations(
-                countries: countries,
-                cities: cities,
-                districts: districts)
+            let (countries, cities, districts) = await parseLocationResponse(response: success)
+            await updateFirstLocations(countries: countries,
+                                       cities: cities,
+                                       districts: districts)
         case .failure(let error):
             showAlert(message: error.localizedDescription)
         }
@@ -99,8 +90,8 @@ final class SignUpViewModel: ObservableObject {
                 union_name: unionName,
                 union_tel: unionPhone,
                 union_email: unionEmail,
-                union_web_site: unionEmail,
-                union_password: unionEmail),
+                union_web_site: unionWebsite,
+                union_password: unionPassword),
             type: UnionSignUpResponse.self)
    
         switch response {
@@ -124,30 +115,55 @@ final class SignUpViewModel: ObservableObject {
         }
     }
     
-    func updateLocations(countries: [Country], cities: [City], districts: [District]) {
-        DispatchQueue.main.async {
-            self.countries = countries
-            self.cities = cities.filter { $0.ulkeIDFK == self.selectedCountry.ulkeID }
-            self.districts = districts.filter { $0.sehirIDFK == self.selectedCity.sehirID }
-        }
+    @MainActor
+    /// Test
+    func updateMockLocations() {
+        countries = Country.mockCountriesResponse
+        cities = City.mockCitiesResponse.filter { $0.ulkeIDFK == self.selectedCountry.ulkeID }
+        districts = District.mockDistrictsResponse.filter { $0.sehirIDFK == self.selectedCity.sehirID }
     }
     
-    private func parseLocationResponse(response: [[LocationResponseElement]]) -> ([Country], [City], [District]) {
-        guard response.count == 3 else { return ([], [], []) }
-        let countriesResponse = response[0]
-        let citiesResponse = response[1]
-        let districtsResponse = response[2]
-        
-        let countries: [Country] = countriesResponse.compactMap {
+    @MainActor
+    func updateLocations() {
+        let countries: [Country] = locationCountriesResponse.compactMap {
             Country(id: UUID().uuidString, ulkeID: $0.ulkeID, ulkeAdi: $0.ulkeAdi)
         }
-        let cities: [City] = citiesResponse.compactMap {
+        let cities: [City] = locationCitiesResponse.compactMap {
             City(id: UUID().uuidString, sehirID: $0.sehirID, sehirAdi: $0.sehirAdi, ulkeIDFK: $0.ulkeIDFk)
         }
-        let districts: [District] = districtsResponse.compactMap {
+        let districts: [District] = locationDistrictsResponse.compactMap {
+            District(id: UUID().uuidString, ilceID: $0.ilceID, ilceAdi: $0.ilceAdi, sehirIDFK: $0.sehirIDFK)
+        }
+        
+        self.countries = countries
+        self.cities = cities.filter { $0.ulkeIDFK == self.selectedCountry.ulkeID }
+        self.districts = districts.filter { $0.sehirIDFK == self.selectedCity.sehirID }
+    }
+    
+    @MainActor
+    private func parseLocationResponse(response: [[LocationResponseElement]]) -> ([Country], [City], [District]) {
+        guard response.count == 3 else { return ([], [], []) }
+        locationCountriesResponse = response[0]
+        locationCitiesResponse = response[1]
+        locationDistrictsResponse = response[2]
+        
+        let countries: [Country] = locationCountriesResponse.compactMap {
+            Country(id: UUID().uuidString, ulkeID: $0.ulkeID, ulkeAdi: $0.ulkeAdi)
+        }
+        let cities: [City] = locationCitiesResponse.compactMap {
+            City(id: UUID().uuidString, sehirID: $0.sehirID, sehirAdi: $0.sehirAdi, ulkeIDFK: $0.ulkeIDFk)
+        }
+        let districts: [District] = locationDistrictsResponse.compactMap {
             District(id: UUID().uuidString, ilceID: $0.ilceID, ilceAdi: $0.ilceAdi, sehirIDFK: $0.sehirIDFK)
         }
         return (countries, cities, districts)
+    }
+    
+    @MainActor
+    private func updateFirstLocations(countries: [Country], cities: [City], districts: [District]) {
+        self.countries = countries
+        self.cities = cities.filter { $0.ulkeIDFK == self.selectedCountry.ulkeID }
+        self.districts = districts.filter { $0.sehirIDFK == self.selectedCity.sehirID }
     }
     
     private func showAlert(message: String) {

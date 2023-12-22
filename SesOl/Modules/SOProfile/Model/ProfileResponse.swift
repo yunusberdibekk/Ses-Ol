@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - CitizienProfileResponse
-
 struct CitizienProfileResponse: Codable {
     var userAccountID: Int
     var userName, userSurname, userTel, userPassword: String
@@ -41,8 +39,6 @@ struct CitizienProfileResponse: Codable {
         fullAddress: "CUMHURİYET MEYDANI S 41 NO 13 BEYDAN İŞH K.2 D 2/3 HATAY")
 }
 
-// MARK: - UnionProfileResponse
-
 struct UnionProfileResponse: Codable {
     var userAccountID: Int
     var unionName, unionTel, unionPassword, unionEmail: String
@@ -58,8 +54,8 @@ struct UnionProfileResponse: Codable {
     }
 
     static let mockUnionProfileResponseElement: UnionProfileResponse = .init(
-        userAccountID: 2,
-        unionName: "AFAD",
+        userAccountID: UnionResponseElement.mockUnionResponseElement1.id,
+        unionName: UnionResponseElement.mockUnionResponseElement1.unionName,
         unionTel: "27(1705)183-98-53",
         unionPassword: UUID().uuidString,
         unionEmail: "gelisoy_ifu20@hotmail.com",

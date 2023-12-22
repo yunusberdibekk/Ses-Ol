@@ -11,15 +11,17 @@ struct SOUnionCreateView: View {
     @EnvironmentObject var viewModel: SOCreateViewModel
 
     var body: some View {
-        Form {
-            postOptions
-            switch viewModel.unionCreateViewOption {
-            case .createPost:
+        switch viewModel.unionCreateViewOption {
+        case .createPost:
+            Form {
+                postOptions
                 createPost
                 createButton
-            case .posts:
-                postsView
             }
+            .task { await viewModel.fetchAdditionalUnionPosts() }
+        case .posts:
+            unionPostOptions
+            postsView
         }
     }
 
@@ -32,6 +34,18 @@ struct SOUnionCreateView: View {
                 }
             }
         }
+    }
+
+    private var unionPostOptions: some View {
+        Picker("Seç", selection: $viewModel.unionCreateViewOption) {
+            ForEach(UnionCreateViewOptions.allCases, id: \.self) { option in
+                Text(option.description)
+                    .tag(option)
+            }
+        }
+        .pickerStyle(.automatic)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var createPost: some View {
@@ -52,21 +66,24 @@ struct SOUnionCreateView: View {
     }
 
     private var postsView: some View {
-        Section {
-            ForEach(0..<viewModel.posts.count, id: \.self) { index in
-                NavigationLink {
-                    SOPostDetailView(
-                        post: viewModel.posts[index],
-                        canDelete: true,
-                    index: index)
-                } label: {
-                    SOUnionPostListCell(post: viewModel.posts[index])
-                        .padding(.bottom, 4)
+        ScrollView {
+            LazyVStack {
+                ForEach(0 ... viewModel.posts.count - 1, id: \.self) { index in
+                    NavigationLink {
+                        SOCreateUnionPostDetailView(
+                            post: viewModel.posts[index],
+                            index: index)
+                            .navigationBarBackButtonHidden(true)
+                            .environmentObject(viewModel)
+                    } label: {
+                        SOUnionPostListCell(post: viewModel.posts[index])
+                            .padding(.bottom, 4)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
-        } header: {
-            Text("KURUM GÖNDERİLER")
         }
+        .task { await viewModel.fetchAdditionalUnionPosts() }
     }
 }
 

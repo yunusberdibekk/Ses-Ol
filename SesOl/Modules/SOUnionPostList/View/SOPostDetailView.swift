@@ -2,17 +2,14 @@
 //  SOPostDetailView.swift
 //  SesOl
 //
-//  Created by Yunus Emre Berdibek on 8.05.2023.
+//  Created by Yunus Emre Berdibek on 21.12.2023.
 //
 
 import SwiftUI
 
 struct SOPostDetailView: View {
-    @EnvironmentObject var viewModel: SOCreateViewModel
     @Environment(\.dismiss) private var dismiss
     let post: UnionPostResponseElement
-    let canDelete: Bool
-    let index: Int
 
     var body: some View {
         NavigationStack {
@@ -35,30 +32,18 @@ struct SOPostDetailView: View {
                     .foregroundColor(.dark_liver)
                     .multilineTextAlignment(.leading)
                     .padding(.all, PagePaddings.Normal.padding_20.rawValue)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "arrow.left")
-                                    .foregroundColor(.halloween_orange)
-                            }
-                        }
 
-                        if viewModel.canDelete(unionID: post.publisherUnionID) && canDelete {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                Button {
-                                    Task {
-                                        await viewModel.deleteUnionPost(postID: post.postID, index: index)
-                                    }
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(.halloween_orange)
-                                }
-                            }
-                        }
-                    }
                 Divider()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.halloween_orange)
+                    }
+                }
             }
             .modifier(RequestCellModifier())
         }
@@ -67,8 +52,5 @@ struct SOPostDetailView: View {
 
 #Preview {
     SOPostDetailView(
-        post: UnionPostResponseElement.mockPostElement,
-        canDelete: true,
-        index: 0)
-        .environmentObject(SOCreateViewModel())
+        post: UnionPostResponseElement.mockPostElement1)
 }

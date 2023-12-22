@@ -111,7 +111,7 @@ struct SOUnionHelpRequestDetailView: View {
 
 #Preview {
     SOUnionHelpRequestDetailView(
-        helpRequest: HelpRequestResponseElement.dummyHelpRequestResponseElement,
+        helpRequest: HelpRequestResponseElement.dummyHelpRequestResponseElement1,
         index: 0)
         .environmentObject(SOHelpRequestListViewModel())
 }

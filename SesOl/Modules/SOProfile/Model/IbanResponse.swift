@@ -22,10 +22,25 @@ struct IbanReadResponseElement: Codable, Identifiable, Hashable {
         case iban
     }
 
-    static let mockIbanReadResponseElement: IbanReadResponseElement = .init(
+    static let mockIbanReadResponseElement1: IbanReadResponseElement = .init(
         id: 1,
         userAccountID: 1,
         ibanTitle: "Ziraat Bankası",
+        iban: UUID().uuidString)
+    static let mockIbanReadResponseElement2: IbanReadResponseElement = .init(
+        id: 1,
+        userAccountID: 1,
+        ibanTitle: "Halk Bankası",
+        iban: UUID().uuidString)
+    static let mockIbanReadResponseElement3: IbanReadResponseElement = .init(
+        id: 1,
+        userAccountID: 1,
+        ibanTitle: "İş Bankası",
+        iban: UUID().uuidString)
+    static let mockIbanReadResponseElement4: IbanReadResponseElement = .init(
+        id: 1,
+        userAccountID: 1,
+        ibanTitle: "VakıfBank",
         iban: UUID().uuidString)
 }
 

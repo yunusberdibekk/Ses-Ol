@@ -32,15 +32,18 @@ struct SignUpView: View {
             .padding(.all, PagePaddings.All.normal.rawValue)
         }
         .onAppear {
+//            Asıl bu olacak.
+//            Task {
+//                await viewModel.getLocations()
+//            }
             Task {
-                await viewModel.getLocations()
+                viewModel.updateMockLocations()
             }
         }
         .onChange(of: viewModel.selectedCountry, perform: { _ in
-            viewModel.updateLocations(
-                countries: viewModel.countries,
-                cities: viewModel.cities,
-                districts: viewModel.districts)
+            Task {
+                viewModel.updateLocations()
+            }
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -88,12 +91,12 @@ struct SignUpView: View {
         .modifier(TextFieldModifier())
     }
 
-    @ViewBuilder private func customCountryInputField(title: String, icon: String, countries: [Country], selection: Binding<Country>) -> some View {
+    @ViewBuilder private func customCountryInputField(title: String, icon: String) -> some View {
         HStack {
             Image(systemName: icon)
                 .foregroundColor(.halloween_orange.opacity(0.5))
-            Picker(title, selection: selection) {
-                ForEach(countries, id: \.id) { country in
+            Picker(title, selection: $viewModel.selectedCountry) {
+                ForEach(viewModel.countries, id: \.id) { country in
                     Text(country.ulkeAdi)
                         .tag(country)
                 }
@@ -105,12 +108,12 @@ struct SignUpView: View {
         .modifier(TextFieldModifier())
     }
 
-    @ViewBuilder private func customCityInputField(title: String, icon: String, cities: [City], selection: Binding<City>) -> some View {
+    @ViewBuilder private func customCityInputField(title: String, icon: String) -> some View {
         HStack {
             Image(systemName: icon)
                 .foregroundColor(.halloween_orange.opacity(0.5))
-            Picker(title, selection: selection) {
-                ForEach(cities, id: \.id) { city in
+            Picker(title, selection: $viewModel.selectedCity) {
+                ForEach(viewModel.cities, id: \.self) { city in
                     Text(city.sehirAdi)
                         .tag(city)
                 }
@@ -122,12 +125,12 @@ struct SignUpView: View {
         .modifier(TextFieldModifier())
     }
 
-    @ViewBuilder private func customDistrictInputField(title: String, icon: String, districts: [District], selection: Binding<District>) -> some View {
+    @ViewBuilder private func customDistrictInputField(title: String, icon: String) -> some View {
         HStack {
             Image(systemName: icon)
                 .foregroundColor(.halloween_orange.opacity(0.5))
-            Picker(title, selection: selection) {
-                ForEach(districts, id: \.id) { district in
+            Picker(title, selection: $viewModel.selectedDistrict) {
+                ForEach(viewModel.districts, id: \.self) { district in
                     Text(district.ilceAdi)
                         .tag(district)
                 }
@@ -154,17 +157,11 @@ struct SignUpView: View {
                              text: $viewModel.citizienPhone,
                              isTextField: true)
             customCountryInputField(title: "Ülke",
-                                    icon: "map.fill",
-                                    countries: viewModel.countries,
-                                    selection: $viewModel.selectedCountry)
+                                    icon: "map.fill")
             customCityInputField(title: "Şehir",
-                                 icon: "map",
-                                 cities: viewModel.cities,
-                                 selection: $viewModel.selectedCity)
+                                 icon: "map")
             customDistrictInputField(title: "İlçe",
-                                     icon: "mappin",
-                                     districts: viewModel.districts,
-                                     selection: $viewModel.selectedDistrict)
+                                     icon: "mappin")
             customInputField(title: "Tam adres",
                              icon: "mappin.and.ellipse",
                              text: $viewModel.citizienFullAddress,
@@ -206,6 +203,8 @@ struct SignUpView: View {
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        NavigationStack {
+            SignUpView()
+        }
     }
 }

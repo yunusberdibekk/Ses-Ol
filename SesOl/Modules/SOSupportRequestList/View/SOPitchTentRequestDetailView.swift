@@ -117,6 +117,6 @@ struct SOPitchTentRequestDetailView: View {
 }
 
 #Preview {
-    SOPitchTentRequestDetailView(pitchTentRequest: VoluntarilyPitchTentResponseElement.dummyModel, index: 0)
+    SOPitchTentRequestDetailView(pitchTentRequest: VoluntarilyPitchTentResponseElement.mockPitchTentSupportRequestResponseElement, index: 0)
         .environmentObject(SOSupportRequestListViewModel())
 }
