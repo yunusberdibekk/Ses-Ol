@@ -32,6 +32,9 @@ struct SOUnionPostListView: View {
                 }
                 Spacer()
             }
+            .navigationTitle("Kurum Gönderiler")
+            .navigationBarTitleDisplayMode(.inline)
+            .padding([.leading,.trailing], 8)
             .onAppear {
                 Task {
                     await viewModel.getUnionPosts()

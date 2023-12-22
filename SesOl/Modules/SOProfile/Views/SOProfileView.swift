@@ -66,7 +66,7 @@ struct SOProfileView: View {
                 header: "Açık adres")
             signOutButton
         }
-        .navigationTitle("Kullanıcı Bilgileri")
+        .padding(.top, 8)
     }
 
     private func unionView(union: UnionProfileResponse) -> some View {
@@ -78,7 +78,7 @@ struct SOProfileView: View {
             showIbansView
             signOutButton
         }
-        .navigationTitle("Kullanıcı Bilgileri")
+        .padding(.top, 8)
     }
 
     @ViewBuilder private func userInformationCell(text: String, header: String) -> some View {
@@ -106,7 +106,7 @@ struct SOProfileView: View {
 
     private var signOutButton: some View {
         NavigationLink {
-            LoginView()
+            SOLoginView()
                 .navigationBarBackButtonHidden(true)
         } label: {
             Button("Çıkış") {

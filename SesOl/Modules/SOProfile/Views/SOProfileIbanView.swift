@@ -19,8 +19,8 @@ struct SOProfileIbanView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(0 ..< viewModel.ibans.count, id: \.self) { index in
-                    let iban = viewModel.ibans[index]
+                ForEach(0 ..< viewModel.unionIbans.count, id: \.self) { index in
+                    let iban = viewModel.unionIbans[index]
                     DisclosureGroup(iban.ibanTitle) {
                         NavigationLink {
                             ibanDetailView(iban: iban)

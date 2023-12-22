@@ -1,5 +1,5 @@
 //
-//  SignUpViewModel.swift
+//  SOSignUpViewModel.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 29.04.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class SignUpViewModel: ObservableObject {
+final class SOSignUpViewModel: ObservableObject {
     @Published var userType: UserType = .citizien
     @Published var locationCountriesResponse: [LocationResponseElement] = []
     @Published var locationCitiesResponse: [LocationResponseElement] = []

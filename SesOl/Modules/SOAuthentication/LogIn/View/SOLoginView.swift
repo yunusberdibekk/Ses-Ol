@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  SOLoginView.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 21.04.2023.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct LoginView: View {
-    @StateObject private var viewModel = LoginViewModel()
+struct SOLoginView: View {
+    @StateObject private var viewModel = SOLoginViewModel()
 
     var body: some View {
         NavigationStack {
@@ -29,7 +29,7 @@ struct LoginView: View {
                     Spacer()
                 }
                 .navigationDestination(isPresented: $viewModel.toSignup, destination: {
-                    SignUpView()
+                    SOSignUpView()
                         .navigationBarBackButtonHidden(true)
                 })
                 .navigationDestination(isPresented: $viewModel.isLogged, destination: {
@@ -94,7 +94,7 @@ struct LoginView: View {
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        SOLoginView()
             .ignoresSafeArea(.all)
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class LoginViewModel: ObservableObject {
+final class SOLoginViewModel: ObservableObject {
     @AppStorage("userType") var userType: UserType = .citizien
     @AppStorage("userID") var userID: Int = 0
 

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 final class SOCreateViewModel: ObservableObject {
-    @AppStorage("userType") var userType: UserType = .union
+    @AppStorage("userType") var userType: UserType = .citizien
     @AppStorage("userID") var userID: Int = 0
 
     /// Union
@@ -18,11 +18,11 @@ final class SOCreateViewModel: ObservableObject {
     /// Citizien
     @Published var citizienCreateViewRequestType: RequestTypes = .help
     @Published var unions: UnionResponse = []
-    @Published var selectedUnion: UnionResponseElement? = nil
+    @Published var selectedUnion: UnionResponseElement = .mockUnionResponseElement1
     @Published var disasters: DisasterResponse = []
-    @Published var selectedDisaster: DisasterResponseElement? = nil
+    @Published var selectedDisaster: DisasterResponseElement = .mockDisasterResponseElement1
     @Published var helpRequestCategories: HelpRequestCategoriesResponse = []
-    @Published var selectedHelpRequestType: HelpRequestCategoryResponseElement? = nil
+    @Published var selectedHelpRequestType: HelpRequestCategoryResponseElement = .mockHelpRequestCategoryResponseElement1
     @Published var selectedRequestType: RequestTypes = .help
     @Published var selectedSupportRequestType: SupportRequestTypes = .standart
 
@@ -209,10 +209,6 @@ final class SOCreateViewModel: ObservableObject {
     }
 
     private func createHelpRequest() async {
-        guard let selectedUnion = selectedUnion, let selectedDisaster = selectedDisaster, let selectedHelpRequestType = selectedHelpRequestType else {
-            await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
-            return
-        }
         let result = await NetworkManager.shared.post(
             url: .requestCrud,
             method: .post,
@@ -241,7 +237,7 @@ final class SOCreateViewModel: ObservableObject {
 
     private func createStandartSupportRequest() async {
         await fetchCitizienAdress()
-        guard let selectedUnion = selectedUnion, let selectedHelpRequestType = selectedHelpRequestType, let citizienAdresID = citizienAdresID else {
+        guard let citizienAdresID = citizienAdresID else {
             await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
             return
         }
@@ -274,10 +270,6 @@ final class SOCreateViewModel: ObservableObject {
 
     func createPsychologistRequest() async {
         await fetchCitizienAdress()
-        guard let selectedUnion = selectedUnion else {
-            await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
-            return
-        }
         let result = await NetworkManager.shared.post(
             url: .voluntarilyPsychologist,
             method: .post,
@@ -302,10 +294,6 @@ final class SOCreateViewModel: ObservableObject {
     }
 
     func createPitchTentRequest() async {
-        guard let selectedUnion = selectedUnion else {
-            await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
-            return
-        }
         let result = await NetworkManager.shared.post(
             url: .voluntarilyPitchTent,
             method: .post,
@@ -330,7 +318,7 @@ final class SOCreateViewModel: ObservableObject {
     }
 
     func createTransporterRequest() async {
-        guard let selectedUnion = selectedUnion, let numOfCars = Int(numOfCars), let numOfDrivers = Int(numOfDrivers) else {
+        guard let numOfCars = Int(numOfCars), let numOfDrivers = Int(numOfDrivers) else {
             await showMessage(message: "Lütfen ilgili tüm alanları doldurunuz.")
             return
         }

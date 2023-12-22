@@ -22,14 +22,6 @@ final class SOProfileViewModel: ObservableObject {
     @Published var logMessage: String = ""
     @Published var logStatus: Bool = false
 
-    @Published var ibans: [IbanReadResponseElement] = [
-        .init(id: 1, userAccountID: 1, ibanTitle: "Ziraat Bankası", iban: UUID().uuidString),
-        .init(id: 2, userAccountID: 1, ibanTitle: "Halk Bankası", iban: UUID().uuidString),
-        .init(id: 3, userAccountID: 1, ibanTitle: "Vakıf Bank", iban: UUID().uuidString),
-        .init(id: 4, userAccountID: 1, ibanTitle: "İş Bankası", iban: UUID().uuidString),
-        .init(id: 5, userAccountID: 1, ibanTitle: "Ing Bank", iban: UUID().uuidString),
-    ]
-
     @MainActor
     private func showAlert(message: String) {
         logMessage = message

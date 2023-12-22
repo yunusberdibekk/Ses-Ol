@@ -59,6 +59,6 @@ struct SOHelpRequestCell: View {
 
 struct HelpRequestRow_Previews: PreviewProvider {
     static var previews: some View {
-        SOHelpRequestCell(helpRequest: HelpRequestResponseElement.dummyHelpRequestResponseElement1)
+        SOHelpRequestCell(helpRequest: HelpRequestResponseElement.mockHelpRequestResponseElement1)
     }
 }

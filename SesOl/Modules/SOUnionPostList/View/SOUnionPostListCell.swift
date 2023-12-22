@@ -36,11 +36,7 @@ struct SOUnionPostListCell: View {
                 .padding(.all, PagePaddings.Normal.padding_20.rawValue)
             Divider()
         }
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(color: Color.gray.opacity(1), radius: 2, x: 0, y: 2)
-        .padding(.leading, PagePaddings.Normal.padding_10.rawValue)
-        .padding(.trailing, PagePaddings.Normal.padding_10.rawValue)
+        .modifier(RequestCellModifier())
     }
 }
 

@@ -26,7 +26,7 @@
 		BE32282F2A214D6C00F9F572 /* SOCitizienHelpRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32282E2A214D6C00F9F572 /* SOCitizienHelpRequestDetailView.swift */; };
 		BE3228342A2158FC00F9F572 /* SOUnionHelpRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3228332A2158FC00F9F572 /* SOUnionHelpRequestDetailView.swift */; };
 		BE32283F2A22071A00F9F572 /* SOSupportRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32283E2A22071900F9F572 /* SOSupportRequestModel.swift */; };
-		BE3DEB5B29F6EB3700B35210 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3DEB5A29F6EB3700B35210 /* LoginViewModel.swift */; };
+		BE3DEB5B29F6EB3700B35210 /* SOLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3DEB5A29F6EB3700B35210 /* SOLoginViewModel.swift */; };
 		BE428A272A06D26000774EC0 /* SORootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A262A06D26000774EC0 /* SORootView.swift */; };
 		BE428A7B2A07270E00774EC0 /* SOHelpRequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A7A2A07270E00774EC0 /* SOHelpRequestListView.swift */; };
 		BE428A8D2A072A2A00774EC0 /* SOUnionPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428A8C2A072A2A00774EC0 /* SOUnionPostListView.swift */; };
@@ -35,9 +35,9 @@
 		BE530E8929F2B1A9009BDCC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE530E8829F2B1A9009BDCC9 /* Preview Assets.xcassets */; };
 		BE530E9A29F2B27C009BDCC9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE530E9929F2B27C009BDCC9 /* Colors.xcassets */; };
 		BE530E9C29F2B289009BDCC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE530E9B29F2B289009BDCC9 /* Images.xcassets */; };
-		BE530EA629F2B643009BDCC9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA529F2B643009BDCC9 /* SignUpView.swift */; };
-		BE530EA829F2B64C009BDCC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA729F2B64C009BDCC9 /* LoginView.swift */; };
-		BE530EAA29F2B654009BDCC9 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA929F2B654009BDCC9 /* OnboardView.swift */; };
+		BE530EA629F2B643009BDCC9 /* SOSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA529F2B643009BDCC9 /* SOSignUpView.swift */; };
+		BE530EA829F2B64C009BDCC9 /* SOLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA729F2B64C009BDCC9 /* SOLoginView.swift */; };
+		BE530EAA29F2B654009BDCC9 /* SOOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EA929F2B654009BDCC9 /* SOOnboardView.swift */; };
 		BE530EAC29F2B668009BDCC9 /* OnboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EAB29F2B668009BDCC9 /* OnboardModel.swift */; };
 		BE530EAE29F2FE21009BDCC9 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EAD29F2FE21009BDCC9 /* Radius.swift */; };
 		BE530EB029F2FE2C009BDCC9 /* PagePaddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE530EAF29F2FE2C009BDCC9 /* PagePaddings.swift */; };
@@ -67,7 +67,7 @@
 		BEA3993A2A200884001B5CC0 /* SOHelpRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA399392A200884001B5CC0 /* SOHelpRequestListViewModel.swift */; };
 		BEA3993C2A2009B4001B5CC0 /* SOHelpRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3993B2A2009B4001B5CC0 /* SOHelpRequestModel.swift */; };
 		BEA3993E2A202C39001B5CC0 /* SOHelpRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3993D2A202C39001B5CC0 /* SOHelpRequestCell.swift */; };
-		BEBD406029FC81C900FDD9D7 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBD405F29FC81C900FDD9D7 /* SignUpViewModel.swift */; };
+		BEBD406029FC81C900FDD9D7 /* SOSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBD405F29FC81C900FDD9D7 /* SOSignUpViewModel.swift */; };
 		BECDB5322A09323500B8CD68 /* SOProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5312A09323500B8CD68 /* SOProfileViewModel.swift */; };
 		BECDB5342A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECDB5332A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift */; };
 		BED12F2E2B2BD7870088091B /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED12F2D2B2BD7870088091B /* UserType.swift */; };
@@ -112,7 +112,7 @@
 		BE3228332A2158FC00F9F572 /* SOUnionHelpRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOUnionHelpRequestDetailView.swift; sourceTree = "<group>"; };
 		BE32283E2A22071900F9F572 /* SOSupportRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSupportRequestModel.swift; sourceTree = "<group>"; };
 		BE342D7629FB1DB20059ED75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BE3DEB5A29F6EB3700B35210 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BE3DEB5A29F6EB3700B35210 /* SOLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOLoginViewModel.swift; sourceTree = "<group>"; };
 		BE428A262A06D26000774EC0 /* SORootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SORootView.swift; sourceTree = "<group>"; };
 		BE428A7A2A07270E00774EC0 /* SOHelpRequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHelpRequestListView.swift; sourceTree = "<group>"; };
 		BE428A8C2A072A2A00774EC0 /* SOUnionPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOUnionPostListView.swift; sourceTree = "<group>"; };
@@ -122,9 +122,9 @@
 		BE530E8829F2B1A9009BDCC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BE530E9929F2B27C009BDCC9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		BE530E9B29F2B289009BDCC9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BE530EA529F2B643009BDCC9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		BE530EA729F2B64C009BDCC9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		BE530EA929F2B654009BDCC9 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
+		BE530EA529F2B643009BDCC9 /* SOSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSignUpView.swift; sourceTree = "<group>"; };
+		BE530EA729F2B64C009BDCC9 /* SOLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOLoginView.swift; sourceTree = "<group>"; };
+		BE530EA929F2B654009BDCC9 /* SOOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOOnboardView.swift; sourceTree = "<group>"; };
 		BE530EAB29F2B668009BDCC9 /* OnboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardModel.swift; sourceTree = "<group>"; };
 		BE530EAD29F2FE21009BDCC9 /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		BE530EAF29F2FE2C009BDCC9 /* PagePaddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagePaddings.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 		BEA399392A200884001B5CC0 /* SOHelpRequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHelpRequestListViewModel.swift; sourceTree = "<group>"; };
 		BEA3993B2A2009B4001B5CC0 /* SOHelpRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHelpRequestModel.swift; sourceTree = "<group>"; };
 		BEA3993D2A202C39001B5CC0 /* SOHelpRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHelpRequestCell.swift; sourceTree = "<group>"; };
-		BEBD405F29FC81C900FDD9D7 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		BEBD405F29FC81C900FDD9D7 /* SOSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSignUpViewModel.swift; sourceTree = "<group>"; };
 		BECDB5312A09323500B8CD68 /* SOProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOProfileViewModel.swift; sourceTree = "<group>"; };
 		BECDB5332A0932C800B8CD68 /* SOCreateUnionPostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOCreateUnionPostDetailView.swift; sourceTree = "<group>"; };
 		BED12F2D2B2BD7870088091B /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		BE2AB3662B2E6171008419F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BE530EA529F2B643009BDCC9 /* SignUpView.swift */,
+				BE530EA529F2B643009BDCC9 /* SOSignUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,7 +280,7 @@
 		BE2AB3672B2E6175008419F7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BEBD405F29FC81C900FDD9D7 /* SignUpViewModel.swift */,
+				BEBD405F29FC81C900FDD9D7 /* SOSignUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 		BE428A092A06CE3B00774EC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BE530EA729F2B64C009BDCC9 /* LoginView.swift */,
+				BE530EA729F2B64C009BDCC9 /* SOLoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 		BE428A0B2A06CE4600774EC0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BE3DEB5A29F6EB3700B35210 /* LoginViewModel.swift */,
+				BE3DEB5A29F6EB3700B35210 /* SOLoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -641,7 +641,7 @@
 		BE5B95252B2F69E8006AC6BA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BE530EA929F2B654009BDCC9 /* OnboardView.swift */,
+				BE530EA929F2B654009BDCC9 /* SOOnboardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -821,7 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE428A7B2A07270E00774EC0 /* SOHelpRequestListView.swift in Sources */,
-				BE530EA629F2B643009BDCC9 /* SignUpView.swift in Sources */,
+				BE530EA629F2B643009BDCC9 /* SOSignUpView.swift in Sources */,
 				BE1A72002AB91AC200EFA272 /* NetworkManager.swift in Sources */,
 				BED12F362B2BDEEB0088091B /* IbanResponse.swift in Sources */,
 				BECDB5322A09323500B8CD68 /* SOProfileViewModel.swift in Sources */,
@@ -830,7 +830,7 @@
 				BE428A8D2A072A2A00774EC0 /* SOUnionPostListView.swift in Sources */,
 				BEDBF9D42B34B905009C55B5 /* SOPostDetailView.swift in Sources */,
 				BEA3993C2A2009B4001B5CC0 /* SOHelpRequestModel.swift in Sources */,
-				BE530EAA29F2B654009BDCC9 /* OnboardView.swift in Sources */,
+				BE530EAA29F2B654009BDCC9 /* SOOnboardView.swift in Sources */,
 				BE530EC129F2FF4A009BDCC9 /* GeometryProxy+Extensions.swift in Sources */,
 				BEDBF9922B3246CD009C55B5 /* DefaultListButtonModifier.swift in Sources */,
 				BE0294372A2738CB009C8788 /* SOPitchTentRequestDetailView.swift in Sources */,
@@ -856,7 +856,7 @@
 				BEEBFC102A135111000D8E25 /* SOProfileView.swift in Sources */,
 				BEF215E129F5B0A70025C19F /* UserCache.swift in Sources */,
 				BEDBF9B02B32BB78009C55B5 /* SOSupportRequestResponse.swift in Sources */,
-				BEBD406029FC81C900FDD9D7 /* SignUpViewModel.swift in Sources */,
+				BEBD406029FC81C900FDD9D7 /* SOSignUpViewModel.swift in Sources */,
 				BE530EDA29F3013B009BDCC9 /* TextFieldModifier.swift in Sources */,
 				BE428A272A06D26000774EC0 /* SORootView.swift in Sources */,
 				BED12F382B2BDEF00088091B /* IbanRequest.swift in Sources */,
@@ -882,7 +882,7 @@
 				BE0294352A2738C0009C8788 /* SOPsychologistRequestDetailView.swift in Sources */,
 				BE530ED829F300F4009BDCC9 /* FontSizes.swift in Sources */,
 				BE530EBF29F2FF31009BDCC9 /* EdgeInsets+Extensions.swift in Sources */,
-				BE3DEB5B29F6EB3700B35210 /* LoginViewModel.swift in Sources */,
+				BE3DEB5B29F6EB3700B35210 /* SOLoginViewModel.swift in Sources */,
 				BEDBF9A42B3266EF009C55B5 /* SOSupportRequestListView.swift in Sources */,
 				BEA3993A2A200884001B5CC0 /* SOHelpRequestListViewModel.swift in Sources */,
 				BE5B95292B2F6A2E006AC6BA /* SOUnionPostListRequest.swift in Sources */,
@@ -890,7 +890,7 @@
 				BE6F91302A329345003B868F /* UnionCreateViewOptions.swift in Sources */,
 				BE530EB729F2FE56009BDCC9 /* ViewSize.swift in Sources */,
 				BE3228342A2158FC00F9F572 /* SOUnionHelpRequestDetailView.swift in Sources */,
-				BE530EA829F2B64C009BDCC9 /* LoginView.swift in Sources */,
+				BE530EA829F2B64C009BDCC9 /* SOLoginView.swift in Sources */,
 				BEA3993E2A202C39001B5CC0 /* SOHelpRequestCell.swift in Sources */,
 				BEDBF99E2B324F54009C55B5 /* SOUnionCreateView.swift in Sources */,
 				BEDBF9A62B32671D009C55B5 /* SOSupportRequestListViewModel.swift in Sources */,

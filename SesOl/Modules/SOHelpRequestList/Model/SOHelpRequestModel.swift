@@ -44,7 +44,7 @@ struct HelpRequestResponseElement: Codable {
         case requestApproveStatus = "request_approve_status"
     }
 
-    static let dummyHelpRequestResponseElement1: HelpRequestResponseElement = .init(
+    static let mockHelpRequestResponseElement1: HelpRequestResponseElement = .init(
         requestID: -1,
         requestAccountID: -1,
         userName: "Howard",
@@ -65,7 +65,7 @@ struct HelpRequestResponseElement: Codable {
         requestFullAddress: "Full adress",
         requestApproveStatus: -1)
 
-    static let dummyHelpRequestResponseElement2: HelpRequestResponseElement = .init(
+    static let mockHelpRequestResponseElement2: HelpRequestResponseElement = .init(
         requestID: -1,
         requestAccountID: -1,
         userName: "Johnson",
@@ -86,7 +86,7 @@ struct HelpRequestResponseElement: Codable {
         requestFullAddress: "Full adress",
         requestApproveStatus: -1)
 
-    static let dummyHelpRequestResponseElement3: HelpRequestResponseElement = .init(
+    static let mockHelpRequestResponseElement3: HelpRequestResponseElement = .init(
         requestID: -1,
         requestAccountID: -1,
         userName: "Cook",
@@ -107,7 +107,7 @@ struct HelpRequestResponseElement: Codable {
         requestFullAddress: "Full adress",
         requestApproveStatus: -1)
 
-    static let dummyHelpRequestResponseElement4: HelpRequestResponseElement = .init(
+    static let mockHelpRequestResponseElement4: HelpRequestResponseElement = .init(
         requestID: -1,
         requestAccountID: -1,
         userName: "Reyes",
@@ -127,6 +127,13 @@ struct HelpRequestResponseElement: Codable {
         requestCountry: "Turkiye",
         requestFullAddress: "Full adress",
         requestApproveStatus: -1)
+
+    static let mockHelpRequestResponseElements: HelpRequestResponse = [
+        .mockHelpRequestResponseElement1,
+        .mockHelpRequestResponseElement2,
+        .mockHelpRequestResponseElement3,
+        .mockHelpRequestResponseElement4
+    ]
 }
 
 typealias HelpRequestResponse = [HelpRequestResponseElement]

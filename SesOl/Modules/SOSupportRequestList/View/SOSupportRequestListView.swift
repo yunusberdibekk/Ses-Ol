@@ -52,6 +52,7 @@ struct SOSupportRequestListView: View {
                     Text(viewModel.selectedSupportRequestType.title)
                 }
             }
+            .listStyle(.plain)
             .onChange(of: viewModel.selectedRequestStatus, perform: { value in
                 Task {
                     await viewModel.fetchAdditionalSupportRequests(status: value)
@@ -119,6 +120,7 @@ struct SOSupportRequestListView: View {
         ForEach(0 ..< requests.count, id: \.self) { index in
             NavigationLink {
                 SOSupportRequestDetailView(supportRequest: requests[index], index: index)
+                    .navigationBarBackButtonHidden(true)
                     .environmentObject(viewModel)
             } label: {
                 supportRequestCell(request: requests[index])
@@ -144,6 +146,7 @@ struct SOSupportRequestListView: View {
         ForEach(0 ..< requests.count, id: \.self) { index in
             NavigationLink {
                 SOPsychologistRequestDetailView(psychologistRequest: requests[index], index: index)
+                    .navigationBarBackButtonHidden(true)
                     .environmentObject(viewModel)
             } label: {
                 psychologistRequestCell(request: requests[index])
@@ -169,6 +172,7 @@ struct SOSupportRequestListView: View {
         ForEach(0 ..< requests.count, id: \.self) { index in
             NavigationLink {
                 SOPitchTentRequestDetailView(pitchTentRequest: requests[index], index: index)
+                    .navigationBarBackButtonHidden(true)
                     .environmentObject(viewModel)
             } label: {
                 pitchTentRequestCell(request: requests[index])
@@ -194,6 +198,7 @@ struct SOSupportRequestListView: View {
         ForEach(0 ..< requests.count, id: \.self) { index in
             NavigationLink {
                 SOTransporterRequestDetailView(transporterRequest: requests[index], index: index)
+                    .navigationBarBackButtonHidden(true)
                     .environmentObject(viewModel)
             } label: {
                 transporterRequestCell(request: requests[index])

@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  SOSignUpView.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 21.04.2023.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SignUpView: View {
-    @StateObject private var viewModel = SignUpViewModel()
+struct SOSignUpView: View {
+    @StateObject private var viewModel = SOSignUpViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -204,7 +204,7 @@ struct SignUpView: View {
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SignUpView()
+            SOSignUpView()
         }
     }
 }

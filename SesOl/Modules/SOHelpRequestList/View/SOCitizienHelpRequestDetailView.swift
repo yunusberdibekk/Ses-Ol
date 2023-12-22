@@ -96,7 +96,7 @@ struct SOCitizienHelpRequestDetailView: View {
 
 #Preview {
     SOCitizienHelpRequestDetailView(
-        helpRequest: HelpRequestResponseElement.dummyHelpRequestResponseElement1,
+        helpRequest: HelpRequestResponseElement.mockHelpRequestResponseElement1,
         index: 0)
         .environmentObject(SOHelpRequestListViewModel())
 }

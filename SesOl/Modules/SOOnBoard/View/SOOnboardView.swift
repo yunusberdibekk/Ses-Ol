@@ -1,5 +1,5 @@
 //
-//  OnBoardView.swift
+//  SOOnboardView.swift
 //  SesOl
 //
 //  Created by Yunus Emre Berdibek on 21.04.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardView: View {
+struct SOOnboardView: View {
     @AppStorage("isOnBoarding") var isOnBoarding = false
 
     init() {
@@ -52,8 +52,6 @@ struct OnboardView: View {
     }
 }
 
-struct OnBoardView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardView()
-    }
+#Preview {
+    SOOnboardView()
 }

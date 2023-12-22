@@ -18,7 +18,7 @@ struct SesOlApp: App {
 //            } else {
 //                OnboardView()
 //            }
-            SOCreateView()
+            SORootView()
         }
     }
 }
