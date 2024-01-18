@@ -33,7 +33,6 @@ final class SOLoginViewModel: ObservableObject {
                 self.userID = model.userAccountID
                 self.isLogged = true
             }
-
         case .failure(let error):
             showAlert(message: error.localizedDescription)
         }
